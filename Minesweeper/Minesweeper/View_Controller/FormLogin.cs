@@ -23,7 +23,14 @@ namespace Minesweeper.View_Controller
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FazerLogin();
+            //FazerLogin();
+
+
+
+
+            //Provisório. Acrescentar um evento para dados do login
+            Program.V_Menu.Show();
+
         }
 
         private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)

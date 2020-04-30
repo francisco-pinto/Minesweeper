@@ -1,11 +1,8 @@
-﻿using Minesweeper.Models;
-using Minesweeper.View_Controller;
+﻿using Minesweeper.View_Controller;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Menu = Minesweeper.Models.Menu;
+using Minesweeper.Models;
 
 namespace Minesweeper
 {

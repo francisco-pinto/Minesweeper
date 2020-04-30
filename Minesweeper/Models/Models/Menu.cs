@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Minesweeper.Models
 {
-    public class Login
+    public class Menu
     {
-        public void FazerLogin()
-        {
-            Program.V_Menu.Show();
-        }
+        public Menu() { }
     }
 }
