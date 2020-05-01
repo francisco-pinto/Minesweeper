@@ -23,9 +23,11 @@ namespace Minesweeper.View_Controller
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             this.Hide();
+
+
             //FazerLogin();
 
-
+            // Gitlab teste
 
 
             //Provisório. Acrescentar um evento para dados do login
