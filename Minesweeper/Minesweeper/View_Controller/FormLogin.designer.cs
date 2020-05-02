@@ -48,6 +48,9 @@
             this.buttonOpenFile = new System.Windows.Forms.Button();
             this.textBoxFileName = new System.Windows.Forms.TextBox();
             this.textBoxSAvedFileName = new System.Windows.Forms.TextBox();
+            this.pictureBoxFoto = new System.Windows.Forms.PictureBox();
+            this.buttonSubmeter = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFoto)).BeginInit();
             this.SuspendLayout();
             // 
             // labelNome
@@ -117,7 +120,7 @@
             // labelfoto
             // 
             this.labelfoto.AutoSize = true;
-            this.labelfoto.Location = new System.Drawing.Point(22, 314);
+            this.labelfoto.Location = new System.Drawing.Point(19, 328);
             this.labelfoto.Name = "labelfoto";
             this.labelfoto.Size = new System.Drawing.Size(76, 17);
             this.labelfoto.TabIndex = 28;
@@ -196,9 +199,9 @@
             // 
             // buttonOpenFile
             // 
-            this.buttonOpenFile.Location = new System.Drawing.Point(197, 308);
+            this.buttonOpenFile.Location = new System.Drawing.Point(104, 308);
             this.buttonOpenFile.Name = "buttonOpenFile";
-            this.buttonOpenFile.Size = new System.Drawing.Size(95, 23);
+            this.buttonOpenFile.Size = new System.Drawing.Size(81, 50);
             this.buttonOpenFile.TabIndex = 30;
             this.buttonOpenFile.Text = "Open File";
             this.buttonOpenFile.UseVisualStyleBackColor = true;
@@ -206,23 +209,43 @@
             // 
             // textBoxFileName
             // 
-            this.textBoxFileName.Location = new System.Drawing.Point(298, 311);
+            this.textBoxFileName.Location = new System.Drawing.Point(197, 308);
             this.textBoxFileName.Name = "textBoxFileName";
-            this.textBoxFileName.Size = new System.Drawing.Size(154, 22);
+            this.textBoxFileName.Size = new System.Drawing.Size(255, 22);
             this.textBoxFileName.TabIndex = 31;
             // 
             // textBoxSAvedFileName
             // 
-            this.textBoxSAvedFileName.Location = new System.Drawing.Point(197, 338);
+            this.textBoxSAvedFileName.Location = new System.Drawing.Point(197, 336);
             this.textBoxSAvedFileName.Name = "textBoxSAvedFileName";
             this.textBoxSAvedFileName.Size = new System.Drawing.Size(255, 22);
             this.textBoxSAvedFileName.TabIndex = 32;
+            // 
+            // pictureBoxFoto
+            // 
+            this.pictureBoxFoto.Location = new System.Drawing.Point(501, 251);
+            this.pictureBoxFoto.Name = "pictureBoxFoto";
+            this.pictureBoxFoto.Size = new System.Drawing.Size(91, 94);
+            this.pictureBoxFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxFoto.TabIndex = 33;
+            this.pictureBoxFoto.TabStop = false;
+            // 
+            // buttonSubmeter
+            // 
+            this.buttonSubmeter.Location = new System.Drawing.Point(483, 371);
+            this.buttonSubmeter.Name = "buttonSubmeter";
+            this.buttonSubmeter.Size = new System.Drawing.Size(129, 40);
+            this.buttonSubmeter.TabIndex = 34;
+            this.buttonSubmeter.Text = "Submeter Registo";
+            this.buttonSubmeter.UseVisualStyleBackColor = true;
             // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 435);
+            this.Controls.Add(this.buttonSubmeter);
+            this.Controls.Add(this.pictureBoxFoto);
             this.Controls.Add(this.textBoxSAvedFileName);
             this.Controls.Add(this.textBoxFileName);
             this.Controls.Add(this.buttonOpenFile);
@@ -250,6 +273,7 @@
             this.Text = "FormLogin";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLogin_FormClosing);
             this.Load += new System.EventHandler(this.FormLogin_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,5 +301,7 @@
         private System.Windows.Forms.Button buttonOpenFile;
         private System.Windows.Forms.TextBox textBoxFileName;
         private System.Windows.Forms.TextBox textBoxSAvedFileName;
+        private System.Windows.Forms.PictureBox pictureBoxFoto;
+        private System.Windows.Forms.Button buttonSubmeter;
     }
 }

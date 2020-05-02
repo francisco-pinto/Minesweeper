@@ -78,6 +78,12 @@
     <Compile Include="View_Controller\FormMenu.Designer.cs">
       <DependentUpon>FormMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="View_Controller\FormOnOff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Controller\FormOnOff.Designer.cs">
+      <DependentUpon>FormOnOff.cs</DependentUpon>
+    </Compile>
     <Compile Include="View_Controller\PedirNomeFacil.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </Compile>
     <EmbeddedResource Include="View_Controller\FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View_Controller\FormOnOff.resx">
+      <DependentUpon>FormOnOff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View_Controller\PedirNomeFacil.resx">
       <DependentUpon>PedirNomeFacil.cs</DependentUpon>

@@ -64,12 +64,13 @@ namespace Minesweeper.View_Controller
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
-            ofd.Filter = "PNG|*.png";
+            ofd.Filter = "PNG|*.png; *.jpg; *.jpeg";
 
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 textBoxFileName.Text = ofd.SafeFileName;
                 textBoxSAvedFileName.Text = ofd.FileName;
+                pictureBoxFoto.Image = new Bitmap(ofd.FileName);
             }
         }
     }

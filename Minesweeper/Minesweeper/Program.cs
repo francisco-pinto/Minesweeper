@@ -16,11 +16,13 @@ namespace Minesweeper
         public static FormMineSweeper V_Mapa { get; private set; }
         public static FormLogin V_Login { get; private set; }
         public static Instrucoes V_Instrucoes { get; private set; }
+        public static FormOnOff V_OnOff { get; private set; }
         public static ControllerJogador C_jogador { get; private set; }
         public static ControllerMapa C_mapa { get; private set; }
         public static ControllerMenu C_menu { get; private set; }
         public static ControllerInstrucoes C_Intrucoes { get; private set; }
         public static ControllerLogin C_Login { get; private set; }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -42,6 +44,7 @@ namespace Minesweeper
             V_Mapa = new FormMineSweeper();
             V_Instrucoes = new Instrucoes();
             V_Login = new FormLogin();
+            V_OnOff = new FormOnOff();
 
             //Controllers
             C_jogador = new ControllerJogador();
@@ -50,7 +53,7 @@ namespace Minesweeper
             C_Intrucoes = new ControllerInstrucoes();
             C_Login = new ControllerLogin();
 
-            Application.Run(V_Login);
+            Application.Run(V_OnOff);
         }
     }
 }
