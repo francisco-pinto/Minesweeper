@@ -29,10 +29,11 @@ namespace Minesweeper_UWP_
 
             PropriedadesRegistar();
             
-            mainGrid.Height = 412;
-            mainGrid.Width = 1000;
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Height = 200, Width = 200 });
+            //mainGrid.Height = 412;
+            //mainGrid.Width = 1000;
+            
             ApplicationView.PreferredLaunchViewSize = new Size { Height = 520, Width = 1020 };
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Height = 515, Width = 1000 });
         }
 
         private void PropriedadesRegistar()

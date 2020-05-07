@@ -29,9 +29,9 @@ namespace Minesweeper_UWP_
         public Menu()
         {
             //Set tamanho min
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Height = 200, Width = 200 });
+           
             ApplicationView.PreferredLaunchViewSize = new Size { Height = 800, Width = 1000 };
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Height = 800, Width = 1000 });
 
 
 

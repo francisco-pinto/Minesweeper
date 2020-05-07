@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -69,9 +70,39 @@ namespace Minesweeper_UWP_
                     // parameter
                     rootFrame.Navigate(typeof(Login), e.Arguments);
                 }
-                // Ensure the current window is active
+
+
+                //Altera propriedades da janela
+                WindowProprieties();
+                
                 Window.Current.Activate();
             }
+        }
+
+        void WindowProprieties(){
+            //Altera cores de forma a esconder os botões
+            ChangeTitleBarColors();
+        }
+        void ChangeTitleBarColors()
+        {
+            //Esconder botões Maximizar e minimizar
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+
+            // Set active window colors
+            titleBar.ForegroundColor = Windows.UI.Colors.Black;
+            titleBar.BackgroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonForegroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonHoverBackgroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonPressedBackgroundColor = Windows.UI.Colors.White;
+
+            // Set inactive window colors
+            titleBar.InactiveForegroundColor = Windows.UI.Colors.White;
+            titleBar.InactiveBackgroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonInactiveForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.White;
         }
 
         /// <summary>
