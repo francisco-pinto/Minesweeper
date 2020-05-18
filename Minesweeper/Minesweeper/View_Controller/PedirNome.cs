@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Minesweeper.View_Controller
 {
-    public partial class PedirNomeFacil : Form
+    public partial class PedirNome : Form
     {
-        public PedirNomeFacil()
+        public PedirNome()
         {
             InitializeComponent();
         }
