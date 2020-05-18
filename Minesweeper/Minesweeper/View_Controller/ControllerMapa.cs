@@ -36,6 +36,11 @@ namespace Minesweeper.View_Controller
         }
         private void GanharJogo()
         {
+            //Som de vitória
+            string path = Environment.CurrentDirectory + @"/Winning.wav";
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
+            player.Play();
+
             Program.V_Mapa.MostraTodasBandeiras();
             Program.V_Mapa.setVariaveisFinais("00", false);
             Program.V_Mapa.GanharHappy();
@@ -76,6 +81,11 @@ namespace Minesweeper.View_Controller
         }
         private void PerderJogo()
         {
+            //Som de derrota
+            string path = Environment.CurrentDirectory + @"/Explosion.wav";
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
+            player.Play();
+
             Program.V_Mapa.setVariaveisFinais("-1", false);
             string[] posErradas = Program.M_mapa.GetBandeirasErradas();
             Program.V_Mapa.MostraTodasBombas();

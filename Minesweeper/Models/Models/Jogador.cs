@@ -15,8 +15,6 @@ namespace Minesweeper
         public string Nome { get => nome; set => nome = value; }
         public int Pontuacao { get => pontuacao; set => pontuacao = value; }
 
-        Jogador jogador = new Jogador();
-
         //var jogadorQuery =
         //    from jogador in Jogador
         //    select new { Jogador.nome, jogador.pontuacao };

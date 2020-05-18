@@ -110,7 +110,6 @@ namespace Minesweeper
                 }
             }
         }
-
         public void PerderSad()
         {
             string path = Environment.CurrentDirectory + @"/btns/sad.png";
@@ -121,15 +120,11 @@ namespace Minesweeper
             string path = Environment.CurrentDirectory + @"/btns/smile glasses.png";
             buttonReiniciar.Image = Image.FromFile(path);
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-            /*Necessita de Evento???*/
-            /*Colocar 001*/
-            /*Quando acabar o jogo*/
-
-            //labelTime.Text = segundos.ToString();
-
+            string path = Environment.CurrentDirectory + @"/Clock.wav";
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
+            player.Play();
 
             segundos += 1;
 
