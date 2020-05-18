@@ -28,8 +28,6 @@ namespace Minesweeper_UWP_
             this.InitializeComponent();
 
             ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 480, Width = 535 });
-            //Tamanho min da janela
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(475, 530));
 
         }
         private void Button_Click(object sender, RoutedEventArgs e)

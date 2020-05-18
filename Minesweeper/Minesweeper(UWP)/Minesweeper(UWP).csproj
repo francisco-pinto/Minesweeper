@@ -119,6 +119,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ControllerInstrucoes.cs" />
+    <Compile Include="Controllers\ControllerJogador.cs" />
+    <Compile Include="Controllers\ControllerLogin.cs" />
+    <Compile Include="Controllers\ControllerMapa.cs" />
+    <Compile Include="Controllers\ControllerMenu.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="Instrucoes.xaml.cs">
       <DependentUpon>Instrucoes.xaml</DependentUpon>
     </Compile>
@@ -186,6 +192,7 @@
       <Name>Minesweeper.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -31,9 +31,6 @@ namespace Minesweeper_UWP_
             //Set tamanho min
            
             ApplicationView.PreferredLaunchViewSize = new Size { Height = 800, Width = 1000 };
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Height = 800, Width = 1000 });
-
-
 
             this.InitializeComponent();
         }

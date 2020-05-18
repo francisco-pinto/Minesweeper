@@ -43,10 +43,6 @@ namespace Minesweeper_UWP_
             this.InitializeComponent();
             //Muda tamanho da janela
             ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 110 + 42 * NLinhas, Width = 42 * NColunas });
-
-            //Tamanho min da janela
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(110 + 42 * NLinhas - 106, 42 * NColunas + 112));
-
             this.TextBlockMinas.Text = NMinas.ToString();
             CreateMapa(NLinhas, NColunas);      
         }
