@@ -49,7 +49,7 @@ namespace Minesweeper_UWP_
                 TextBoxNumColunas.Visibility = Visibility.Collapsed;
              
                 
-                //play(9, 9, 10);
+                play(9, 9, 10);
                 /*Adicionar ao eventpo de modo a chamar
                  a pág já inicializada no app.xaml.cs
                  usando o Program*/
@@ -62,7 +62,7 @@ namespace Minesweeper_UWP_
                 TextBoxNumColunas.Visibility = Visibility.Collapsed;
 
 
-                //play(16, 16, 40);
+                play(16, 16, 40);
                 this.Frame.Navigate(typeof(MainPage));
             }else if(RadioButtonCustom.IsChecked == true)
             {
@@ -70,7 +70,7 @@ namespace Minesweeper_UWP_
                 int numColunas = 0; Int32.TryParse(TextBoxNumColunas.Text, out numColunas);
                 int numBombas = 0; Int32.TryParse(TextBoxNumBombas.Text, out numBombas);
 
-                //play(numLinhas, numColunas, numBombas);
+                play(numLinhas, numColunas, numBombas);
                 this.Frame.Navigate(typeof(MainPage));
             }
         }
