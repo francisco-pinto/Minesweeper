@@ -19,14 +19,14 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock x:Name="TextBlockMinas" Grid.Column="0"  HorizontalAlignment="Center" Margin="0,0,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <Button x:Name="ButtonCara" Grid.Column="1" Content="" HorizontalAlignment="Center" Width="48" Height="47" BorderBrush="White" FocusVisualSecondaryBrush="#99FFFFFF">
+            <Button x:Name="ButtonCara" Grid.Column="1" Content="" HorizontalAlignment="Center" Width="48" Height="47" BorderBrush="White" FocusVisualSecondaryBrush="#99FFFFFF" Click="ButtonCara_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/Assets/smile.png" Stretch="Fill"/>
                 </Button.Background>
 
 
             </Button>
-            <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBlock Name="textblockTimer" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Center" />
 
         </Grid>
     </Grid>

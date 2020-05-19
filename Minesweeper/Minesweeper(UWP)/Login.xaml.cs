@@ -23,6 +23,7 @@ namespace Minesweeper_UWP_
     /// </summary>
     public sealed partial class Login : Page
     {
+        OpenFileDialog ofd = new OpenFileDialog();
         public Login()
         {
             this.InitializeComponent();
@@ -82,6 +83,18 @@ namespace Minesweeper_UWP_
         {
             ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 800, Width = 1000 });
             this.Frame.Navigate(typeof(Menu), null);
+        }
+
+        private void ButtonInserirfoto_Click(object sender, RoutedEventArgs e)
+        {
+            ofd.Filter = "PNG|*.png; *.jpg; *.jpeg";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                textBoxFileName.Text = ofd.SafeFileName;
+                textBoxSAvedFileName.Text = ofd.FileName;
+                pictureBoxFoto.Image = new Bitmap(ofd.FileName);
+            }
         }
     }
 }

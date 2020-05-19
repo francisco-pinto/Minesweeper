@@ -26,5 +26,15 @@ namespace Minesweeper_UWP_
         {
             this.InitializeComponent();
         }
+
+        private void ButtonRede_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Login), null);
+        }
+
+        private void ButtonStandalone_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Menu), null);
+        }
     }
 }

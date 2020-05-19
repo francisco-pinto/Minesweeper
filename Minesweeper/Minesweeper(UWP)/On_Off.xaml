@@ -10,8 +10,8 @@
 
     <Grid x:Name="mainGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="244">
         <TextBlock HorizontalAlignment="Left" Margin="118,53,0,0" FontWeight="Bold" FontSize="18" Text="Como deseja jogar?" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button Name="ButtonRede" Content="Rede" Margin="76,150,0,0" VerticalAlignment="Top" Width="93"/>
-        <Button x:Name="ButtonStandalone" Content="Standalone" Margin="231,150,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button Name="ButtonRede" Content="Rede" Margin="76,150,0,0" VerticalAlignment="Top" Width="93" Click="ButtonRede_Click"/>
+        <Button x:Name="ButtonStandalone" Content="Standalone" Margin="231,150,0,0" VerticalAlignment="Top" Width="93" Click="ButtonStandalone_Click"/>
 
     </Grid>
 </Page>

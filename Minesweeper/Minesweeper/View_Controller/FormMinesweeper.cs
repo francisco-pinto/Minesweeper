@@ -124,7 +124,7 @@ namespace Minesweeper
         {
             string path = Environment.CurrentDirectory + @"/Clock.wav";
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
-            player.Play();
+            //player.Play();
 
             segundos += 1;
 
