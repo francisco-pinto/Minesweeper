@@ -26,7 +26,7 @@
 
 
             </Button>
-            <TextBlock Name="textblockTimer" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Center" />
+            <TextBlock Name="TextBlockTimer" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Center" />
 
         </Grid>
     </Grid>

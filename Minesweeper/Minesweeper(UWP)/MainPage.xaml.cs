@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -41,16 +42,12 @@ namespace Minesweeper_UWP_
         public event MostraConteudoQuadrado MostraConteudoQuadrado;
         public event AdicionaFlag AdicionaFlag;
 
-        public int NMinas { get => nMinas; set => nMinas = value; }
-        public int NColunas { get => nColunas; set => nColunas = value; }
-        public int NLinhas { get => nLinhas; set => nLinhas = value; }
-
         public MainPage()
         {   
             this.InitializeComponent();
             //Muda tamanho da janela
-            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 110 + 42 * NLinhas, Width = 42 * NColunas });
-            this.TextBlockMinas.Text = NMinas.ToString();
+            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 110 + 42 * numLinhas, Width = 42 * numColunas });
+            this.TextBlockMinas.Text = numMinas.ToString();
                  
         }
         public void CreateMapa(int nLinhas, int nColunas, int nMinas)
@@ -149,7 +146,7 @@ namespace Minesweeper_UWP_
             //timer1.Stop();
 
             TextBlockMinas.Text = null;
-            textblockTimer.Text = null;
+            TextBlockTimer.Text = null;
             for (int linha = 0; linha < numLinhas; linha++)
             {
                 for (int coluna = 0; coluna < numColunas; coluna++)
@@ -163,13 +160,16 @@ namespace Minesweeper_UWP_
         public void PerderSad()
         {
             string path = Environment.CurrentDirectory + @"/btns/sad.png";
-            ButtonCara.Image = Image.FromFile(path);
+            //Background        Fazer por bitmap
+            ButtonCara.Background = new BitmapImage(new Uri("ms-appx:///Images/NameOfFile.png"));
         }
         public void GanharHappy()
         {
             string path = Environment.CurrentDirectory + @"/btns/smile glasses.png";
+            //Background        Fazer por bitmap
             ButtonCara.Image = Image.FromFile(path);
         }
+
         //private void timer1_Tick(object sender, EventArgs e)
         //{
         //    string path = Environment.CurrentDirectory + @"/Clock.wav";
@@ -226,11 +226,13 @@ namespace Minesweeper_UWP_
         private void B_MouseUp(object sender, MouseEventArgs e)
         {
             string path = Environment.CurrentDirectory + @"/btns/smile.png";
+            //Background        Fazer por bitmap
             ButtonCara.Image = Image.FromFile(path);
         }
         private void B_MouseDown(object sender, MouseEventArgs e)
         {
             string path = Environment.CurrentDirectory + @"/btns/boca.png";
+            //Background        Fazer por bitmap
             ButtonCara.Image = Image.FromFile(path);
         }
 
@@ -238,10 +240,12 @@ namespace Minesweeper_UWP_
         {
             if (path != null)
             {
+                //Background        Fazer por bitmap
                 button[linha, coluna].Image = Image.FromFile(path);
             }
             else
             {
+                //Background        Fazer por bitmap
                 button[linha, coluna].Image = null;
             }
 
@@ -254,6 +258,7 @@ namespace Minesweeper_UWP_
                 {
                     if (nome == button[linha, coluna].Name)
                     {
+                        //Background        Fazer por bitmap
                         button[linha, coluna].Image = Image.FromFile(path);
                         return;
                     }
@@ -273,6 +278,7 @@ namespace Minesweeper_UWP_
             {
                 string[] pos = PosErradas[i].Split('-');
 
+                //Background        Fazer por bitmap
                 button[Int32.Parse(pos[0]), Int32.Parse(pos[1])].Image = Image.FromFile(path);
             }
         }
@@ -288,7 +294,7 @@ namespace Minesweeper_UWP_
 
             //Nº minas
             TextBlockMinas.Text = getMinas();
-            textblockTimer.Text = "000";
+            TextBlockTimer.Text = "000";
         }
         public void setVariaveisFinais(string nMinas, bool timerAtualization)
         {

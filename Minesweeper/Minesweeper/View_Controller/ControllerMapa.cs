@@ -28,7 +28,7 @@ namespace Minesweeper.View_Controller
                 {
                     if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
-                        string path = Environment.CurrentDirectory + @"\btns\btnFlag.png";
+                        string path = Environment.CurrentDirectory + @"\Botoes\btnFlag.png";
                         AtualizaImagemConteudo(b[linha, coluna].Name, path);
                     }
                 }
@@ -37,7 +37,7 @@ namespace Minesweeper.View_Controller
         private void GanharJogo()
         {
             //Som de vitória
-            string path = Environment.CurrentDirectory + @"/Winning.wav";
+            string path = Environment.CurrentDirectory + @"\Music\Winning.wav";
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
             player.Play();
 
@@ -82,7 +82,7 @@ namespace Minesweeper.View_Controller
         private void PerderJogo()
         {
             //Som de derrota
-            string path = Environment.CurrentDirectory + @"/Explosion.wav";
+            string path = Environment.CurrentDirectory + @"\Music\Explosion.wav";
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
             player.Play();
 

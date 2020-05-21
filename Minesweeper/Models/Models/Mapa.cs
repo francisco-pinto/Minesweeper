@@ -54,7 +54,7 @@ namespace Minesweeper.Models
         }
         public string getImagePath(Quadrado quadrado)
         {
-            string path = Environment.CurrentDirectory + @"\btns\";
+            string path = Environment.CurrentDirectory + @"\Botoes\";
             switch (quadrado.DistanciaBomba)
             {
                 /*COLOCAR O TAMANHO DAS IMAGENS MAIS PEQUENO*/

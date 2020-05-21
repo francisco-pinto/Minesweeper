@@ -63,7 +63,7 @@ namespace Minesweeper.Models
         //Atualiza simbolos, tal como a bandeira
         public string AtualizaSimbolo()
         {
-            string path = Environment.CurrentDirectory + @"\btns\";
+            string path = Environment.CurrentDirectory + @"\Botoes\";
 
             contadorCliques++;
             if (contadorCliques == 1)                           //Ser banderia
