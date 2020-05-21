@@ -122,7 +122,7 @@ namespace Minesweeper
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            string path = Environment.CurrentDirectory + @"/Clock.wav";
+            string path = Environment.CurrentDirectory + @"/Music/Clock.wav";
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
             player.Play();
 
