@@ -12,49 +12,72 @@ namespace Minesweeper
     {
         private string nome;
         private int pontuacao;
-        
+        private FileInfo fi = new FileInfo(@"c:\pontuacao.txt");
+
         public Jogador() { }
         public string Nome { get => nome; set => nome = value; }
         public int Pontuacao { get => pontuacao; set => pontuacao = value; }
 
-        Jogador jogador = new Jogador();
+        //Jogador jogador = new Jogador();
 
-        ////Serializaçao
+        ////OFFLINE
 
-        ////escrever
-        //FileStream fs = new FileStream("jogador.xml", FileMode.Create);
+        void EstadoFicheiro()
+        {
+            if (fi.Exists)
+            {
 
-        //XmlSerializer xs = new XmlSerializer(typeof(Jogador));
-        //xs.Serialize(FileStream, jogador);
+            }
+            else
+            {
+                FileStream fs = fi.Create();
+            }
+        }
+
+
+
+
+
+
+
+            ////SERVIDOR
+            ////Serializaçao
+
+            ////escrever
+            //FileStream fs = new FileStream("jogador.xml", FileMode.Create);
+
+            //XmlSerializer xs = new XmlSerializer(typeof(Jogador));
+            //xs.Serialize(FileStream, jogador);
+
+            //fs.Close();
+
+            ////ler
+            //FileStream fs = new FileStream("jogador.xml", FileMode.Open);
+
+            //XmlSerializer xs = new XmlSerializer(typeof(Jogador));
+            //Jogador jogador = (Jogador)xs.Deserialize(fs);
+
+            //fs.close();
+
+
+            ////Linq
+
+            //var jogadores = new Jogador[]
+            //{
+            //    new Jogador { Nome = "aaaaaa", Pontuacao = 999}
+            //};
+
+            //var jogadorQuery =
+            //    from jogador in jogadores
+            //    select new { jogador.Nome, jogador.Pontuacao };
+
+            //foreach (var jogador in jogadorQuery)
+            //    {
+            //        Console.WriteLine("{0}", jogador.Nome);
+            //        Console.WriteLine("{0}", jogador.Pontuacao);
+            //    }
+
+
         
-        //fs.Close();
-
-        ////ler
-        //FileStream fs = new FileStream("jogador.xml", FileMode.Open);
-
-        //XmlSerializer xs = new XmlSerializer(typeof(Jogador));
-        //Jogador jogador = (Jogador)xs.Deserialize(fs);
-
-        //fs.close();
-
-
-        ////Linq
-
-        //var jogadores = new Jogador[]
-        //{
-        //    new Jogador { Nome = "aaaaaa", Pontuacao = 999}
-        //};
-
-        //var jogadorQuery =
-        //    from jogador in jogadores
-        //    select new { jogador.Nome, jogador.Pontuacao };
-
-        //foreach (var jogador in jogadorQuery)
-        //    {
-        //        Console.WriteLine("{0}", jogador.Nome);
-        //        Console.WriteLine("{0}", jogador.Pontuacao);
-        //    }
-
-
     }
 }
