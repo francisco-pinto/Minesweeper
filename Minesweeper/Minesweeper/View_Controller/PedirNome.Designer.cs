@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PedirNome));
             this.label1 = new System.Windows.Forms.Label();
             this.buttonAdicionarFacil = new System.Windows.Forms.Button();
             this.textBoxNomeJogadorFacil = new System.Windows.Forms.TextBox();
@@ -61,7 +62,7 @@
             this.textBoxNomeJogadorFacil.Size = new System.Drawing.Size(133, 20);
             this.textBoxNomeJogadorFacil.TabIndex = 2;
             // 
-            // PedirNomeFacil
+            // PedirNome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,7 +70,8 @@
             this.Controls.Add(this.textBoxNomeJogadorFacil);
             this.Controls.Add(this.buttonAdicionarFacil);
             this.Controls.Add(this.label1);
-            this.Name = "PedirNomeFacil";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "PedirNome";
             this.ResumeLayout(false);
             this.PerformLayout();
 

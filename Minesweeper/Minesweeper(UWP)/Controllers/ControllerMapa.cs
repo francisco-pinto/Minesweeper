@@ -1,24 +1,27 @@
 ﻿using Minesweeper.Models;
+using Minesweeper_UWP_;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Windows.UI.Xaml.Controls;
 
 namespace Minesweeper.View_Controller
 {
-    class ControllerMapa
+    public class ControllerMapa
     {
+        private App Program;
         public ControllerMapa()
         {
-            Program.V_Mapa.MostraBombasTodas += V_Mapa_MostraBombasTodas;
-            Program.V_Mapa.MostraBandeirasTodas += V_Mapa_MostraBandeirasTodas;
-            Program.V_Mapa.AdicionaFlag += V_Mapa_AdicionaFlag; 
-            Program.V_Mapa.MostraConteudoQuadrado += V_Mapa_MostraConteudoQuadrado;
-            Program.V_Mapa.getMinas += V_Mapa_getMinas;
-            Program.V_Mapa.AtualizarMinas += V_Mapa_AtualizarMinas;
+            Program = App.Current as App;
+            Program.V_MainPage.MostraBombasTodas += V_Mapa_MostraBombasTodas;
+            Program.V_MainPage.MostraBandeirasTodas += V_Mapa_MostraBandeirasTodas;
+            Program.V_MainPage.AdicionaFlag += V_Mapa_AdicionaFlag; 
+            Program.V_MainPage.MostraConteudoQuadrado += V_Mapa_MostraConteudoQuadrado;
+            Program.V_MainPage.getMinas += V_Mapa_getMinas;
+            Program.V_MainPage.AtualizarMinas += V_Mapa_AtualizarMinas;
         }
         private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)
         {
@@ -28,7 +31,7 @@ namespace Minesweeper.View_Controller
                 {
                     if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
-                        string path = Environment.CurrentDirectory + @"\Botoes\btnFlag.png";
+                        string path = Environment.CurrentDirectory + @"\btns\btnFlag.png";
                         AtualizaImagemConteudo(b[linha, coluna].Name, path);
                     }
                 }
@@ -36,18 +39,17 @@ namespace Minesweeper.View_Controller
         }
         private void GanharJogo()
         {
-            //Som de vitória
-            string path = Environment.CurrentDirectory + @"\Music\Winning.wav";
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
-            player.Play();
+            Program.V_MainPage.MostraTodasBandeiras();
+            Program.V_MainPage.setVariaveisFinais("00", false);
+            Program.V_MainPage.GanharHappy();
 
-            Program.V_Mapa.MostraTodasBandeiras();
-            Program.V_Mapa.setVariaveisFinais("00", false);
-            Program.V_Mapa.GanharHappy();
+            //Mensagem ganhou o jogo
             MessageBox.Show("Ganhou o jogo!");
-            Program.V_Mapa.Hide();
-            Program.V_Mapa.LimparForm();
-            Program.V_Menu.Show();
+            
+            
+            Program.V_MainPage.Hide();
+            Program.V_MainPage.LimparForm();
+            Program.V_MainPage.Show();
         }
         private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)
         {  
@@ -65,11 +67,11 @@ namespace Minesweeper.View_Controller
         }
         private void AtualizaImagemConteudo(string nome, string path)
         {
-            Program.V_Mapa.AtualizaImagemConteudo(nome, path);
+            Program.V_MainPage.AtualizaImagemConteudo(nome, path);
         }
         private void AlteraSimboloBotao(int linha, int coluna, string path)
         {
-            Program.V_Mapa.AtualizaSimboloBotao(linha, coluna, path);
+            Program.V_MainPage.AtualizaSimboloBotao(linha, coluna, path);
         }
         private void V_Mapa_AtualizarMinas(Button b)
         {
@@ -81,20 +83,20 @@ namespace Minesweeper.View_Controller
         }
         private void PerderJogo()
         {
-            //Som de derrota
-            string path = Environment.CurrentDirectory + @"\Music\Explosion.wav";
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
-            player.Play();
-
-            Program.V_Mapa.setVariaveisFinais("-1", false);
+            Program.V_MainPage.setVariaveisFinais("-1", false);
             string[] posErradas = Program.M_mapa.GetBandeirasErradas();
-            Program.V_Mapa.MostraTodasBombas();
-            Program.V_Mapa.MostraBandeirasErradas(posErradas);
-            Program.V_Mapa.PerderSad();
+            Program.V_MainPage.MostraTodasBombas();
+            Program.V_MainPage.MostraBandeirasErradas(posErradas);
+            Program.V_MainPage.PerderSad();
+
+            
+            //Perder o jogo Mensagem
             MessageBox.Show("Perdeu o jogo!");
-            Program.V_Mapa.Hide();
-            Program.V_Mapa.LimparForm();
-            Program.V_Menu.Show();
+            
+
+            Program.V_MainPage.Hide();
+            Program.V_MainPage.LimparForm();
+            Program.V_MainPage.Show();
             /*Pontuação*/
         }
         private void V_Mapa_MostraConteudoQuadrado(Button b)

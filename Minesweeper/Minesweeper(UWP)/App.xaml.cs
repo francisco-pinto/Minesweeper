@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Minesweeper;
+using Minesweeper.Models;
+using Minesweeper.View_Controller;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,7 +26,21 @@ namespace Minesweeper_UWP_
     /// </summary>
     sealed partial class App : Application
     {
-
+        public Mapa M_mapa { get; private set; }
+        public Menu M_menu { get; private set; }
+        public Jogador M_jogador { get; private set; }
+        public Minesweeper.Models.Login M_Login { get; private set; }
+        public MainPage V_MainPage { get; private set; }
+        public Instrucoes V_Instrucoes { get; private set; }
+        public PedirNome V_PedirNome { get; private set; }
+        public On_Off V_On_Off { get; private set; }
+        public Login V_Login { get; private set; }
+        public Menu V_Menu { get; private set; }
+        public ControllerJogador C_jogador { get; private set; }
+        public ControllerMapa C_mapa { get; private set; }
+        public ControllerMenu C_menu { get; private set; }
+        public ControllerInstrucoes C_Intrucoes { get; private set; }
+        public ControllerLogin C_Login { get; private set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -32,6 +49,11 @@ namespace Minesweeper_UWP_
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            M_mapa = new Mapa();
+            M_menu = new Menu();
+            M_jogador = new Jogador();
+            M_Login = new Minesweeper.Models.Login();
         }
 
         /// <summary>
@@ -68,7 +90,7 @@ namespace Minesweeper_UWP_
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(Login), e.Arguments);
+                    rootFrame.Navigate(typeof(On_Off), e.Arguments);
                 }
 
 
@@ -77,6 +99,19 @@ namespace Minesweeper_UWP_
                 
                 Window.Current.Activate();
             }
+
+            V_Menu = rootFrame.Content as Menu;
+            V_Login = rootFrame.Content as Login;
+            V_Instrucoes = rootFrame.Content as Instrucoes;
+            V_MainPage = rootFrame.Content as MainPage;
+            V_PedirNome = rootFrame.Content as PedirNome;
+            V_On_Off = rootFrame.Content as On_Off;
+
+            C_Intrucoes = new ControllerInstrucoes();
+            C_jogador = new ControllerJogador();
+            C_Login = new ControllerLogin();
+            C_mapa = new ControllerMapa();
+            C_menu = new ControllerMenu();
         }
 
         void WindowProprieties(){

@@ -95,7 +95,7 @@ namespace Minesweeper
         {
             this.Hide();
             //Tornar feliz quando reinicia
-            string path = Environment.CurrentDirectory + @"/btns/smile.png";
+            string path = Environment.CurrentDirectory + @"/Botoes/smile.png";
             buttonReiniciar.Image = Image.FromFile(path);
             timer1.Stop();
 
@@ -110,26 +110,21 @@ namespace Minesweeper
                 }
             }
         }
-
         public void PerderSad()
         {
-            string path = Environment.CurrentDirectory + @"/btns/sad.png";
+            string path = Environment.CurrentDirectory + @"/Botoes/sad.png";
             buttonReiniciar.Image = Image.FromFile(path);
         }
         public void GanharHappy()
         {
-            string path = Environment.CurrentDirectory + @"/btns/smile glasses.png";
+            string path = Environment.CurrentDirectory + @"/Botoes/smile glasses.png";
             buttonReiniciar.Image = Image.FromFile(path);
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-            /*Necessita de Evento???*/
-            /*Colocar 001*/
-            /*Quando acabar o jogo*/
-
-            //labelTime.Text = segundos.ToString();
-
+            string path = Environment.CurrentDirectory + @"/Music/Clock.wav";
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
+            player.Play();
 
             segundos += 1;
 
@@ -174,12 +169,12 @@ namespace Minesweeper
         }
         private void B_MouseUp(object sender, MouseEventArgs e)
         {
-            string path = Environment.CurrentDirectory + @"/btns/smile.png";
+            string path = Environment.CurrentDirectory + @"/Botoes/smile.png";
             buttonReiniciar.Image = Image.FromFile(path);
         }
         private void B_MouseDown(object sender, MouseEventArgs e)
         {
-            string path = Environment.CurrentDirectory + @"/btns/boca.png";
+            string path = Environment.CurrentDirectory + @"/Botoes/boca.png";
             buttonReiniciar.Image = Image.FromFile(path);
         }
         public void AtualizaSimboloBotao(int linha, int coluna, string path)
@@ -215,7 +210,7 @@ namespace Minesweeper
         }
         public void MostraBandeirasErradas(string[] PosErradas)
         {
-            string path = Environment.CurrentDirectory + @"/btns/btnBombaErrada.png";
+            string path = Environment.CurrentDirectory + @"\Botoes\btnBombaErrada.png";
             for(int i = 0; i < PosErradas.Length; i++)
             {
                 string[] pos = PosErradas[i].Split('-');

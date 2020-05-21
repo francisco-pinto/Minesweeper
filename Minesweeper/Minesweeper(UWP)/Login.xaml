@@ -29,6 +29,7 @@
         <TextBox x:Name="TBLogin_Fotografia" HorizontalAlignment="Left" Margin="743,283,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
         <TextBox x:Name="TBLogin_Pais" HorizontalAlignment="Left" Margin="743,344,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
         <Button x:Name="ButtonRegistar" Content="Inserir" Margin="511,341,0,0" VerticalAlignment="Top" Width="80" Visibility="Visible"/>
+        <Button x:Name="ButtonInserirfoto" Content="Escolher" Margin="906,279,0,0" VerticalAlignment="Top" Width="80" Visibility="Visible" Click="ButtonInserirfoto_Click"/>
 
     </Grid>
 </Page>
