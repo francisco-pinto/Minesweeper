@@ -14,7 +14,7 @@ namespace Minesweeper.View_Controller
         public ControllerLogin()
         {
             Program = App.Current as App;
-            Program.V_Login.FazerLogin += V_Login_FazerLogin;
+            //Program.V_Login.FazerLogin += V_Login_FazerLogin;
         }
 
         private void V_Login_FazerLogin()

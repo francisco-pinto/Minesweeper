@@ -31,7 +31,7 @@ namespace Minesweeper.View_Controller
                 {
                     if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
-                        string path = Environment.CurrentDirectory + @"\btns\btnFlag.png";
+                        string path = "btnFlag.png";
                         AtualizaImagemConteudo(b[linha, coluna].Name, path);
                     }
                 }
@@ -44,12 +44,12 @@ namespace Minesweeper.View_Controller
             Program.V_MainPage.GanharHappy();
 
             //Mensagem ganhou o jogo
-            MessageBox.Show("Ganhou o jogo!");
+            //MessageBox.Show("Ganhou o jogo!");
             
             
-            Program.V_MainPage.Hide();
+            //Program.V_MainPage.Hide();
             Program.V_MainPage.LimparForm();
-            Program.V_MainPage.Show();
+            Program.V_MainPage.showPage();
         }
         private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)
         {  
@@ -60,7 +60,19 @@ namespace Minesweeper.View_Controller
                     if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
                         string path = Program.M_mapa.getImagePath(Program.M_mapa.GetQuadrado(linha, coluna));
-                        AtualizaImagemConteudo(b[linha, coluna].Name, path);
+                        
+                        if(path == @"\Botoes\btnVazio.png")
+                        {
+                            AtualizaImagemConteudo(b[linha, coluna].Name, "btnVazio.png");
+                        }else if(path == @"\Botoes\btnBomba.png")
+                        {
+                            AtualizaImagemConteudo(b[linha, coluna].Name, "btnVazio.png");
+                        }
+                        else
+                        {
+                            string newPath = path.Remove(0, 8);
+                            AtualizaImagemConteudo(b[linha, coluna].Name, newPath);
+                        } 
                     }
                 }
             }
@@ -91,12 +103,12 @@ namespace Minesweeper.View_Controller
 
             
             //Perder o jogo Mensagem
-            MessageBox.Show("Perdeu o jogo!");
+            //MessageBox.Show("Perdeu o jogo!");
             
 
-            Program.V_MainPage.Hide();
+            //Program.V_MainPage.Hide();
             Program.V_MainPage.LimparForm();
-            Program.V_MainPage.Show();
+            Program.V_MainPage.showPage();
             /*Pontuação*/
         }
         private void V_Mapa_MostraConteudoQuadrado(Button b)

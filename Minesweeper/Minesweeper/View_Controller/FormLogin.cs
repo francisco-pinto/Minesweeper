@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Minesweeper.View_Controller
 {
-    public delegate void  fazlogin();
+    public delegate void fazlogin();
     public partial class FormLogin : Form
     {
         public event fazlogin FazerLogin;

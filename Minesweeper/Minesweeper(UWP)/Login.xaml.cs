@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,13 +25,14 @@ namespace Minesweeper_UWP_
     /// </summary>
     public sealed partial class Login : Page
     {
-        OpenFileDialog ofd = new OpenFileDialog();
+        FileOpenPicker picker = new FileOpenPicker();
+        
         public Login()
         {
             this.InitializeComponent();
 
             PropriedadesRegistar();
-            
+            picker = new FileOpenPicker();
             //mainGrid.Height = 412;
             //mainGrid.Width = 1000;
             
@@ -85,15 +88,32 @@ namespace Minesweeper_UWP_
             this.Frame.Navigate(typeof(Menu), null);
         }
 
-        private void ButtonInserirfoto_Click(object sender, RoutedEventArgs e)
+        private void ButtonInserirfoto_ClickAsync(object sender, RoutedEventArgs e)
         {
-            ofd.Filter = "PNG|*.png; *.jpg; *.jpeg";
+            PhotoPickerAsync();
+        }
 
-            if (ofd.ShowDialog() == DialogResult.OK)
+        private async System.Threading.Tasks.Task PhotoPickerAsync()
+        {
+            picker.ViewMode = PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
+
+            StorageFile file = await picker.PickSingleFileAsync();
+
+            if (file != null)
             {
-                textBoxFileName.Text = ofd.SafeFileName;
-                textBoxSAvedFileName.Text = ofd.FileName;
-                pictureBoxFoto.Image = new Bitmap(ofd.FileName);
+
+                //Adicionar Picture box que mostra a foto
+                TBLogin_Fotografia.Text = file.Path.ToString();
+
+
+            }
+            else
+            {
+                TBLogin_Fotografia.Text = "Erro";
             }
         }
     }

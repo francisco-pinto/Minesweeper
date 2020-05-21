@@ -170,23 +170,22 @@ namespace Minesweeper.View_Controller
         private void ShowForm()
         {
             //Erro ao inicializar o mapa 2x
-            if (!Program.V_MainPage.Visible)
+            if (!Program.V_MainPage.IsVisible())
             {
                 Program.V_MainPage.InicializarVariaveis();
             }
-            Program.V_MainPage.Show();
+            Program.V_MainPage.showPage();
         }
         private void CreateMapa(int numMinas, int nLinhas, int nColunas)
         {
             Program.V_MainPage.CreateMapa(numMinas, nLinhas, nColunas);
             Program.M_mapa.CreateMapa(numMinas, nLinhas, nColunas);
             CriarButtons(nLinhas, nColunas, numMinas);
-            Program.V_MainPage.InserirBotoes(); 
+            //Program.V_MainPage.InserirBotoes(); 
         }
         private void ResizeForm(int altura, int largura)
         {
-            Program.V_MainPage.Size = new System.Drawing.Size(altura, largura);
+            Program.V_MainPage.Resize(altura, largura);
         }
-        
     }
 }

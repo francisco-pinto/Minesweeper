@@ -152,10 +152,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\boca.png" />
+    <Content Include="Assets\btnBomba.png" />
+    <Content Include="Assets\btnBombaErrada.png" />
+    <Content Include="Assets\btnFlag.png" />
+    <Content Include="Assets\btnQuestion.png" />
+    <Content Include="Assets\btnVazio.png" />
+    <Content Include="Assets\Clock.wav" />
+    <Content Include="Assets\Explosion.wav" />
     <Content Include="Assets\MinesweeperLogo.png" />
     <Content Include="Assets\sad.png" />
     <Content Include="Assets\smile glasses.png" />
     <Content Include="Assets\smile.png" />
+    <Content Include="Assets\Winning.wav" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
