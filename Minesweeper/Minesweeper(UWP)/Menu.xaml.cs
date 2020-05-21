@@ -29,13 +29,13 @@ namespace Minesweeper_UWP_
         public Menu()
         {
             this.InitializeComponent();
-            ApplicationView.PreferredLaunchViewSize = new Size { Height = 800, Width = 1000 };
             TextBoxNumBombas.Visibility = Visibility.Collapsed;
             TextBoxNumLinhas.Visibility = Visibility.Collapsed;
             TextBoxNumColunas.Visibility = Visibility.Collapsed;
         }
         private void ButtonInstrucoes_Click(object sender, RoutedEventArgs e)
         {
+            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 480, Width = 535 });
             this.Frame.Navigate(typeof(Instrucoes), null);
         }
         private void ButtonJogar_Click(object sender, RoutedEventArgs e)
@@ -47,8 +47,9 @@ namespace Minesweeper_UWP_
                 TextBoxNumBombas.Visibility = Visibility.Collapsed;
                 TextBoxNumLinhas.Visibility = Visibility.Collapsed;
                 TextBoxNumColunas.Visibility = Visibility.Collapsed;
-             
-                
+
+
+                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * 9, Width = 42 * 9 });
                 play(9, 9, 10);
                 /*Adicionar ao eventpo de modo a chamar
                  a pág já inicializada no app.xaml.cs
@@ -61,7 +62,7 @@ namespace Minesweeper_UWP_
                 TextBoxNumLinhas.Visibility = Visibility.Collapsed;
                 TextBoxNumColunas.Visibility = Visibility.Collapsed;
 
-
+                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * 16, Width = 42 * 16 });
                 play(16, 16, 40);
                 this.Frame.Navigate(typeof(MainPage));
             }else if(RadioButtonCustom.IsChecked == true)
@@ -70,6 +71,8 @@ namespace Minesweeper_UWP_
                 int numColunas = 0; Int32.TryParse(TextBoxNumColunas.Text, out numColunas);
                 int numBombas = 0; Int32.TryParse(TextBoxNumBombas.Text, out numBombas);
 
+
+                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * numLinhas, Width = 42 * numColunas });
                 play(numLinhas, numColunas, numBombas);
                 this.Frame.Navigate(typeof(MainPage));
             }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,11 +30,13 @@ namespace Minesweeper_UWP_
 
         private void ButtonRede_Click(object sender, RoutedEventArgs e)
         {
+            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 520, Width = 1020 });
             this.Frame.Navigate(typeof(Login), null);
         }
 
         private void ButtonStandalone_Click(object sender, RoutedEventArgs e)
         {
+            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 520, Width = 1020 });
             this.Frame.Navigate(typeof(Menu), null);
         }
     }

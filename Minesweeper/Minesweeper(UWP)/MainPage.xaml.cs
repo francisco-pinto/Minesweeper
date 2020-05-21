@@ -58,7 +58,6 @@ namespace Minesweeper_UWP_
             timer1.Tick += Timer1_Tick; 
 
             //Muda tamanho da janela
-            ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * numLinhas, Width = 42 * numColunas });
             this.TextBlockMinas.Text = numMinas.ToString();
                  
         }
