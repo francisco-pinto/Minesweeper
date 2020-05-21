@@ -26,9 +26,6 @@ namespace Minesweeper_UWP_
         public Instrucoes()
         {
             this.InitializeComponent();
-
-            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 480, Width = 535 });
-
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

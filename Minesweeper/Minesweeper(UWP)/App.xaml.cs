@@ -100,18 +100,28 @@ namespace Minesweeper_UWP_
                 Window.Current.Activate();
             }
 
-            V_Menu = rootFrame.Content as Menu;
-            V_Login = rootFrame.Content as Login;
-            V_Instrucoes = rootFrame.Content as Instrucoes;
-            V_MainPage = rootFrame.Content as MainPage;
-            V_PedirNome = rootFrame.Content as PedirNome;
+            //V_Menu = rootFrame.Content as Menu;
+            //V_Login = rootFrame.Content as Login;
+            //V_Instrucoes = rootFrame.Content as Instrucoes;
+            //V_MainPage = rootFrame.Content as MainPage;
+            //V_PedirNome = rootFrame.Content as PedirNome;
             V_On_Off = rootFrame.Content as On_Off;
+
+            V_Menu = new Menu();
+            V_Login = new Login();
+            V_Instrucoes = new Instrucoes();
+            V_MainPage = new MainPage();
+            V_PedirNome = new PedirNome();
+            V_On_Off = new On_Off();
 
             C_Intrucoes = new ControllerInstrucoes();
             C_jogador = new ControllerJogador();
             C_Login = new ControllerLogin();
             C_mapa = new ControllerMapa();
             C_menu = new ControllerMenu();
+
+            
+
         }
 
         void WindowProprieties(){
