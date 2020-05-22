@@ -18,6 +18,7 @@ namespace Minesweeper
         private int numLinhas;
         private int numColunas;
         private int segundos = 0;
+        private int aux = 0;
         private Button[,] button;
 
         public event startGame play;
@@ -42,8 +43,7 @@ namespace Minesweeper
         private void Form1_Load(object sender, EventArgs e)
         {
             //Timer
-            segundos = 0;
-            timer1.Enabled = true;
+            
 
             //Nº minas
             labelMinas.Text = getMinas();
@@ -98,6 +98,7 @@ namespace Minesweeper
             string path = Environment.CurrentDirectory + @"/Botoes/smile.png";
             buttonReiniciar.Image = Image.FromFile(path);
             timer1.Stop();
+            
 
             labelMinas.Text = null;
             labelTime.Text = null;
@@ -174,8 +175,15 @@ namespace Minesweeper
         }
         private void B_MouseDown(object sender, MouseEventArgs e)
         {
+            aux++;
             string path = Environment.CurrentDirectory + @"/Botoes/boca.png";
             buttonReiniciar.Image = Image.FromFile(path);
+
+            if (aux == 1)
+            {
+                timer1.Start();
+            }
+            
         }
         public void AtualizaSimboloBotao(int linha, int coluna, string path)
         {
@@ -236,8 +244,7 @@ namespace Minesweeper
         public void InicializarVariaveis()
         {
             //Timer
-            segundos = 0;
-            timer1.Enabled = true;
+           
 
             //Nº minas
             labelMinas.Text = getMinas();

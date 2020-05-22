@@ -63,20 +63,20 @@ namespace Minesweeper.Models
         //Atualiza simbolos, tal como a bandeira
         public string AtualizaSimbolo()
         {
-            string path = "";
+            string path = @"/Botoes";
 
             contadorCliques++;
             if (contadorCliques == 1)                           //Ser banderia
             {
                 SimboloQuadrado = SIMBOLO.BANDEIRA;
                 //Colocar eventos para mudar de cor no form
-                return (path + "btnFlag.png");
+                return (path + @"/btnFlag.png");
                 //button.BackColor = Color.Red;
             }
             else if (contadorCliques == 2)                      //Ser ?
             {
                 SimboloQuadrado = SIMBOLO.QUESTION;
-                return (path + "btnQuestion.png");
+                return (path + @"/btnQuestion.png");
                 //button.BackColor = Color.BlueViolet;
             }
             else if(contadorCliques == 3)                       //Ser bomba
