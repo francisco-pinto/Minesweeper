@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Minesweeper;
+using Minesweeper.View_Controller;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,10 +24,10 @@ namespace Minesweeper_UWP_
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     /// 
-    public delegate void startGame(int numLinhas, int numColunas, int numBombas);
     public sealed partial class Menu : Page
     {
         public event startGame play;
+        private App Program = App.Current as App;
         public Menu()
         {
             this.InitializeComponent();
@@ -38,6 +40,16 @@ namespace Minesweeper_UWP_
             ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 480, Width = 535 });
             this.Frame.Navigate(typeof(Instrucoes), null);
         }
+
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    Program.C_Intrucoes = new ControllerInstrucoes();
+        //    Program.C_jogador = new ControllerJogador();
+        //    Program.C_Login = new ControllerLogin();
+        //    Program.C_mapa = new ControllerMapa();
+        //    Program.C_menu = new ControllerMenu();
+        //}
+
         private void ButtonJogar_Click(object sender, RoutedEventArgs e)
         {
 
@@ -50,11 +62,12 @@ namespace Minesweeper_UWP_
 
 
                 ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * 9, Width = 42 * 9 });
-                play(9, 9, 10);
+                Program.C_menu.V_Menu_play(9, 9, 10);
+                this.Frame.Navigate(typeof(MainPage));
                 /*Adicionar ao eventpo de modo a chamar
                  a pág já inicializada no app.xaml.cs
                  usando o Program*/
-                this.Frame.Navigate(typeof(MainPage));
+                //this.Frame.Navigate(typeof(MainPage));
             }
             else if(RadioButtonMedio.IsChecked == true)
             {
@@ -63,7 +76,7 @@ namespace Minesweeper_UWP_
                 TextBoxNumColunas.Visibility = Visibility.Collapsed;
 
                 ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * 16, Width = 42 * 16 });
-                play(16, 16, 40);
+                Program.C_menu.V_Menu_play(16, 16, 40);
                 this.Frame.Navigate(typeof(MainPage));
             }else if(RadioButtonCustom.IsChecked == true)
             {
@@ -73,7 +86,7 @@ namespace Minesweeper_UWP_
 
 
                 ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * numLinhas, Width = 42 * numColunas });
-                play(numLinhas, numColunas, numBombas);
+                Program.C_menu.V_Menu_play(numLinhas, numColunas, numBombas);
                 this.Frame.Navigate(typeof(MainPage));
             }
         }

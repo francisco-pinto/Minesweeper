@@ -26,21 +26,21 @@ namespace Minesweeper_UWP_
     /// </summary>
     sealed partial class App : Application
     {
-        public Mapa M_mapa { get; private set; }
-        public Menu M_menu { get; private set; }
-        public Jogador M_jogador { get; private set; }
-        public Minesweeper.Models.Login M_Login { get; private set; }
-        public MainPage V_MainPage { get; private set; }
-        public Instrucoes V_Instrucoes { get; private set; }
-        public PedirNome V_PedirNome { get; private set; }
-        public On_Off V_On_Off { get; private set; }
-        public Login V_Login { get; private set; }
-        public Menu V_Menu { get; private set; }
-        public ControllerJogador C_jogador { get; private set; }
-        public ControllerMapa C_mapa { get; private set; }
-        public ControllerMenu C_menu { get; private set; }
-        public ControllerInstrucoes C_Intrucoes { get; private set; }
-        public ControllerLogin C_Login { get; private set; }
+        public Mapa M_mapa { get; set; }
+        public Menu M_menu { get; set; }
+        public Jogador M_jogador { get; set; }
+        public Minesweeper.Models.Login M_Login { get; set; }
+        public MainPage V_MainPage { get; set; }
+        public Instrucoes V_Instrucoes { get; set; }
+        public PedirNome V_PedirNome { get; set; }
+        public On_Off V_On_Off { get; set; }
+        public Login V_Login { get; set; }
+        public Menu V_Menu { get; set; }
+        public ControllerJogador C_jogador { get; set; }
+        public ControllerMapa C_mapa { get; set; }
+        public ControllerMenu C_menu { get; set; }
+        public ControllerInstrucoes C_Intrucoes { get; set; }
+        public ControllerLogin C_Login { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -119,9 +119,6 @@ namespace Minesweeper_UWP_
             C_Login = new ControllerLogin();
             C_mapa = new ControllerMapa();
             C_menu = new ControllerMenu();
-
-            
-
         }
 
         void WindowProprieties(){

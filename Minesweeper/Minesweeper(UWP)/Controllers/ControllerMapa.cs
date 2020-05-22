@@ -20,7 +20,7 @@ namespace Minesweeper.View_Controller
             Program.V_MainPage.MostraBandeirasTodas += V_Mapa_MostraBandeirasTodas;
             Program.V_MainPage.AdicionaFlag += V_Mapa_AdicionaFlag; 
             Program.V_MainPage.MostraConteudoQuadrado += V_Mapa_MostraConteudoQuadrado;
-            Program.V_MainPage.getMinas += V_Mapa_getMinas;
+            //Program.V_MainPage.getMinas += V_Mapa_getMinas;
             Program.V_MainPage.AtualizarMinas += V_Mapa_AtualizarMinas;
         }
         private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)

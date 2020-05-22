@@ -40,13 +40,16 @@ namespace Minesweeper_UWP_
         private int segundos = 0;
         private Button[,] button;
 
+        private App Program = App.Current as App;
+
         //Timer
         private DispatcherTimer timer1;
 
         public event startGame play;
+        //public event CreateButton CreateButtonModel;
         public event MostraBandeirasTodas MostraBandeirasTodas;
         public event MostraBombasTodas MostraBombasTodas;
-        public event GetMinas getMinas;
+        //public event GetMinas getMinas;
         public event AtualizarMinas AtualizarMinas;
         public event MostraConteudoQuadrado MostraConteudoQuadrado;
         public event AdicionaFlag AdicionaFlag;
@@ -57,6 +60,8 @@ namespace Minesweeper_UWP_
             timer1 = new DispatcherTimer();
             timer1.Tick += Timer1_Tick; 
 
+
+            //Colocar numa função de load
             //Muda tamanho da janela
             this.TextBlockMinas.Text = numMinas.ToString();
                  
@@ -93,16 +98,16 @@ namespace Minesweeper_UWP_
         }
         public void CreateMapa(int nLinhas, int nColunas, int nMinas)
         {
-            numMinas = nMinas;
-            numLinhas = nLinhas;
-            numColunas = nColunas;
+            numMinas = Program.M_mapa.NumMinasPorEncontrar;
+            numLinhas = Program.M_mapa.NumLinhas;
+            numColunas = Program.M_mapa.NumColunas;
 
-            
+            button = new Button[numLinhas, numColunas];
             //int ButtonX = 5;
             //int ButtonY = 10;
             //string nome;
 
-            button = new Button[numLinhas, numColunas];
+
 
             CreateGridProprieties(numLinhas, numColunas);
 
@@ -179,7 +184,7 @@ namespace Minesweeper_UWP_
                 {
                     AdicionaFlag(b);
                     AtualizarMinas(b);
-                    TextBlockMinas.Text = getMinas();
+                    TextBlockMinas.Text = numMinas.ToString();
 
                 }
                 if (mouse.IsLeftButtonPressed)
@@ -202,8 +207,8 @@ namespace Minesweeper_UWP_
           
             timer1.Stop();
 
-            TextBlockMinas.Text = null;
-            TextBlockTimer.Text = null;
+            TextBlockMinas.Text = "";
+            TextBlockTimer.Text = "";
             for (int linha = 0; linha < numLinhas; linha++)
             {
                 for (int coluna = 0; coluna < numColunas; coluna++)
@@ -302,7 +307,7 @@ namespace Minesweeper_UWP_
             timer1.Start();
 
             //Nº minas
-            TextBlockMinas.Text = getMinas();
+            TextBlockMinas.Text = numMinas.ToString();
             TextBlockTimer.Text = "000";
         }
         public void setVariaveisFinais(string nMinas, bool timerAtualization)
@@ -323,18 +328,169 @@ namespace Minesweeper_UWP_
         }
         private void ButtonCara_Click(object sender, RoutedEventArgs e)
         {
-            LimparForm();
-            play(numColunas, numLinhas, numMinas);
-            TextBlockMinas.Text = getMinas();
-        } 
+            if(numMinas != 0)
+            {
+                LimparForm();
+                Program.C_menu.V_Menu_play(numColunas, numLinhas, numMinas);
+            }
+          
+            CreateMapa(numMinas, numLinhas, numColunas);
+            CreateButtonModel(numLinhas, numColunas, numMinas);
+            Resize(30 + 40 * numColunas, 90 + 40 * numLinhas);
+            TextBlockMinas.Text = numMinas.ToString();
+        }
+        public void CreateButtonModel(int numLinhas, int numColunas, int numBombas)
+        {
+            int ButtonX = 0, ButtonY = 40;
+            CONTEUDO[,] conteudoQuadrado = new CONTEUDO[numLinhas, numColunas];
+            int[,] distanciaBomba = new int[numLinhas, numColunas];
+
+            preencherQuadrado(numLinhas, numColunas, numBombas, conteudoQuadrado);
+            preencherDistancias(numLinhas, numColunas, conteudoQuadrado, distanciaBomba);
+
+            for (int linha = 0; linha < numLinhas; linha++)
+            {
+                ButtonX = 5;
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    //Nome irá identificar a posição dos botões
+                    string nome = linha.ToString() + "-" + coluna.ToString();
+
+                    //Possível Evento de set do quadrado
+                    Program.M_mapa.setQuadrado(distanciaBomba[linha, coluna], conteudoQuadrado[linha, coluna], coluna, linha, ButtonX, ButtonY);
+                    //quadrado[linha, coluna] = new Quadrado(distanciaBomba[linha, coluna], conteudoQuadrado[linha, coluna], coluna, linha, ButtonX, ButtonY, nome);
+
+
+                    CreateButton(linha, coluna, conteudoQuadrado[linha, coluna], ButtonX, ButtonY, nome);
+                    ButtonX += 40;
+                }
+                ButtonY += 40;
+            }
+        }
+        public void preencherQuadrado(int numLinhas, int numColunas, int numMinas, CONTEUDO[,] localizacaoBombas)
+        {
+            int contador = 0;
+            var rand = new Random();
+
+            do
+            {
+                int linha = rand.Next(0, numLinhas);
+                int coluna = rand.Next(0, numColunas);
+
+                if (localizacaoBombas[linha, coluna] != CONTEUDO.BOMBA)
+                {
+                    contador++;
+                    localizacaoBombas[linha, coluna] = CONTEUDO.BOMBA;
+                }
+
+            } while (contador != numMinas);
+        }
+        private int BombasAVolta(CONTEUDO[,] conteudoQuadrado, int linha, int coluna, int numLinhas, int numColunas)
+        {
+            int counter = 0;
+            bool algumaBomba = false;
+
+            if (conteudoQuadrado[linha, coluna] != CONTEUDO.BOMBA)
+            {
+                //Em baixo
+                if ((linha + 1 < numLinhas) && (conteudoQuadrado[linha + 1, coluna] == CONTEUDO.BOMBA))
+                {
+                    counter++;
+                    algumaBomba = true;
+                }
+
+                //Em baixo direita
+                if (((linha + 1 < numLinhas) && (coluna + 1 < numColunas)) && (conteudoQuadrado[linha + 1, coluna + 1] == CONTEUDO.BOMBA))
+                {
+                    counter++;
+                    algumaBomba = true;
+                }
+
+                //Em baixo esquerda
+                if (((linha + 1 < numLinhas) && (coluna - 1 >= 0)) && (conteudoQuadrado[linha + 1, coluna - 1] == CONTEUDO.BOMBA))
+                {
+                    counter++;
+                    algumaBomba = true;
+                }
+
+                //À direita
+                if ((coluna + 1 < numColunas) && (conteudoQuadrado[linha, coluna + 1] == CONTEUDO.BOMBA))
+                {
+                    counter++;
+                    algumaBomba = true;
+                }
+
+                //Em cima direita
+                if (((linha - 1 >= 0) && (coluna + 1 < numColunas)) && (conteudoQuadrado[linha - 1, coluna + 1] == CONTEUDO.BOMBA))
+                {
+                    counter++;
+                    algumaBomba = true;
+                }
+
+                //Em cima
+                if ((linha - 1 >= 0) && (conteudoQuadrado[linha - 1, coluna] == CONTEUDO.BOMBA))
+                {
+                    counter++;
+                    algumaBomba = true;
+                }
+
+                //Em cima esquerda
+                if (((linha - 1 >= 0) && (coluna - 1 >= 0)) && (conteudoQuadrado[linha - 1, coluna - 1] == CONTEUDO.BOMBA))
+                {
+                    counter++;
+                    algumaBomba = true;
+                }
+
+                //À esquerda
+                if ((coluna - 1 >= 0) && (conteudoQuadrado[linha, coluna - 1] == CONTEUDO.BOMBA))
+                {
+                    counter++;
+                    algumaBomba = true;
+                }
+            }
+
+            if (algumaBomba)
+            {
+                return counter;
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
+        private void preencherDistancias(int numLinhas, int numColunas, CONTEUDO[,] conteudoQuadrado, int[,] distanciaBomba)
+        {
+
+            int distancia = -1;
+
+            for (int linha = 0; linha < numLinhas; linha++)
+            {
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    if (conteudoQuadrado[linha, coluna] == CONTEUDO.BOMBA)
+                    {
+                        distanciaBomba[linha, coluna] = 0;
+                    }
+                    else if ((distancia = BombasAVolta(conteudoQuadrado, linha, coluna, numLinhas, numColunas)) != -1)
+                    {
+                        distanciaBomba[linha, coluna] = distancia;
+                        distancia = -1;
+                    }
+                    else
+                    {
+                        distanciaBomba[linha, coluna] = distancia;
+                    }
+                }
+            }
+        }
         public void showPage()
         {
-            this.Frame.Navigate(typeof(MainPage));
+            Frame.Navigate(typeof(MainPage));
         }
         public bool IsVisible()
         {
-
-            if(this.Frame.Visibility == Visibility.Visible)
+            if(this.Frame != null)
             {
                 return true;
             }
