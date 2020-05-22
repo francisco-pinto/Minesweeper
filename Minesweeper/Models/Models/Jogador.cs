@@ -12,7 +12,7 @@ namespace Minesweeper
     {
         private string nome;
         private int pontuacao;
-        private FileInfo fi = new FileInfo(@"c:\pontuacao.txt");
+        private FileInfo fi = new FileInfo(@"pontuacao.txt");
 
         public Jogador() { }
         public string Nome { get => nome; set => nome = value; }
@@ -26,11 +26,17 @@ namespace Minesweeper
         {
             if (fi.Exists)
             {
-
+                StreamWriter sw = new StreamWriter("pontuacao.txt");
+                sw.Write(""); //nome e pontuacao
+                sw.Close();
             }
             else
             {
                 FileStream fs = fi.Create();
+                StreamWriter sw = new StreamWriter(fs);
+
+                sw.Write(""); //nome e pontuacao
+                sw.Close();
             }
         }
 

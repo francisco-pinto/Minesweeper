@@ -45,6 +45,10 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.setVariaveisFinais("00", false);
             Program.V_Mapa.GanharHappy();
             MessageBox.Show("Ganhou o jogo!");
+
+            
+            //Program.V_Mapa.VerificarRecorde();
+
             Program.V_Mapa.Hide();
             Program.V_Mapa.LimparForm();
             Program.V_Menu.Show();

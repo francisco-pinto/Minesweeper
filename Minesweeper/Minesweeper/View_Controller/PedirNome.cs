@@ -16,5 +16,18 @@ namespace Minesweeper.View_Controller
         {
             InitializeComponent();
         }
+
+        private void buttonAdicionar_Click(object sender, EventArgs e)
+        {
+            if(textBoxNomeJogador.Text == string.Empty)
+            {
+                MessageBox.Show("Introduza o seu nome");
+            }
+            else
+            {
+                //textBoxNomeJogador.Text = //nome ;
+                //fechar form
+            }
+        }
     }
 }

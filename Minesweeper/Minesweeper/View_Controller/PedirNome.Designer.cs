@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PedirNome));
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonAdicionarFacil = new System.Windows.Forms.Button();
-            this.textBoxNomeJogadorFacil = new System.Windows.Forms.TextBox();
+            this.buttonAdicionar = new System.Windows.Forms.Button();
+            this.textBoxNomeJogador = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -46,29 +46,30 @@
             this.label1.Text = "Parabéns! Fez o melhor tempo!\r\nIntroduza o seu nome:\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // buttonAdicionarFacil
+            // buttonAdicionar
             // 
-            this.buttonAdicionarFacil.Location = new System.Drawing.Point(132, 181);
-            this.buttonAdicionarFacil.Name = "buttonAdicionarFacil";
-            this.buttonAdicionarFacil.Size = new System.Drawing.Size(75, 23);
-            this.buttonAdicionarFacil.TabIndex = 1;
-            this.buttonAdicionarFacil.Text = "Adicionar";
-            this.buttonAdicionarFacil.UseVisualStyleBackColor = true;
+            this.buttonAdicionar.Location = new System.Drawing.Point(132, 181);
+            this.buttonAdicionar.Name = "buttonAdicionar";
+            this.buttonAdicionar.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdicionar.TabIndex = 1;
+            this.buttonAdicionar.Text = "Adicionar";
+            this.buttonAdicionar.UseVisualStyleBackColor = true;
+            this.buttonAdicionar.Click += new System.EventHandler(this.buttonAdicionar_Click);
             // 
-            // textBoxNomeJogadorFacil
+            // textBoxNomeJogador
             // 
-            this.textBoxNomeJogadorFacil.Location = new System.Drawing.Point(103, 134);
-            this.textBoxNomeJogadorFacil.Name = "textBoxNomeJogadorFacil";
-            this.textBoxNomeJogadorFacil.Size = new System.Drawing.Size(133, 20);
-            this.textBoxNomeJogadorFacil.TabIndex = 2;
+            this.textBoxNomeJogador.Location = new System.Drawing.Point(103, 134);
+            this.textBoxNomeJogador.Name = "textBoxNomeJogador";
+            this.textBoxNomeJogador.Size = new System.Drawing.Size(133, 20);
+            this.textBoxNomeJogador.TabIndex = 2;
             // 
             // PedirNome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(353, 287);
-            this.Controls.Add(this.textBoxNomeJogadorFacil);
-            this.Controls.Add(this.buttonAdicionarFacil);
+            this.Controls.Add(this.textBoxNomeJogador);
+            this.Controls.Add(this.buttonAdicionar);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PedirNome";
@@ -80,7 +81,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonAdicionarFacil;
-        private System.Windows.Forms.TextBox textBoxNomeJogadorFacil;
+        private System.Windows.Forms.Button buttonAdicionar;
+        private System.Windows.Forms.TextBox textBoxNomeJogador;
     }
 }

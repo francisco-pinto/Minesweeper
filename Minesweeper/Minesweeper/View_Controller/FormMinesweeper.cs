@@ -258,5 +258,12 @@ namespace Minesweeper
             play(numColunas, numLinhas, numMinas);
             labelMinas.Text = getMinas();
         }
+
+        public void VerificarRecorde()
+        {
+            //if melhor tempo
+            //abrir FormPedirNome
+            //buscar funçao EstadoFicheiro
+        }
     }
 }
