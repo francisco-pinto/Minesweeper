@@ -10,26 +10,20 @@ using System.Windows.Forms;
 
 namespace Minesweeper.View_Controller
 {
-    public partial class FormOnOff : Form
+    public partial class FormConsultarPerfil : Form
     {
-        
-        public FormOnOff()
+        public FormConsultarPerfil()
         {
             InitializeComponent();
+
+            
         }
 
-        private void buttonRede_Click(object sender, EventArgs e)
+        OpenFileDialog ofd = new OpenFileDialog();
+        
+        private void buttonVoltarMenu_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Program.V_Login.Show();
-        }
-
-        private void buttonStand_Click(object sender, EventArgs e)
-        {
-            
-            this.Hide();
-            Program.V_Menu.Show();
-            
         }
     }
 }

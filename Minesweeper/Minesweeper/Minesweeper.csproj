@@ -49,6 +49,12 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="View_Controller\ControllerInstrucoes.cs" />
     <Compile Include="View_Controller\ControllerLogin.cs" />
+    <Compile Include="View_Controller\FormConsultarPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Controller\FormConsultarPerfil.Designer.cs">
+      <DependentUpon>FormConsultarPerfil.cs</DependentUpon>
+    </Compile>
     <Compile Include="View_Controller\FormInstrucoes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="View_Controller\PedirNome.Designer.cs">
       <DependentUpon>PedirNome.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View_Controller\FormConsultarPerfil.resx">
+      <DependentUpon>FormConsultarPerfil.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View_Controller\FormInstrucoes.resx">
       <DependentUpon>FormInstrucoes.cs</DependentUpon>
     </EmbeddedResource>

@@ -15,6 +15,8 @@ namespace Minesweeper
         public static FormMenu V_Menu { get; private set; }
         public static FormMineSweeper V_Mapa { get; private set; }
         public static FormLogin V_Login { get; private set; }
+
+        public static FormConsultarPerfil V_ConsultarPerfil { get; private set; }
         public static Instrucoes V_Instrucoes { get; private set; }
         public static FormOnOff V_OnOff { get; private set; }
         public static PedirNome V_PedirNome { get; private set; }
@@ -47,6 +49,7 @@ namespace Minesweeper
             V_Login = new FormLogin();
             V_OnOff = new FormOnOff();
             V_PedirNome = new PedirNome();
+            V_ConsultarPerfil = new FormConsultarPerfil();
 
             //Controllers
             C_jogador = new ControllerJogador();

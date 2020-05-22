@@ -25,6 +25,7 @@ namespace Minesweeper.View_Controller
         {
             InitializeComponent();
             ConfigRadioButtons();
+            
         }
 
         private void buttonJogar_Click(object sender, EventArgs e)
@@ -154,6 +155,14 @@ namespace Minesweeper.View_Controller
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
+        }
+
+        private void buttonConsultarPerfil_Click(object sender, EventArgs e)
+        {
+            Program.V_ConsultarPerfil.Show();
+
+            
+
         }
     }
 }

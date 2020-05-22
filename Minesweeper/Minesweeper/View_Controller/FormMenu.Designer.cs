@@ -41,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.listBoxFacil = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonConsultarPerfil = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.groupBoxInserirDificuldade.SuspendLayout();
             this.SuspendLayout();
@@ -48,9 +49,10 @@
             // pictureBoxLogo
             // 
             this.pictureBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLogo.Image")));
-            this.pictureBoxLogo.Location = new System.Drawing.Point(120, 12);
+            this.pictureBoxLogo.Location = new System.Drawing.Point(160, 15);
+            this.pictureBoxLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new System.Drawing.Size(288, 128);
+            this.pictureBoxLogo.Size = new System.Drawing.Size(384, 158);
             this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxLogo.TabIndex = 0;
             this.pictureBoxLogo.TabStop = false;
@@ -58,9 +60,10 @@
             // radioButtonFacil
             // 
             this.radioButtonFacil.AutoSize = true;
-            this.radioButtonFacil.Location = new System.Drawing.Point(15, 19);
+            this.radioButtonFacil.Location = new System.Drawing.Point(20, 23);
+            this.radioButtonFacil.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.radioButtonFacil.Name = "radioButtonFacil";
-            this.radioButtonFacil.Size = new System.Drawing.Size(47, 17);
+            this.radioButtonFacil.Size = new System.Drawing.Size(58, 21);
             this.radioButtonFacil.TabIndex = 2;
             this.radioButtonFacil.TabStop = true;
             this.radioButtonFacil.Text = "Fácil";
@@ -70,9 +73,10 @@
             // radioButtonMedia
             // 
             this.radioButtonMedia.AutoSize = true;
-            this.radioButtonMedia.Location = new System.Drawing.Point(138, 19);
+            this.radioButtonMedia.Location = new System.Drawing.Point(184, 23);
+            this.radioButtonMedia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.radioButtonMedia.Name = "radioButtonMedia";
-            this.radioButtonMedia.Size = new System.Drawing.Size(54, 17);
+            this.radioButtonMedia.Size = new System.Drawing.Size(67, 21);
             this.radioButtonMedia.TabIndex = 3;
             this.radioButtonMedia.TabStop = true;
             this.radioButtonMedia.Text = "Média";
@@ -84,9 +88,11 @@
             this.groupBoxInserirDificuldade.Controls.Add(this.radioButtonCustom);
             this.groupBoxInserirDificuldade.Controls.Add(this.radioButtonFacil);
             this.groupBoxInserirDificuldade.Controls.Add(this.radioButtonMedia);
-            this.groupBoxInserirDificuldade.Location = new System.Drawing.Point(98, 169);
+            this.groupBoxInserirDificuldade.Location = new System.Drawing.Point(131, 208);
+            this.groupBoxInserirDificuldade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxInserirDificuldade.Name = "groupBoxInserirDificuldade";
-            this.groupBoxInserirDificuldade.Size = new System.Drawing.Size(325, 42);
+            this.groupBoxInserirDificuldade.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxInserirDificuldade.Size = new System.Drawing.Size(433, 52);
             this.groupBoxInserirDificuldade.TabIndex = 4;
             this.groupBoxInserirDificuldade.TabStop = false;
             this.groupBoxInserirDificuldade.Text = "Insira a dificuldade";
@@ -94,9 +100,10 @@
             // radioButtonCustom
             // 
             this.radioButtonCustom.AutoSize = true;
-            this.radioButtonCustom.Location = new System.Drawing.Point(253, 19);
+            this.radioButtonCustom.Location = new System.Drawing.Point(337, 23);
+            this.radioButtonCustom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.radioButtonCustom.Name = "radioButtonCustom";
-            this.radioButtonCustom.Size = new System.Drawing.Size(60, 17);
+            this.radioButtonCustom.Size = new System.Drawing.Size(76, 21);
             this.radioButtonCustom.TabIndex = 4;
             this.radioButtonCustom.TabStop = true;
             this.radioButtonCustom.Text = "Custom";
@@ -105,9 +112,10 @@
             // 
             // buttonJogar
             // 
-            this.buttonJogar.Location = new System.Drawing.Point(216, 217);
+            this.buttonJogar.Location = new System.Drawing.Point(288, 267);
+            this.buttonJogar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonJogar.Name = "buttonJogar";
-            this.buttonJogar.Size = new System.Drawing.Size(75, 23);
+            this.buttonJogar.Size = new System.Drawing.Size(100, 28);
             this.buttonJogar.TabIndex = 5;
             this.buttonJogar.Text = "Jogar";
             this.buttonJogar.UseVisualStyleBackColor = true;
@@ -115,9 +123,10 @@
             // 
             // buttonInstrucoes
             // 
-            this.buttonInstrucoes.Location = new System.Drawing.Point(216, 260);
+            this.buttonInstrucoes.Location = new System.Drawing.Point(288, 320);
+            this.buttonInstrucoes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonInstrucoes.Name = "buttonInstrucoes";
-            this.buttonInstrucoes.Size = new System.Drawing.Size(75, 23);
+            this.buttonInstrucoes.Size = new System.Drawing.Size(100, 28);
             this.buttonInstrucoes.TabIndex = 7;
             this.buttonInstrucoes.Text = "Instruções";
             this.buttonInstrucoes.UseVisualStyleBackColor = true;
@@ -127,26 +136,30 @@
             // 
             this.listBoxMedio.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.listBoxMedio.FormattingEnabled = true;
-            this.listBoxMedio.Location = new System.Drawing.Point(314, 364);
+            this.listBoxMedio.ItemHeight = 16;
+            this.listBoxMedio.Location = new System.Drawing.Point(419, 448);
+            this.listBoxMedio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBoxMedio.Name = "listBoxMedio";
-            this.listBoxMedio.Size = new System.Drawing.Size(109, 95);
+            this.listBoxMedio.Size = new System.Drawing.Size(144, 116);
             this.listBoxMedio.TabIndex = 15;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(357, 333);
+            this.label3.Location = new System.Drawing.Point(476, 410);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 13);
+            this.label3.Size = new System.Drawing.Size(46, 17);
             this.label3.TabIndex = 14;
             this.label3.Text = "Média";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(131, 333);
+            this.label2.Location = new System.Drawing.Point(175, 410);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.Size = new System.Drawing.Size(37, 17);
             this.label2.TabIndex = 13;
             this.label2.Text = "Fácil";
             // 
@@ -154,26 +167,40 @@
             // 
             this.listBoxFacil.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.listBoxFacil.FormattingEnabled = true;
-            this.listBoxFacil.Location = new System.Drawing.Point(98, 364);
+            this.listBoxFacil.ItemHeight = 16;
+            this.listBoxFacil.Location = new System.Drawing.Point(131, 448);
+            this.listBoxFacil.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBoxFacil.Name = "listBoxFacil";
-            this.listBoxFacil.Size = new System.Drawing.Size(109, 95);
+            this.listBoxFacil.Size = new System.Drawing.Size(144, 116);
             this.listBoxFacil.TabIndex = 12;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(202, 303);
+            this.label1.Location = new System.Drawing.Point(269, 373);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 16);
+            this.label1.Size = new System.Drawing.Size(143, 20);
             this.label1.TabIndex = 16;
             this.label1.Text = "Melhores Tempos";
             // 
+            // buttonConsultarPerfil
+            // 
+            this.buttonConsultarPerfil.Location = new System.Drawing.Point(27, 135);
+            this.buttonConsultarPerfil.Name = "buttonConsultarPerfil";
+            this.buttonConsultarPerfil.Size = new System.Drawing.Size(89, 49);
+            this.buttonConsultarPerfil.TabIndex = 17;
+            this.buttonConsultarPerfil.Text = "Consultar Perfil";
+            this.buttonConsultarPerfil.UseVisualStyleBackColor = true;
+            this.buttonConsultarPerfil.Click += new System.EventHandler(this.buttonConsultarPerfil_Click);
+            // 
             // FormMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 482);
+            this.ClientSize = new System.Drawing.Size(712, 593);
+            this.Controls.Add(this.buttonConsultarPerfil);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxMedio);
             this.Controls.Add(this.label3);
@@ -185,6 +212,7 @@
             this.Controls.Add(this.pictureBoxLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "FormMenu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMenu_FormClosing);
@@ -210,5 +238,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBoxFacil;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonConsultarPerfil;
     }
 }
