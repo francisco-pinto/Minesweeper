@@ -144,9 +144,21 @@ namespace Minesweeper_UWP_
             button[linha, coluna].Height = 40;
             button[linha, coluna].Width = 40;
             button[linha, coluna].Content = nome;
-            button[linha, coluna].Click += B_Click;
-            button[linha, coluna].PointerPressed += MainPage_PointerPressed; ;
-            button[linha, coluna].PointerReleased += MainPage_PointerReleased; ;
+            button[linha, coluna].Tapped += MainPage_Tapped;
+            button[linha, coluna].RightTapped += MainPage_RightTapped;
+            button[linha, coluna].PointerPressed += MainPage_PointerPressed; 
+            button[linha, coluna].PointerReleased += MainPage_PointerReleased;
+
+            //Adicionar o PointerPressed ao botão esquerdo
+            button[linha, coluna].AddHandler(PointerPressedEvent,
+            new PointerEventHandler(MainPage_PointerPressed), true);
+            //Adicionar o PointerReleased ao botão esquerdo
+            button[linha, coluna].AddHandler(PointerReleasedEvent,
+            new PointerEventHandler(MainPage_PointerReleased), true);
+
+
+            //button[linha, coluna].
+
             /*Colocar inicialmente imagem de fundo normal*/
             //    button[linha, coluna].Location = new Point(ButtonX, ButtonY);
 
@@ -161,6 +173,23 @@ namespace Minesweeper_UWP_
             Grid.SetRow(button[linha, coluna], linha);
 
         }
+
+        private void MainPage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+
+            MostraConteudoQuadrado(b);
+        }
+
+        private void MainPage_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+
+            AdicionaFlag(b);
+            AtualizarMinas(b);
+            TextBlockMinas.Text = numMinas.ToString();
+        }
+
         private void MainPage_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             ButtonCara.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/smile.png")), Stretch = Stretch.None };
@@ -168,31 +197,6 @@ namespace Minesweeper_UWP_
         private void MainPage_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             ButtonCara.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/boca.png")), Stretch = Stretch.None };
-        }
-        private void B_Click(object sender, RoutedEventArgs e)
-        {
-            Button b = (Button)sender;
-            PointerRoutedEventArgs me = e.OriginalSource as PointerRoutedEventArgs;  //Evento do rato
-
-            //Verifica se trata de rato
-            if (me.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
-            {
-
-                var mouse = me.GetCurrentPoint(this).Properties;
-
-                if (mouse.IsRightButtonPressed)
-                {
-                    AdicionaFlag(b);
-                    AtualizarMinas(b);
-                    TextBlockMinas.Text = numMinas.ToString();
-
-                }
-                if (mouse.IsLeftButtonPressed)
-                {
-                    MostraConteudoQuadrado(b);
-                    //MessageBox.Show(b.Name);
-                }
-            }
         }
         public void MostraTodasBandeiras()
         {

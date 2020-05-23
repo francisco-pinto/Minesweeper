@@ -160,9 +160,6 @@ namespace Minesweeper.View_Controller
         private void buttonConsultarPerfil_Click(object sender, EventArgs e)
         {
             Program.V_ConsultarPerfil.Show();
-
-            
-
         }
     }
 }
