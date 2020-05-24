@@ -16,76 +16,76 @@ namespace Minesweeper.View_Controller
         public ControllerMapa()
         {
             Program = App.Current as App;
-            Program.V_MainPage.MostraBombasTodas += V_Mapa_MostraBombasTodas;
-            Program.V_MainPage.MostraBandeirasTodas += V_Mapa_MostraBandeirasTodas;
+            //Program.V_MainPage.MostraBombasTodas += V_Mapa_MostraBombasTodas;
+            //Program.V_MainPage.MostraBandeirasTodas += V_Mapa_MostraBandeirasTodas;
             Program.V_MainPage.AdicionaFlag += V_Mapa_AdicionaFlag; 
             Program.V_MainPage.MostraConteudoQuadrado += V_Mapa_MostraConteudoQuadrado;
             //Program.V_MainPage.getMinas += V_Mapa_getMinas;
             Program.V_MainPage.AtualizarMinas += V_Mapa_AtualizarMinas;
         }
-        private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)
-        {
-            for (int linha = 0; linha < numLinhas; linha++)
-            {
-                for (int coluna = 0; coluna < numColunas; coluna++)
-                {
-                    if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
-                    {
-                        string path = "btnFlag.png";
-                        AtualizaImagemConteudo(b[linha, coluna].Name, path);
-                    }
-                }
-            }
-        }
+        //private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)
+        //{
+        //    for (int linha = 0; linha < numLinhas; linha++)
+        //    {
+        //        for (int coluna = 0; coluna < numColunas; coluna++)
+        //        {
+        //            if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
+        //            {
+        //                string path = "btnFlag.png";
+        //                AtualizaImagemConteudo(b[linha, coluna].Name, path);
+        //            }
+        //        }
+        //    }
+        //}
         private void GanharJogo()
         {
-            Program.V_MainPage.MostraTodasBandeiras();
-            Program.V_MainPage.setVariaveisFinais("00", false);
-            Program.V_MainPage.GanharHappy();
+            //Program.V_MainPage.MostraTodasBandeiras();
+            //Program.V_MainPage.setVariaveisFinais("00", false);
+            //Program.V_MainPage.GanharHappy();
 
-            //Mensagem ganhou o jogo
-            //MessageBox.Show("Ganhou o jogo!");
+            ////Mensagem ganhou o jogo
+            ////MessageBox.Show("Ganhou o jogo!");
             
             
-            //Program.V_MainPage.Hide();
-            Program.V_MainPage.LimparForm();
-            Program.V_MainPage.showPage();
+            ////Program.V_MainPage.Hide();
+            //Program.V_MainPage.LimparForm();
+            //Program.V_MainPage.showPage();
         }
-        private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)
-        {  
-            for (int linha = 0; linha < numLinhas; linha++)
-            {
-                for (int coluna = 0; coluna < numColunas; coluna++)
-                {
-                    if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
-                    {
-                        string path = Program.M_mapa.getImagePath(Program.M_mapa.GetQuadrado(linha, coluna));
+        //private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)
+        //{  
+        //    for (int linha = 0; linha < numLinhas; linha++)
+        //    {
+        //        for (int coluna = 0; coluna < numColunas; coluna++)
+        //        {
+        //            if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
+        //            {
+        //                string path = Program.M_mapa.getImagePath(Program.M_mapa.GetQuadrado(linha, coluna));
                         
-                        if(path == @"\Botoes\btnVazio.png")
-                        {
-                            AtualizaImagemConteudo(b[linha, coluna].Name, "btnVazio.png");
-                        }else if(path == @"\Botoes\btnBomba.png")
-                        {
-                            AtualizaImagemConteudo(b[linha, coluna].Name, "btnVazio.png");
-                        }
-                        else
-                        {
-                            string newPath = path.Remove(0, 8);
-                            AtualizaImagemConteudo(b[linha, coluna].Name, newPath);
-                        } 
-                    }
-                }
-            }
-        }
-        private void AtualizaImagemConteudo(string nome, string path)
-        {
-            Program.V_MainPage.AtualizaImagemConteudo(nome, path);
-        }
+        //                if(path == @"\Botoes\btnVazio.png")
+        //                {
+        //                    AtualizaImagemConteudo(b[linha, coluna].Name, "btnVazio.png");
+        //                }else if(path == @"\Botoes\btnBomba.png")
+        //                {
+        //                    AtualizaImagemConteudo(b[linha, coluna].Name, "btnVazio.png");
+        //                }
+        //                else
+        //                {
+        //                    string newPath = path.Remove(0, 8);
+        //                    AtualizaImagemConteudo(b[linha, coluna].Name, newPath);
+        //                } 
+        //            }
+        //        }
+        //    }
+        //}
+        //private void AtualizaImagemConteudo(string nome, string path)
+        //{
+        //    Program.V_MainPage.AtualizaImagemConteudo(nome, path);
+        //}
         private void AlteraSimboloBotao(int linha, int coluna, string path)
         {
             Program.V_MainPage.AtualizaSimboloBotao(linha, coluna, path);
         }
-        private void V_Mapa_AtualizarMinas(Button b)
+        public void V_Mapa_AtualizarMinas(Button b)
         {
             Program.M_mapa.AtualizaMinas(b.Name);
         }
@@ -95,11 +95,11 @@ namespace Minesweeper.View_Controller
         }
         private void PerderJogo()
         {
-            Program.V_MainPage.setVariaveisFinais("-1", false);
-            string[] posErradas = Program.M_mapa.GetBandeirasErradas();
-            Program.V_MainPage.MostraTodasBombas();
-            Program.V_MainPage.MostraBandeirasErradas(posErradas);
-            Program.V_MainPage.PerderSad();
+            //Program.V_MainPage.setVariaveisFinais("-1", false);
+            //string[] posErradas = Program.M_mapa.GetBandeirasErradas();
+            //Program.V_MainPage.MostraTodasBombas();
+            //Program.V_MainPage.MostraBandeirasErradas(posErradas);
+            //Program.V_MainPage.PerderSad();
 
             
             //Perder o jogo Mensagem
@@ -107,11 +107,12 @@ namespace Minesweeper.View_Controller
             
 
             //Program.V_MainPage.Hide();
-            Program.V_MainPage.LimparForm();
-            Program.V_MainPage.showPage();
+            //Program.V_MainPage.LimparForm();
+            
+            //Program.V_MainPage.showPage();
             /*Pontuação*/
         }
-        private void V_Mapa_MostraConteudoQuadrado(Button b)
+        public int V_Mapa_MostraConteudoQuadrado(Button b)
         {
             /*Identifica o quadrado que possui aquele nome*/
             int numLinhas = Program.M_mapa.NumLinhas;
@@ -139,14 +140,15 @@ namespace Minesweeper.View_Controller
             if (quadrado.ConteudoQuadrado == CONTEUDO.BOMBA)
             {
                 PerderJogo();
+                return -1;
             }
 
             //Verifica se ganha o jogo
             //Talvez mudar nome da função
             //Colocar condição de entrada para não percorrer sempre que código é executado
-            VerificarQuadradosExpostos(numLinhas, numColunas, numMinas);
+            return VerificarQuadradosExpostos(numLinhas, numColunas, numMinas);
         }
-        public void VerificarQuadradosExpostos(int numLinhas, int numColunas, int numMinas)
+        public int VerificarQuadradosExpostos(int numLinhas, int numColunas, int numMinas)
         {
             int quadradoporver = numColunas * numLinhas;
 
@@ -165,14 +167,16 @@ namespace Minesweeper.View_Controller
             if (quadradoporver == numMinas)
             {
                 GanharJogo();
+                return 1;
             }
+            return 0;
         }
         private void MostrarQuadrado(int linha, int coluna, Quadrado quadrado)
         {
             string nome = quadrado.Linha.ToString() + '-' + quadrado.Coluna.ToString();
             quadrado.Selecionado = true;
-            string path = Program.M_mapa.getImagePath(quadrado);
-            AtualizaImagemConteudo(nome, path);   //Ir pelo nome
+            //string path = Program.M_mapa.getImagePath(quadrado);
+            //AtualizaImagemConteudo(nome, path);   //Ir pelo nome
         }
         public void MostraQuadradosVaziosTodos(int linha, int coluna, Quadrado quadrado, int numLinhas, int numColunas)
         {
@@ -246,7 +250,7 @@ namespace Minesweeper.View_Controller
                 }
             }
         }
-        private void V_Mapa_AdicionaFlag(Button b)
+        public string V_Mapa_AdicionaFlag(Button b)
         {
             string nome = b.Name;
             
@@ -259,9 +263,15 @@ namespace Minesweeper.View_Controller
                 //Função deveria estar no MAPA?
                 string path = Program.M_mapa.getQuadradoPath(linha, coluna);
 
+                //string path = @"\btnFlag.png";
+
                 /*Passar isso a imagens mais tarde*/
-                AlteraSimboloBotao(linha, coluna, path);
+
+                return path;
+                //AlteraSimboloBotao(linha, coluna, path);
             }
+
+            return null;
         }
     }
 }

@@ -6,13 +6,16 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
+using System.Threading.Tasks;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Storage;
+using Windows.System.Threading;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Core.Preview;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
@@ -47,7 +50,7 @@ namespace Minesweeper_UWP_
 
         public event startGame play;
         //public event CreateButton CreateButtonModel;
-        public event MostraBandeirasTodas MostraBandeirasTodas;
+        //public event MostraBandeirasTodas MostraBandeirasTodas;
         public event MostraBombasTodas MostraBombasTodas;
         //public event GetMinas getMinas;
         public event AtualizarMinas AtualizarMinas;
@@ -57,14 +60,14 @@ namespace Minesweeper_UWP_
         public MainPage()
         {   
             this.InitializeComponent();
+            //NavigationCacheMode = NavigationCacheMode.Required;
             timer1 = new DispatcherTimer();
             timer1.Tick += Timer1_Tick; 
 
 
             //Colocar numa função de load
             //Muda tamanho da janela
-            this.TextBlockMinas.Text = numMinas.ToString();
-                 
+            this.TextBlockMinas.Text = numMinas.ToString();       
         }
 
         private void Timer1_Tick(object sender, object e)
@@ -143,7 +146,7 @@ namespace Minesweeper_UWP_
             button[linha, coluna].Name = nome;
             button[linha, coluna].Height = 40;
             button[linha, coluna].Width = 40;
-            button[linha, coluna].Content = nome;
+            //button[linha, coluna].Content = nome;
             button[linha, coluna].Tapped += MainPage_Tapped;
             button[linha, coluna].RightTapped += MainPage_RightTapped;
             button[linha, coluna].PointerPressed += MainPage_PointerPressed; 
@@ -173,23 +176,136 @@ namespace Minesweeper_UWP_
             Grid.SetRow(button[linha, coluna], linha);
 
         }
-
         private void MainPage_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Button b = (Button)sender;
 
-            MostraConteudoQuadrado(b);
-        }
+            int aux = Program.C_mapa.V_Mapa_MostraConteudoQuadrado(b);
 
+            if(aux == 0)            //Mostrar Quadrados Vazios
+            {
+                AtualizaImagemConteudo();
+            }
+            else if(aux == -1)       //Perder o jogo
+            {
+                setVariaveisFinais("-1", false);
+                MostraTodasBombas();
+                string[] posErradas = Program.M_mapa.GetBandeirasErradas(); //Colcoar um get no controller
+                MostraBandeirasErradas(posErradas);
+                PerderSad();
+                BlockControls();
+                //LimparForm();
+                Sleep(5);
+                //Task.Run(async () => await Task.Delay(TimeSpan.FromMilliseconds(10000)));
+
+                
+
+            }
+            else if(aux == 1)       //Ganhar Jogo
+            {
+                MostraBandeirasTodas();
+                setVariaveisFinais("00", false);
+                GanharHappy();
+                BlockControls();
+                //LimparForm();
+                Sleep(5);
+            }   
+        }
+        private void BlockControls()
+        {
+            ButtonCara.IsEnabled = false;
+
+            for(int linha = 0; linha < numLinhas; linha++)
+            {
+                for(int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    button[linha, coluna].IsEnabled = false;
+                }
+            }
+        }
+        private void Sleep(int sec)
+        {
+            TimeSpan delay = TimeSpan.FromSeconds(5);
+            bool completed = false;
+            ThreadPoolTimer DelayTimer = ThreadPoolTimer.CreateTimer(
+                (source) =>
+                {
+                        //
+                        Dispatcher.RunAsync(
+                                                CoreDispatcherPriority.High,
+                                                () =>
+                                        {
+                                                //
+                                                // UI components can be accessed within this scope.
+                                                //
+
+                                            });
+
+                    completed = true;
+                },
+                delay,
+                (source) =>
+                {
+
+                    Dispatcher.RunAsync(
+                                        CoreDispatcherPriority.High,
+                                        () =>
+                                        {
+                                                //
+
+                                                if (completed)
+                                            {
+                                                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * numColunas, Width = 42 * numLinhas });
+                                                this.Frame.Navigate(typeof(Menu));
+                                            }
+                                            else
+                                            {
+                                                    // Timer cancelled.
+                                                }
+
+                                        });
+                });
+        }
+        public void AtualizaImagemConteudo()
+        {
+            string path = @"";
+
+            for(int linha = 0; linha < numLinhas; linha++)
+            {
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    path = Program.M_mapa.getImagePath(Program.M_mapa.GetQuadrado(linha, coluna));
+                    
+                    path = path.Remove(0, 8);
+
+                    path = @"\btn2.png";
+                    if (!Program.M_mapa.CheckQuadradoSelecionado(linha, coluna))
+                    {
+                        button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.Fill };
+                        //button[linha, coluna].Background = new SolidColorBrush(Colors.DarkGray);
+                    }
+                }
+            }
+        }
         private void MainPage_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             Button b = (Button)sender;
+            string nome = b.Name;
 
-            AdicionaFlag(b);
-            AtualizarMinas(b);
+            string[] pos = nome.Split('-');
+            int linha = Convert.ToInt32(pos[0]);
+            int coluna = Convert.ToInt32(pos[1]);
+
+            string path = Program.C_mapa.V_Mapa_AdicionaFlag(b);
+            AtualizaSimboloBotao(linha, coluna, path);
+            Program.C_mapa.V_Mapa_AtualizarMinas(b);
+            AtualizaNumMinasMapa();
             TextBlockMinas.Text = numMinas.ToString();
         }
-
+        private void AtualizaNumMinasMapa()
+        {
+            numMinas = Program.M_mapa.NumMinasPorEncontrar;
+        }
         private void MainPage_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             ButtonCara.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/smile.png")), Stretch = Stretch.None };
@@ -197,10 +313,6 @@ namespace Minesweeper_UWP_
         private void MainPage_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             ButtonCara.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/boca.png")), Stretch = Stretch.None };
-        }
-        public void MostraTodasBandeiras()
-        {
-            MostraBandeirasTodas(button, numLinhas, numColunas);
         }
         public void LimparForm()
         {
@@ -233,8 +345,6 @@ namespace Minesweeper_UWP_
             ButtonCara.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/smile glasses.png")), Stretch = Stretch.None };
         }
 
-
-
         // Adaptar codigo ao criar botao em cima
         //public void CreateButton(int linha, int coluna, CONTEUDO conteudoQuadrado, int ButtonX, int ButtonY, string nome)
         //{
@@ -266,33 +376,43 @@ namespace Minesweeper_UWP_
             }
             else
             {
-                button[linha, coluna].Background = null;
+                button[linha, coluna].Background = new SolidColorBrush(Colors.LightGray); 
             }
 
         }
-        public void AtualizaImagemConteudo(string nome, string path)
+        //public void AtualizaImagemConteudo(string nome, string path)
+        //{
+        //    for (int linha = 0; linha < numLinhas; linha++)
+        //    {
+        //        for (int coluna = 0; coluna < numColunas; coluna++)
+        //        {
+        //            if (nome == button[linha, coluna].Name)
+        //            {
+
+        //                button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.None };
+        //                return;
+        //            }
+        //        }
+        //    }
+        //}
+        public void MostraTodasBombas()
         {
+            string path = @"/btnBomba.png";
+            //MostraBombasTodas(button, numLinhas, numColunas);
             for (int linha = 0; linha < numLinhas; linha++)
             {
                 for (int coluna = 0; coluna < numColunas; coluna++)
                 {
-                    if (nome == button[linha, coluna].Name)
+                    if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
-                        
                         button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.None };
-                        return;
                     }
                 }
             }
         }
-        public void MostraTodasBombas()
-        {
-            MostraBombasTodas(button, numLinhas, numColunas);
-
-        }
         public void MostraBandeirasErradas(string[] PosErradas)
         {
-            string path = "btnBombaErrada.png";
+            string path = @"/btnBombaErrada.png";
             for (int i = 0; i < PosErradas.Length; i++)
             {
                 string[] pos = PosErradas[i].Split('-');
@@ -507,18 +627,31 @@ namespace Minesweeper_UWP_
         {
             ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = altura, Width = largura });
         }
-
-    //private void FormMineSweeper_FormClosing(object sender, FormClosingEventArgs e)
-    //{
-    //    //Esconder e não eliminar form
-    //    if (e.CloseReason == CloseReason.UserClosing)
-    //    {
-    //        e.Cancel = true;
-    //        Hide();
-    //    }
-    //    LimparForm();
-    //    Program.V_Menu.Show();
-    //}
+        private void MostraBandeirasTodas()
+        {
+            for (int linha = 0; linha < numLinhas; linha++)
+            {
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
+                    {
+                        string path = "btnFlag.png";
+                        button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.None };
+                    }
+                }
+            }
+        }
+        //private void FormMineSweeper_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    //Esconder e não eliminar form
+        //    if (e.CloseReason == CloseReason.UserClosing)
+        //    {
+        //        e.Cancel = true;
+        //        Hide();
+        //    }
+        //    LimparForm();
+        //    Program.V_Menu.Show();
+        //}
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;

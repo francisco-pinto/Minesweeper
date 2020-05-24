@@ -90,7 +90,6 @@ namespace Minesweeper_UWP_
                 this.Frame.Navigate(typeof(MainPage));
             }
         }
-
         private void RadioButtonCustom_Checked(object sender, RoutedEventArgs e)
         {
             TextBoxNumBombas.Text = "Num Bombas";
@@ -100,6 +99,36 @@ namespace Minesweeper_UWP_
             TextBoxNumBombas.Visibility = Visibility.Visible;
             TextBoxNumLinhas.Visibility = Visibility.Visible;
             TextBoxNumColunas.Visibility = Visibility.Visible;
+        }
+        private void TextBoxNumBombas_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBoxNumBombas_GotFocus;
+        }
+        private void TextBoxNumColunas_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBoxNumColunas_GotFocus;
+        }
+        private void TextBoxNumLinhas_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBoxNumLinhas_GotFocus;
+        }
+        private void RadioButtonMedio_Checked(object sender, RoutedEventArgs e)
+        {
+            TextBoxNumBombas.Visibility = Visibility.Collapsed;
+            TextBoxNumLinhas.Visibility = Visibility.Collapsed;
+            TextBoxNumColunas.Visibility = Visibility.Collapsed;
+        }
+        private void RadioButtonFacil_Checked(object sender, RoutedEventArgs e)
+        {
+            TextBoxNumBombas.Visibility = Visibility.Collapsed;
+            TextBoxNumLinhas.Visibility = Visibility.Collapsed;
+            TextBoxNumColunas.Visibility = Visibility.Collapsed;
         }
     }
 }

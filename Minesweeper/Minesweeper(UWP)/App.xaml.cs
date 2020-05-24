@@ -63,6 +63,8 @@ namespace Minesweeper_UWP_
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(300, 300));
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -120,7 +122,6 @@ namespace Minesweeper_UWP_
             C_mapa = new ControllerMapa();
             C_menu = new ControllerMenu();
         }
-
         void WindowProprieties(){
             //Altera cores de forma a esconder os botões
             ChangeTitleBarColors();

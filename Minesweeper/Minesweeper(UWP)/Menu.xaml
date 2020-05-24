@@ -17,12 +17,12 @@
         <ListView  Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="200,0,0,114" Height="193" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="232"/>
         <TextBlock  HorizontalAlignment="Right" Margin="0,0,300,320"  Text="Melhores Tempos Médio" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
         <ListView  Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="0,0,200,113"  Height="191" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="250"/>
-        <RadioButton x:Name="RadioButtonFacil"  Content="Fácil"  Margin="329,0,0,520"  VerticalAlignment="Bottom" Height="32"/>
-        <RadioButton x:Name="RadioButtonMedio" Content="Médio"  Margin="0,0,406,518"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Height="32"/>
+        <RadioButton x:Name="RadioButtonFacil"  Content="Fácil"  Margin="329,0,0,520"  VerticalAlignment="Bottom" Height="32" Checked="RadioButtonFacil_Checked"/>
+        <RadioButton x:Name="RadioButtonMedio" Content="Médio"  Margin="0,0,406,518"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Height="32" Checked="RadioButtonMedio_Checked"/>
         <RadioButton x:Name="RadioButtonCustom" Content="Custom"  Margin="0,0,272,518"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Height="32" Checked="RadioButtonCustom_Checked"/>
-        <TextBox Name="TextBoxNumLinhas" HorizontalAlignment="Left" Margin="612,300,0,0" Text="Num Linhas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
-        <TextBox Name="TextBoxNumColunas" HorizontalAlignment="Left" Margin="612,345,0,0" Text="Num Colunas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
-        <TextBox Name="TextBoxNumBombas" HorizontalAlignment="Left" Margin="612,390,0,0" Text="Num Bombas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112"/>
+        <TextBox Name="TextBoxNumLinhas" HorizontalAlignment="Left" Margin="612,300,0,0" Text="Num Linhas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" GotFocus="TextBoxNumLinhas_GotFocus"/>
+        <TextBox Name="TextBoxNumColunas" HorizontalAlignment="Left" Margin="612,345,0,0" Text="Num Colunas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" GotFocus="TextBoxNumColunas_GotFocus"/>
+        <TextBox Name="TextBoxNumBombas" HorizontalAlignment="Left" Margin="612,390,0,0" Text="Num Bombas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" GotFocus="TextBoxNumBombas_GotFocus"/>
 
     </Grid>
 </Page>
