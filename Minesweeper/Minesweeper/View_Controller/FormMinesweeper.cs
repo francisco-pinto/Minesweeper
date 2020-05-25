@@ -98,6 +98,7 @@ namespace Minesweeper
             string path = Environment.CurrentDirectory + @"/Botoes/smile.png";
             buttonReiniciar.Image = Image.FromFile(path);
             timer1.Stop();
+            aux = 0;
             
 
             labelMinas.Text = null;

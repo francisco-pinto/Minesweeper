@@ -61,7 +61,7 @@ namespace Minesweeper.View_Controller
                 {
                     if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
-                        string path = Program.M_mapa.getImagePath(Program.M_mapa.GetQuadrado(linha, coluna));
+                        string path = Environment.CurrentDirectory + Program.M_mapa.getImagePath(Program.M_mapa.GetQuadrado(linha, coluna));
                         AtualizaImagemConteudo(b[linha, coluna].Name, path);
                     }
                 }
@@ -161,7 +161,7 @@ namespace Minesweeper.View_Controller
         {
             string nome = quadrado.Linha.ToString() + '-' + quadrado.Coluna.ToString();
             quadrado.Selecionado = true;
-            string path = Program.M_mapa.getImagePath(quadrado);
+            string path = Environment.CurrentDirectory + Program.M_mapa.getImagePath(quadrado);
             AtualizaImagemConteudo(nome, path);   //Ir pelo nome
         }
         public void MostraQuadradosVaziosTodos(int linha, int coluna, Quadrado quadrado, int numLinhas, int numColunas)

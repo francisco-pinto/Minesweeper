@@ -61,9 +61,10 @@ namespace Minesweeper_UWP_
                 TextBoxNumColunas.Visibility = Visibility.Collapsed;
 
 
-                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * 9, Width = 42 * 9 });
+                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * 9, Width = 32 * 9 });
                 Program.C_menu.V_Menu_play(9, 9, 10);
                 this.Frame.Navigate(typeof(MainPage));
+                
                 /*Adicionar ao eventpo de modo a chamar
                  a pág já inicializada no app.xaml.cs
                  usando o Program*/
@@ -84,8 +85,47 @@ namespace Minesweeper_UWP_
                 int numColunas = 0; Int32.TryParse(TextBoxNumColunas.Text, out numColunas);
                 int numBombas = 0; Int32.TryParse(TextBoxNumBombas.Text, out numBombas);
 
+                if (numLinhas < 9)
+                {
+                    numLinhas = 9;
+                }
+                if (numColunas < 9)
+                {
+                    numColunas = 9;
+                }
+                if (numLinhas > 15)
+                {
+                    numLinhas = 15;
+                }
+                if (numColunas > 22)
+                {
+                    numColunas = 22;
+                }
 
-                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * numLinhas, Width = 42 * numColunas });
+                int numMaxBombas = (numLinhas * numColunas) - (numLinhas + numColunas) + 1;
+                int numMinBombas = 10;
+
+                if (numBombas > numMaxBombas)
+                {
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
+                    Program.C_menu.V_Menu_play(numLinhas, numColunas, numMaxBombas);
+                    this.Frame.Navigate(typeof(MainPage));
+                }
+                else if (numBombas < numMinBombas)
+                {
+
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
+                    Program.C_menu.V_Menu_play(numLinhas, numColunas, numMinBombas);
+                    this.Frame.Navigate(typeof(MainPage));
+                }
+                else
+                {
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
+                    Program.C_menu.V_Menu_play(numLinhas, numColunas, numBombas);
+                    this.Frame.Navigate(typeof(MainPage));
+                }
+
+                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
                 Program.C_menu.V_Menu_play(numLinhas, numColunas, numBombas);
                 this.Frame.Navigate(typeof(MainPage));
             }

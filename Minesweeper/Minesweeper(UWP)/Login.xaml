@@ -11,9 +11,9 @@
     <Grid x:Name="mainGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Width="997" Height="412" >
 
         <TextBlock HorizontalAlignment="Right" Margin="0,64,878,0" Text="Nome:" TextWrapping="Wrap" FontSize="20" Height="32" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="184,59,0,0" Text="" TextWrapping="Wrap" Width="330" FontSize="20" Height="45" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextboxName" HorizontalAlignment="Left" Margin="184,59,0,0" Text="" TextWrapping="Wrap" Width="330" FontSize="20" Height="45" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Right" Margin="0,156,850,0" Text="Password:" TextWrapping="Wrap" FontSize="20" Height="32" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="184,153,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" FontSize="20"/>
+        <TextBox x:Name="TextboxPassword" HorizontalAlignment="Left" Margin="184,153,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" FontSize="20"/>
         <Button Content="Login" Margin="0,246,837,0" VerticalAlignment="Top" Width="100" HorizontalAlignment="Right" Height="32" Click="ButtonLogin_Click"/>
         <Button Content="Registar" Margin="0,300,837,0" VerticalAlignment="Top" Width="100" Height="32" HorizontalAlignment="Right" Click="ButtonRegistar_Click"/>
         <TextBlock x:Name="Login_Name" HorizontalAlignment="Left" Margin="638,40,0,0" Text="Nome:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="Visible"/>

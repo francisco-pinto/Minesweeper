@@ -152,6 +152,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\boca.png" />
+    <Content Include="Assets\btn1.png" />
+    <Content Include="Assets\btn2.png" />
+    <Content Include="Assets\btn3.png" />
+    <Content Include="Assets\btn4.png" />
+    <Content Include="Assets\btn5.png" />
+    <Content Include="Assets\btn6.png" />
+    <Content Include="Assets\btn7.png" />
+    <Content Include="Assets\btn8.png" />
     <Content Include="Assets\btnBomba.png" />
     <Content Include="Assets\btnBombaErrada.png" />
     <Content Include="Assets\btnFlag.png" />

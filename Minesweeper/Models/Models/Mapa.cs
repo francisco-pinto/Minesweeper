@@ -21,7 +21,7 @@ namespace Minesweeper.Models
         }
         public void CreateMapa(int nMinas, int nLinhas, int nColunas)
         {
-            nMinasTotais = nMinas;
+            NMinasTotais = nMinas;
             numMinasPorEncontrar = nMinas;
             NumLinhas = nLinhas;
             NumColunas = nColunas;
@@ -33,6 +33,8 @@ namespace Minesweeper.Models
         public int NumMinasPorEncontrar { get => numMinasPorEncontrar; set => numMinasPorEncontrar = value; }
         public int NumLinhas { get => numLinhas; set => numLinhas = value; }
         public int NumColunas { get => numColunas; set => numColunas = value; }
+        public int NMinasTotais { get => nMinasTotais; set => nMinasTotais = value; }
+
         public bool CheckQuadradoSelecionado(int linha, int coluna)
         {
             if(!quadrado[linha, coluna].Selecionado)
@@ -54,7 +56,7 @@ namespace Minesweeper.Models
         }
         public string getImagePath(Quadrado quadrado)
         {
-            string path = Environment.CurrentDirectory + @"\Botoes\";
+            string path = @"\Botoes\";
             switch (quadrado.DistanciaBomba)
             {
                 /*COLOCAR O TAMANHO DAS IMAGENS MAIS PEQUENO*/

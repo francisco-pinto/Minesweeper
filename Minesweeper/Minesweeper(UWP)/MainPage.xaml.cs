@@ -42,6 +42,8 @@ namespace Minesweeper_UWP_
         private int numColunas;
         private int segundos = 0;
         private Button[,] button;
+        private int auxTimer = 0;
+        private int auxBlockControls = 0;
 
         private App Program = App.Current as App;
 
@@ -62,6 +64,7 @@ namespace Minesweeper_UWP_
             this.InitializeComponent();
             //NavigationCacheMode = NavigationCacheMode.Required;
             timer1 = new DispatcherTimer();
+            timer1.Interval = new TimeSpan(0, 0, 1);
             timer1.Tick += Timer1_Tick; 
 
 
@@ -69,7 +72,6 @@ namespace Minesweeper_UWP_
             //Muda tamanho da janela
             this.TextBlockMinas.Text = numMinas.ToString();       
         }
-
         private void Timer1_Tick(object sender, object e)
         {
             //string path = Environment.CurrentDirectory + @"/Clock.wav";
@@ -101,9 +103,14 @@ namespace Minesweeper_UWP_
         }
         public void CreateMapa(int nLinhas, int nColunas, int nMinas)
         {
-            numMinas = Program.M_mapa.NumMinasPorEncontrar;
+            numMinas = Program.M_mapa.NMinasTotais;
             numLinhas = Program.M_mapa.NumLinhas;
             numColunas = Program.M_mapa.NumColunas;
+
+            TextBlockMinas.Text = numMinas.ToString();
+            TextBlockTimer.Text = "000";
+            timer1.Stop();
+            auxTimer = 0;
 
             button = new Button[numLinhas, numColunas];
             //int ButtonX = 5;
@@ -129,24 +136,28 @@ namespace Minesweeper_UWP_
             for (int linha = 0; linha < numLinhas; linha++)
             {
                 RowDefinition gridRow = new RowDefinition();
-                gridRow.Height = new GridLength(42); 
+                gridRow.Height = new GridLength(32); 
                 MapaGrid.RowDefinitions.Add(gridRow);
             }
 
             for(int coluna = 0; coluna < numColunas; coluna++)
             {
                 ColumnDefinition gridCol = new ColumnDefinition();
-                gridCol.Width = new GridLength(42);
+                gridCol.Width = new GridLength(32);
                 MapaGrid.ColumnDefinitions.Add(gridCol);
             }
         }
         public void CreateButton(int linha, int coluna, CONTEUDO conteudoQuadrado, int ButtonX, int ButtonY, string nome)
         {
+            //Atributos
             button[linha, coluna] = new Button();
             button[linha, coluna].Name = nome;
-            button[linha, coluna].Height = 40;
-            button[linha, coluna].Width = 40;
+            button[linha, coluna].Height = 30;
+            button[linha, coluna].Width = 30;
+            button[linha, coluna].Background = new SolidColorBrush(Colors.LightGray);
             //button[linha, coluna].Content = nome;
+
+            //Eventos
             button[linha, coluna].Tapped += MainPage_Tapped;
             button[linha, coluna].RightTapped += MainPage_RightTapped;
             button[linha, coluna].PointerPressed += MainPage_PointerPressed; 
@@ -188,6 +199,11 @@ namespace Minesweeper_UWP_
             }
             else if(aux == -1)       //Perder o jogo
             {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Explosion.wav"));
+                mediaPlayer.Play();
+                auxTimer = 0;
+                timer1.Stop();
                 setVariaveisFinais("-1", false);
                 MostraTodasBombas();
                 string[] posErradas = Program.M_mapa.GetBandeirasErradas(); //Colcoar um get no controller
@@ -197,12 +213,14 @@ namespace Minesweeper_UWP_
                 //LimparForm();
                 Sleep(5);
                 //Task.Run(async () => await Task.Delay(TimeSpan.FromMilliseconds(10000)));
-
-                
-
             }
             else if(aux == 1)       //Ganhar Jogo
             {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Winnig.wav"));
+                mediaPlayer.Play();
+                auxTimer = 0;
+                timer1.Stop();
                 MostraBandeirasTodas();
                 setVariaveisFinais("00", false);
                 GanharHappy();
@@ -213,13 +231,17 @@ namespace Minesweeper_UWP_
         }
         private void BlockControls()
         {
-            ButtonCara.IsEnabled = false;
+            auxBlockControls = 1;
+            ButtonCara.Click -= ButtonCara_Click;
 
-            for(int linha = 0; linha < numLinhas; linha++)
+            for (int linha = 0; linha < numLinhas; linha++)
             {
-                for(int coluna = 0; coluna < numColunas; coluna++)
+                for (int coluna = 0; coluna < numColunas; coluna++)
                 {
-                    button[linha, coluna].IsEnabled = false;
+                    button[linha, coluna].Tapped -= new TappedEventHandler(MainPage_Tapped);
+                    button[linha, coluna].RightTapped -= new RightTappedEventHandler(MainPage_RightTapped);
+                    button[linha, coluna].PointerPressed -= new PointerEventHandler(MainPage_PointerPressed);
+                    button[linha, coluna].PointerReleased -= new PointerEventHandler(MainPage_PointerReleased);
                 }
             }
         }
@@ -255,7 +277,7 @@ namespace Minesweeper_UWP_
 
                                                 if (completed)
                                             {
-                                                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * numColunas, Width = 42 * numLinhas });
+                                                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 700, Width = 1000 });
                                                 this.Frame.Navigate(typeof(Menu));
                                             }
                                             else
@@ -275,13 +297,11 @@ namespace Minesweeper_UWP_
                 for (int coluna = 0; coluna < numColunas; coluna++)
                 {
                     path = Program.M_mapa.getImagePath(Program.M_mapa.GetQuadrado(linha, coluna));
-                    
                     path = path.Remove(0, 8);
 
-                    path = @"\btn2.png";
                     if (!Program.M_mapa.CheckQuadradoSelecionado(linha, coluna))
                     {
-                        button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.Fill };
+                        button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.UniformToFill };
                         //button[linha, coluna].Background = new SolidColorBrush(Colors.DarkGray);
                     }
                 }
@@ -291,6 +311,11 @@ namespace Minesweeper_UWP_
         {
             Button b = (Button)sender;
             string nome = b.Name;
+
+            if (auxBlockControls == 1)
+            {
+                Window.Current.Content.RemoveHandler(RightTappedEvent, b);
+            }
 
             string[] pos = nome.Split('-');
             int linha = Convert.ToInt32(pos[0]);
@@ -312,6 +337,10 @@ namespace Minesweeper_UWP_
         }
         private void MainPage_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if(auxTimer == 0)
+            {
+                timer1.Start();
+            }
             ButtonCara.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/boca.png")), Stretch = Stretch.None };
         }
         public void LimparForm()
@@ -324,7 +353,7 @@ namespace Minesweeper_UWP_
             timer1.Stop();
 
             TextBlockMinas.Text = "";
-            TextBlockTimer.Text = "";
+            TextBlockTimer.Text = "000";
             for (int linha = 0; linha < numLinhas; linha++)
             {
                 for (int coluna = 0; coluna < numColunas; coluna++)
@@ -405,7 +434,7 @@ namespace Minesweeper_UWP_
                 {
                     if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
-                        button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.None };
+                        button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.UniformToFill };
                     }
                 }
             }
@@ -417,7 +446,7 @@ namespace Minesweeper_UWP_
             {
                 string[] pos = PosErradas[i].Split('-');
 
-                button[Int32.Parse(pos[0]), Int32.Parse(pos[1])].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.None };
+                button[Int32.Parse(pos[0]), Int32.Parse(pos[1])].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.UniformToFill };
             }
         }
         public Button GetButton(int linha, int coluna)
@@ -452,15 +481,15 @@ namespace Minesweeper_UWP_
         }
         private void ButtonCara_Click(object sender, RoutedEventArgs e)
         {
+
             if(numMinas != 0)
             {
                 LimparForm();
-                Program.C_menu.V_Menu_play(numColunas, numLinhas, numMinas);
+                Program.C_menu.V_Menu_play(numColunas, numLinhas, Program.M_mapa.NMinasTotais);
             }
-          
             CreateMapa(numMinas, numLinhas, numColunas);
             CreateButtonModel(numLinhas, numColunas, numMinas);
-            Resize(30 + 40 * numColunas, 90 + 40 * numLinhas);
+            Resize(110 + 32 * numColunas, 32 * numLinhas);
             TextBlockMinas.Text = numMinas.ToString();
         }
         public void CreateButtonModel(int numLinhas, int numColunas, int numBombas)

@@ -10,19 +10,19 @@
 
     <Grid Height="800" Width="1000">
 
-        <Image Height="193" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/Assets/MinesweeperLogo.png" Margin="329,0,319,585"/>
-        <Button Content="Jogar" Margin="0,0,0,448" VerticalAlignment="Bottom" Click="ButtonJogar_Click" HorizontalAlignment="Center" Width="98" Height="32"/>
-        <Button Content="Instruções" Margin="0,0,0,378" VerticalAlignment="Bottom" Click="ButtonInstrucoes_Click" HorizontalAlignment="Center" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="300,0,0,320" Text="Melhores Tempos Fácil" TextWrapping="Wrap" Width="152" Height="19" VerticalAlignment="Bottom"/>
-        <ListView  Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="200,0,0,114" Height="193" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="232"/>
-        <TextBlock  HorizontalAlignment="Right" Margin="0,0,300,320"  Text="Melhores Tempos Médio" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
-        <ListView  Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="0,0,200,113"  Height="191" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="250"/>
-        <RadioButton x:Name="RadioButtonFacil"  Content="Fácil"  Margin="329,0,0,520"  VerticalAlignment="Bottom" Height="32" Checked="RadioButtonFacil_Checked"/>
-        <RadioButton x:Name="RadioButtonMedio" Content="Médio"  Margin="0,0,406,518"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Height="32" Checked="RadioButtonMedio_Checked"/>
-        <RadioButton x:Name="RadioButtonCustom" Content="Custom"  Margin="0,0,272,518"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Height="32" Checked="RadioButtonCustom_Checked"/>
-        <TextBox Name="TextBoxNumLinhas" HorizontalAlignment="Left" Margin="612,300,0,0" Text="Num Linhas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" GotFocus="TextBoxNumLinhas_GotFocus"/>
-        <TextBox Name="TextBoxNumColunas" HorizontalAlignment="Left" Margin="612,345,0,0" Text="Num Colunas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" GotFocus="TextBoxNumColunas_GotFocus"/>
-        <TextBox Name="TextBoxNumBombas" HorizontalAlignment="Left" Margin="612,390,0,0" Text="Num Bombas" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" GotFocus="TextBoxNumBombas_GotFocus"/>
+        <Image Height="175" VerticalAlignment="Top" Source="/Assets/MinesweeperLogo.png" Margin="321,25,320,0"/>
+        <Button Content="Jogar" Margin="451,320,451,0" VerticalAlignment="Top" Click="ButtonJogar_Click" Height="32" HorizontalAlignment="Stretch"/>
+        <Button Content="Instruções" Margin="0,390,440,0" VerticalAlignment="Top" Click="ButtonInstrucoes_Click" Width="120" HorizontalAlignment="Right"/>
+        <TextBlock Margin="300,0,548,320" Text="Melhores Tempos Fácil" TextWrapping="Wrap" Height="19" VerticalAlignment="Bottom"/>
+        <ListView  Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="200,0,568,114" Height="193" VerticalAlignment="Bottom"/>
+        <TextBlock Margin="547,0,300,320"  Text="Melhores Tempos Médio" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+        <ListView  Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="550,0,200,113"  Height="191" VerticalAlignment="Bottom"/>
+        <RadioButton x:Name="RadioButtonFacil"  Content="Fácil"  Margin="329,0,551,520"  VerticalAlignment="Bottom" Height="32" Checked="RadioButtonFacil_Checked" HorizontalAlignment="Stretch"/>
+        <RadioButton x:Name="RadioButtonMedio" Content="Médio"  Margin="474,0,406,518"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="32" Checked="RadioButtonMedio_Checked"/>
+        <RadioButton x:Name="RadioButtonCustom" Content="Custom"  Margin="608,0,272,518"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="32" Checked="RadioButtonCustom_Checked"/>
+        <TextBox Name="TextBoxNumLinhas" Margin="612,300,276,0" Text="Num Linhas" TextWrapping="Wrap" VerticalAlignment="Top" GotFocus="TextBoxNumLinhas_GotFocus"/>
+        <TextBox Name="TextBoxNumColunas" Margin="612,345,276,0" Text="Num Colunas" TextWrapping="Wrap" VerticalAlignment="Top" GotFocus="TextBoxNumColunas_GotFocus"/>
+        <TextBox Name="TextBoxNumBombas" Margin="612,390,276,0" Text="Num Bombas" TextWrapping="Wrap" VerticalAlignment="Top" GotFocus="TextBoxNumBombas_GotFocus"/>
 
     </Grid>
 </Page>

@@ -63,7 +63,7 @@ namespace Minesweeper_UWP_
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(300, 300));
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(100, 100));
 
             Frame rootFrame = Window.Current.Content as Frame;
 
