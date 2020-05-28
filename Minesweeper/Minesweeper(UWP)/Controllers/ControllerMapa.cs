@@ -271,7 +271,7 @@ namespace Minesweeper.View_Controller
                 //AlteraSimboloBotao(linha, coluna, path);
             }
 
-            return null;
+            return "Vazio";
         }
     }
 }

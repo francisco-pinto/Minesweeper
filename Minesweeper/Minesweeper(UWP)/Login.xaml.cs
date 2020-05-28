@@ -36,7 +36,7 @@ namespace Minesweeper_UWP_
         public Login()
         {
             this.InitializeComponent();
-
+            //TextboxPassword. = '*';
             PropriedadesRegistar();
             picker = new FileOpenPicker();
             //mainGrid.Height = 412;
@@ -63,6 +63,7 @@ namespace Minesweeper_UWP_
             Login_Username.Visibility = Visibility.Collapsed;
 
             ButtonRegistar.Visibility = Visibility.Collapsed;
+            ButtonInserirfoto.Visibility = Visibility.Collapsed;
         }
 
         private void ButtonRegistar_Click(object sender, RoutedEventArgs e)
@@ -86,6 +87,7 @@ namespace Minesweeper_UWP_
             Login_Username.Visibility = Visibility.Visible;
 
             ButtonRegistar.Visibility = Visibility.Visible;
+            ButtonInserirfoto.Visibility = Visibility.Visible;
         }
 
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
@@ -110,7 +112,7 @@ namespace Minesweeper_UWP_
             XDocument xmlPedido = XDocument.Parse("<credenciais><username></username><password></password></credenciais>");
             //preenche os dados no XML
             xmlPedido.Element("credenciais").Element("username").Value = TextboxName.Text; // colocar aqui o username do utilizador
-            xmlPedido.Element("credenciais").Element("password").Value = TextboxPassword.Text; // colocar aqui a palavra passe do utilizador
+            xmlPedido.Element("credenciais").Element("password").Value = PasswordBox1.Password; // colocar aqui a palavra passe do utilizador
 
             string mensagem = xmlPedido.Root.ToString();
 

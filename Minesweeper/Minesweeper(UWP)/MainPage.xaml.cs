@@ -217,7 +217,7 @@ namespace Minesweeper_UWP_
             else if(aux == 1)       //Ganhar Jogo
             {
                 MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Winnig.wav"));
+                mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Winning.wav"));
                 mediaPlayer.Play();
                 auxTimer = 0;
                 timer1.Stop();
@@ -399,13 +399,19 @@ namespace Minesweeper_UWP_
         //}
         public void AtualizaSimboloBotao(int linha, int coluna, string path)
         {
-            if (path != null)
+            if (path == "Vazio")
             {
-                button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.UniformToFill };
+                //Voltar ao estado original em que estava. Impedir que botão direito mude novamento os já selecionados
+                AtualizaImagemConteudo();
+                //button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/btnVazio.png")), Stretch = Stretch.UniformToFill };
+            }
+            else if(path == null)
+            {
+                button[linha, coluna].Background = new SolidColorBrush(Colors.LightGray);
             }
             else
             {
-                button[linha, coluna].Background = new SolidColorBrush(Colors.LightGray); 
+                button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.UniformToFill };
             }
 
         }

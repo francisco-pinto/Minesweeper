@@ -13,7 +13,6 @@
         <TextBlock HorizontalAlignment="Right" Margin="0,64,878,0" Text="Nome:" TextWrapping="Wrap" FontSize="20" Height="32" VerticalAlignment="Top"/>
         <TextBox x:Name="TextboxName" HorizontalAlignment="Left" Margin="184,59,0,0" Text="" TextWrapping="Wrap" Width="330" FontSize="20" Height="45" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Right" Margin="0,156,850,0" Text="Password:" TextWrapping="Wrap" FontSize="20" Height="32" VerticalAlignment="Top"/>
-        <TextBox x:Name="TextboxPassword" HorizontalAlignment="Left" Margin="184,153,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" FontSize="20"/>
         <Button Content="Login" Margin="0,246,837,0" VerticalAlignment="Top" Width="100" HorizontalAlignment="Right" Height="32" Click="ButtonLogin_Click"/>
         <Button Content="Registar" Margin="0,300,837,0" VerticalAlignment="Top" Width="100" Height="32" HorizontalAlignment="Right" Click="ButtonRegistar_Click"/>
         <TextBlock x:Name="Login_Name" HorizontalAlignment="Left" Margin="638,40,0,0" Text="Nome:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="Visible"/>
@@ -30,6 +29,7 @@
         <TextBox x:Name="TBLogin_Pais" HorizontalAlignment="Left" Margin="743,344,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
         <Button x:Name="ButtonRegistar" Content="Inserir" Margin="511,341,0,0" VerticalAlignment="Top" Width="80" Visibility="Visible"/>
         <Button x:Name="ButtonInserirfoto" Content="Escolher" Margin="906,279,0,0" VerticalAlignment="Top" Width="80" Visibility="Visible" Click="ButtonInserirfoto_ClickAsync"/>
+        <PasswordBox x:Name="PasswordBox1" HorizontalAlignment="Left" Margin="184,151,0,0" VerticalAlignment="Top" Width="330" FontSize="20" Height="45"/>
 
     </Grid>
 </Page>
