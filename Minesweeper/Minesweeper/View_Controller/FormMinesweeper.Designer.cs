@@ -84,9 +84,10 @@
             this.Controls.Add(this.labelTime);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FormMineSweeper";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MineSweeper";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMineSweeper_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);

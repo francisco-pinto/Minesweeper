@@ -37,9 +37,10 @@
             // buttonVoltarAoMenu
             // 
             this.buttonVoltarAoMenu.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonVoltarAoMenu.Location = new System.Drawing.Point(172, 290);
+            this.buttonVoltarAoMenu.Location = new System.Drawing.Point(229, 357);
+            this.buttonVoltarAoMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonVoltarAoMenu.Name = "buttonVoltarAoMenu";
-            this.buttonVoltarAoMenu.Size = new System.Drawing.Size(114, 23);
+            this.buttonVoltarAoMenu.Size = new System.Drawing.Size(152, 28);
             this.buttonVoltarAoMenu.TabIndex = 0;
             this.buttonVoltarAoMenu.Text = "Voltar ao menu";
             this.buttonVoltarAoMenu.UseVisualStyleBackColor = true;
@@ -48,33 +49,37 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-1509, 113);
+            this.label1.Location = new System.Drawing.Point(-2012, 139);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(9, 13);
+            this.label1.Size = new System.Drawing.Size(11, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "j";
             // 
             // labelInstrucoes
             // 
             this.labelInstrucoes.AutoSize = true;
-            this.labelInstrucoes.Location = new System.Drawing.Point(39, 32);
+            this.labelInstrucoes.Location = new System.Drawing.Point(52, 39);
+            this.labelInstrucoes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelInstrucoes.Name = "labelInstrucoes";
-            this.labelInstrucoes.Size = new System.Drawing.Size(379, 221);
+            this.labelInstrucoes.Size = new System.Drawing.Size(509, 289);
             this.labelInstrucoes.TabIndex = 2;
             this.labelInstrucoes.Text = resources.GetString("labelInstrucoes.Text");
             // 
             // Instrucoes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 340);
+            this.ClientSize = new System.Drawing.Size(608, 418);
             this.Controls.Add(this.labelInstrucoes);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonVoltarAoMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Instrucoes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Instruções";
             this.ResumeLayout(false);
             this.PerformLayout();

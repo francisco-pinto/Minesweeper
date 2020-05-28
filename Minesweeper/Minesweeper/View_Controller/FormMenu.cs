@@ -159,6 +159,8 @@ namespace Minesweeper.View_Controller
 
         private void buttonConsultarPerfil_Click(object sender, EventArgs e)
         {
+
+
             Program.V_ConsultarPerfil.Show();
         }
 
@@ -171,6 +173,10 @@ namespace Minesweeper.View_Controller
         public void ShowConsultaPerfil()
         {
             buttonConsultarPerfil.Visible = true;
+        }
+        public void ShowFoto()
+        {
+            
         }
     }
 }

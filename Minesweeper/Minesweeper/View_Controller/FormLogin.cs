@@ -13,8 +13,6 @@ using System.Xml.Linq;
 
 namespace Minesweeper.View_Controller
 {
-    public delegate void fazlogin();
-    public delegate void dadosUtilizador();
    public partial class FormLogin : Form
     {
         public event fazlogin FazerLogin;
@@ -123,6 +121,15 @@ namespace Minesweeper.View_Controller
         private void FormLogin_Load(object sender, EventArgs e)
         {
             Program.V_Login.Size = new System.Drawing.Size(500, 100);
+
+            // Set to no text.
+            //textBoxPasse.Text = "";
+
+            // The password character is an asterisk.
+            textBoxPasse.PasswordChar = '*';
+
+            // The control will allow no more than 14 characters.
+            //textBoxPasse.MaxLength = 14;
         }
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
@@ -136,6 +143,6 @@ namespace Minesweeper.View_Controller
                 pictureBoxFoto.Image = new Bitmap(ofd.FileName);
             }
         }
-       
+
     }
 }

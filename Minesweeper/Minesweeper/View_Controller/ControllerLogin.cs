@@ -23,6 +23,7 @@ namespace Minesweeper.View_Controller
         {
             Program.V_Menu.AlteraImagem();
             Program.V_Menu.ShowConsultaPerfil();
+            Program.V_Menu.ShowFoto();
 
 
         }

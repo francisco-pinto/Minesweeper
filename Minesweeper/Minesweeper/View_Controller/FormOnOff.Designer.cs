@@ -38,19 +38,18 @@
             // 
             this.labelOnOff.AutoSize = true;
             this.labelOnOff.Font = new System.Drawing.Font("Microsoft Tai Le", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOnOff.Location = new System.Drawing.Point(158, 58);
-            this.labelOnOff.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelOnOff.Location = new System.Drawing.Point(211, 71);
             this.labelOnOff.Name = "labelOnOff";
-            this.labelOnOff.Size = new System.Drawing.Size(211, 29);
+            this.labelOnOff.Size = new System.Drawing.Size(266, 35);
             this.labelOnOff.TabIndex = 0;
             this.labelOnOff.Text = "Como deseja jogar:";
             // 
             // buttonRede
             // 
-            this.buttonRede.Location = new System.Drawing.Point(94, 141);
-            this.buttonRede.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRede.Location = new System.Drawing.Point(125, 174);
+            this.buttonRede.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRede.Name = "buttonRede";
-            this.buttonRede.Size = new System.Drawing.Size(104, 60);
+            this.buttonRede.Size = new System.Drawing.Size(139, 74);
             this.buttonRede.TabIndex = 1;
             this.buttonRede.Text = "Rede";
             this.buttonRede.UseVisualStyleBackColor = true;
@@ -58,10 +57,10 @@
             // 
             // buttonStand
             // 
-            this.buttonStand.Location = new System.Drawing.Point(306, 141);
-            this.buttonStand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonStand.Location = new System.Drawing.Point(408, 174);
+            this.buttonStand.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonStand.Name = "buttonStand";
-            this.buttonStand.Size = new System.Drawing.Size(106, 60);
+            this.buttonStand.Size = new System.Drawing.Size(141, 74);
             this.buttonStand.TabIndex = 2;
             this.buttonStand.Text = "Standalone";
             this.buttonStand.UseVisualStyleBackColor = true;
@@ -69,15 +68,16 @@
             // 
             // FormOnOff
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 265);
+            this.ClientSize = new System.Drawing.Size(667, 326);
             this.Controls.Add(this.buttonStand);
             this.Controls.Add(this.buttonRede);
             this.Controls.Add(this.labelOnOff);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormOnOff";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormOnOff";
             this.ResumeLayout(false);
             this.PerformLayout();
