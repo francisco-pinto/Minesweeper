@@ -76,7 +76,7 @@ namespace Minesweeper_UWP_
                 TextBoxNumLinhas.Visibility = Visibility.Collapsed;
                 TextBoxNumColunas.Visibility = Visibility.Collapsed;
 
-                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 42 * 16, Width = 42 * 16 });
+                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * 16, Width = 32 * 16 });
                 Program.C_menu.V_Menu_play(16, 16, 40);
                 this.Frame.Navigate(typeof(MainPage));
             }else if(RadioButtonCustom.IsChecked == true)
@@ -107,27 +107,23 @@ namespace Minesweeper_UWP_
 
                 if (numBombas > numMaxBombas)
                 {
-                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 32 * numLinhas, Width = 32 * numColunas });
                     Program.C_menu.V_Menu_play(numLinhas, numColunas, numMaxBombas);
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else if (numBombas < numMinBombas)
                 {
 
-                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 32 * numLinhas, Width = 32 * numColunas });
                     Program.C_menu.V_Menu_play(numLinhas, numColunas, numMinBombas);
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else
                 {
-                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 32 * numLinhas, Width = 32 * numColunas });
                     Program.C_menu.V_Menu_play(numLinhas, numColunas, numBombas);
                     this.Frame.Navigate(typeof(MainPage));
                 }
-
-                ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
-                Program.C_menu.V_Menu_play(numLinhas, numColunas, numBombas);
-                this.Frame.Navigate(typeof(MainPage));
             }
         }
         private void RadioButtonCustom_Checked(object sender, RoutedEventArgs e)

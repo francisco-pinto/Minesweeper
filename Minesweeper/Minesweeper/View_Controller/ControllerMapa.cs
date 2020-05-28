@@ -26,46 +26,37 @@ namespace Minesweeper.View_Controller
 
         public void EscritaFicheiroXML()
         {
-            //Criado documento XML em memória com a declaração XML e a estrutura (comentário, elemento Alunos, subelementos Inscritos e NaoInscritos
-            XDocument doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
-            new XComment("Recorde em fácil e médio"),
-            new XElement("Fácil",
-            new XElement("Jogador"),
-            new XElement("Nome"),
-            new XElement("Nível"),
-            new XElement("Tempo")));
+            string dificuldade;
 
-            new XElement("Médio",
-            new XElement("Jogador"),
-            new XElement("Nome"),
-            new XElement("Nível"),
-            new XElement("Tempo"));
-
-
-            //Criar um elemento XML Aluno com atributo Numero e subelementos Nome e Curso com o número, nome e curso do aluno
-            XElement novo = new XElement("Jogador",
-                new XElement("Nome", Program.M_jogador.Nome));
-
-
-            //Verifica se o aluno está inscrito
             if (Program.M_mapa.NumColunas == 9)
             {
-                new XElement("Dificuldade", "Fácil");
+                dificuldade = "facil";
             }
             else
             {
-                new XElement("Dificuldade", "Médio");
+                dificuldade = "medio";
             }
-            new XElement("Pontuação", Program.M_jogador.Pontuacao);
+
+            //Criado documento XML em memória com a declaração XML e a estrutura (comentário, elemento Alunos, subelementos Inscritos e NaoInscritos
+            XDocument doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+            new XComment("Recorde em facil e medio"),
+            new XElement("pontuacoes",
+                new XAttribute("Nivel", "Facil"),
+                new XElement("Nome", Program.M_jogador.Nome),
+                new XElement("Tempo", Program.M_jogador.Pontuacao),
+            
+            new XAttribute("Nivel", "Medio"),
+                new XElement("Nome"),
+                new XElement("Tempo")));
 
             //Guarda o documento em ficheiro XML
-            doc.Save(Environment.CurrentDirectory + @"/Save");
+            doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
         }
         private void V_PedirNome_AtribuirNome(string nome)
         {
-            EscritaFicheiroXML();
             Program.M_jogador.Nome = nome;
             Program.M_jogador.Pontuacao = Program.V_Mapa.segundos;
+            EscritaFicheiroXML();
         }
 
         private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)
@@ -90,7 +81,7 @@ namespace Minesweeper.View_Controller
             player.Play();
             
             //this.Hide();
-            Program.V_PedirNome.Show();
+            
             
             //verificar online offline
 
@@ -105,7 +96,8 @@ namespace Minesweeper.View_Controller
 
             Program.V_Mapa.Hide();
             Program.V_Mapa.LimparForm();
-            Program.V_Menu.Show();
+            Program.V_PedirNome.Show();
+            
         }
         private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)
         {  
