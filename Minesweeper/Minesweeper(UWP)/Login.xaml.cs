@@ -65,7 +65,6 @@ namespace Minesweeper_UWP_
             ButtonRegistar.Visibility = Visibility.Collapsed;
             ButtonInserirfoto.Visibility = Visibility.Collapsed;
         }
-
         private void ButtonRegistar_Click(object sender, RoutedEventArgs e)
         {
             //ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 790, Width = 1020 });
@@ -89,12 +88,10 @@ namespace Minesweeper_UWP_
             ButtonRegistar.Visibility = Visibility.Visible;
             ButtonInserirfoto.Visibility = Visibility.Visible;
         }
-
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
          return true;
         }
-
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
             ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
