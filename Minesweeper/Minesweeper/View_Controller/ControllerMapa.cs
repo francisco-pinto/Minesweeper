@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Minesweeper.View_Controller
@@ -39,18 +41,29 @@ namespace Minesweeper.View_Controller
 
             //Criado documento XML em memória com a declaração XML e a estrutura (comentário, elemento Alunos, subelementos Inscritos e NaoInscritos
             XDocument doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
-            new XComment("Recorde em facil e medio"),
-            new XElement("pontuacoes",
-                new XAttribute("Nivel", "Facil"),
-                new XElement("Nome", Program.M_jogador.Nome),
-                new XElement("Tempo", Program.M_jogador.Pontuacao),
-            
-            new XAttribute("Nivel", "Medio"),
-                new XElement("Nome"),
-                new XElement("Tempo")));
+                new XComment("Recorde em facil e medio"),
+                new XElement("pontuacoes",
+                    new XElement("Facil",
+                        new XElement("Nome", Program.M_jogador.Nome),
+                        new XElement("Tempo", Program.M_jogador.Pontuacao)
+                    ),
+                    new XElement("Medio",
+                        new XElement("Nome"),
+                        new XElement("Tempo")
+                        )
+                )
+            );
 
             //Guarda o documento em ficheiro XML
+            if(!File.Exists(Environment.CurrentDirectory + @"\Save\pontuacao.xml"))
+            {
+                Directory.CreateDirectory(Environment.CurrentDirectory + @"\Save");
+                File.Create(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
+
+            }
+        
             doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
+               
         }
         private void V_PedirNome_AtribuirNome(string nome)
         {
