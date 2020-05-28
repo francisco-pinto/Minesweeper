@@ -161,5 +161,16 @@ namespace Minesweeper.View_Controller
         {
             Program.V_ConsultarPerfil.Show();
         }
+
+        public void AlteraImagem()
+        {
+            pictureBoxOnline.Image = Image.FromFile(@"/Botoes/online.png");
+            
+
+        }
+        public void ShowConsultaPerfil()
+        {
+            buttonConsultarPerfil.Visible = false;
+        }
     }
 }

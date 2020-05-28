@@ -12,11 +12,19 @@ namespace Minesweeper.View_Controller
         {
 
             Program.V_Login.FazerLogin += V_Login_FazerLogin;
+            Program.V_Login.EnviarDados += V_Login_EnviarDados;
         }
 
         private void V_Login_FazerLogin()
         {
             Program.M_Login.FazerLogin();
+        }
+        private void V_Login_EnviarDados()
+        {
+            Program.V_Menu.AlteraImagem();
+            Program.V_Menu.ShowConsultaPerfil();
+
+
         }
     }
 }

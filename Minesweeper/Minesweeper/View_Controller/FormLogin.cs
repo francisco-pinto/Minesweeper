@@ -14,12 +14,15 @@ using System.Xml.Linq;
 namespace Minesweeper.View_Controller
 {
     public delegate void fazlogin();
-    public partial class FormLogin : Form
+    public delegate void dadosUtilizador();
+   public partial class FormLogin : Form
     {
         public event fazlogin FazerLogin;
+        public event dadosUtilizador EnviarDados;
         public FormLogin()
         {
             InitializeComponent();
+
         }
 
         OpenFileDialog ofd = new OpenFileDialog();
@@ -75,6 +78,8 @@ namespace Minesweeper.View_Controller
             } else
             {
                 MessageBox.Show("Entrou!");
+                EnviarDados();
+
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("id").Value
             }
@@ -110,6 +115,9 @@ namespace Minesweeper.View_Controller
             textBoxPassword.Visible = true;
             textBoxUsername.Visible = true;
 
+
+
+            // Colocar Online
         }
 
         private void FormLogin_Load(object sender, EventArgs e)
@@ -128,5 +136,6 @@ namespace Minesweeper.View_Controller
                 pictureBoxFoto.Image = new Bitmap(ofd.FileName);
             }
         }
+       
     }
 }

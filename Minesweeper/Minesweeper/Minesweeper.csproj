@@ -185,6 +185,8 @@
     <Content Include="Botoes\MinesweeperLogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Botoes\Offline.png" />
+    <Content Include="Botoes\online.png" />
     <Content Include="Botoes\sad.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

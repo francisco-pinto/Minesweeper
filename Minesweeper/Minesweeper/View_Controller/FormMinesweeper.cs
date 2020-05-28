@@ -188,7 +188,9 @@ namespace Minesweeper
         }
         public void AtualizaSimboloBotao(int linha, int coluna, string path)
         {
-            if(path != null)
+            path = Environment.CurrentDirectory + @"/Botoes" +path;
+            //if(path != null)
+            if(path != Environment.CurrentDirectory + @"/Botoes")
             {
                 button[linha, coluna].Image = Image.FromFile(path);
             }
