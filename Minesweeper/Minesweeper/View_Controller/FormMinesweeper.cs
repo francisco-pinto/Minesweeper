@@ -17,7 +17,7 @@ namespace Minesweeper
         private int numMinas;
         private int numLinhas;
         private int numColunas;
-        private int segundos = 0;
+        public int segundos = 0;
         private int aux = 0;
         private Button[,] button;
 

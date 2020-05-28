@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Minesweeper.View_Controller
 {
     class ControllerMapa
     {
+
         public ControllerMapa()
         {
             Program.V_Mapa.MostraBombasTodas += V_Mapa_MostraBombasTodas;
@@ -19,7 +21,53 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.MostraConteudoQuadrado += V_Mapa_MostraConteudoQuadrado;
             Program.V_Mapa.getMinas += V_Mapa_getMinas;
             Program.V_Mapa.AtualizarMinas += V_Mapa_AtualizarMinas;
+            Program.V_PedirNome.AtribuirNome += V_PedirNome_AtribuirNome;
         }
+
+        public void EscritaFicheiroXML()
+        {
+            //Criado documento XML em memória com a declaração XML e a estrutura (comentário, elemento Alunos, subelementos Inscritos e NaoInscritos
+            XDocument doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+            new XComment("Recorde em fácil e médio"),
+            new XElement("Fácil",
+            new XElement("Jogador"),
+            new XElement("Nome"),
+            new XElement("Nível"),
+            new XElement("Tempo")));
+
+            new XElement("Médio",
+            new XElement("Jogador"),
+            new XElement("Nome"),
+            new XElement("Nível"),
+            new XElement("Tempo"));
+
+
+            //Criar um elemento XML Aluno com atributo Numero e subelementos Nome e Curso com o número, nome e curso do aluno
+            XElement novo = new XElement("Jogador",
+                new XElement("Nome", Program.M_jogador.Nome));
+
+
+            //Verifica se o aluno está inscrito
+            if (Program.M_mapa.NumColunas == 9)
+            {
+                new XElement("Dificuldade", "Fácil");
+            }
+            else
+            {
+                new XElement("Dificuldade", "Médio");
+            }
+            new XElement("Pontuação", Program.M_jogador.Pontuacao);
+
+            //Guarda o documento em ficheiro XML
+            doc.Save(Environment.CurrentDirectory + @"/Save");
+        }
+        private void V_PedirNome_AtribuirNome(string nome)
+        {
+            EscritaFicheiroXML();
+            Program.M_jogador.Nome = nome;
+            Program.M_jogador.Pontuacao = Program.V_Mapa.segundos;
+        }
+
         private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)
         {
             for (int linha = 0; linha < numLinhas; linha++)
@@ -40,6 +88,12 @@ namespace Minesweeper.View_Controller
             string path = Environment.CurrentDirectory + @"\Music\Winning.wav";
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
             player.Play();
+            
+            //this.Hide();
+            Program.V_PedirNome.Show();
+            
+            //verificar online offline
+
 
             Program.V_Mapa.MostraTodasBandeiras();
             Program.V_Mapa.setVariaveisFinais("00", false);

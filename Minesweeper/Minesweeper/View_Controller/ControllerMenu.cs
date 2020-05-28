@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Minesweeper.View_Controller
 {
@@ -15,7 +16,8 @@ namespace Minesweeper.View_Controller
             Program.V_Menu.ConsultarPerfil += V_Menu_ConsultarPerfil;
         }
 
-        private void V_Menu_ConsultarPerfil()
+
+    private void V_Menu_ConsultarPerfil()
         {
             Program.V_ConsultarPerfil.AcessoPerfil();
         }

@@ -12,6 +12,7 @@ namespace Minesweeper.View_Controller
 {
     public partial class PedirNome : Form
     {
+        public event AtribuirNome AtribuirNome;
         public PedirNome()
         {
             InitializeComponent();
@@ -25,8 +26,8 @@ namespace Minesweeper.View_Controller
             }
             else
             {
-                //textBoxNomeJogador.Text = //nome ;
-                //fechar form
+                AtribuirNome(textBoxNomeJogador.Text);
+                this.Hide();
             }
         }
     }

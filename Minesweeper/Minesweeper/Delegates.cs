@@ -16,4 +16,5 @@ namespace Minesweeper
     public delegate string GetMinas();
     public delegate void fazlogin();
     public delegate void dadosUtilizador();
+    public delegate void AtribuirNome(string nome);
 }
