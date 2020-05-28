@@ -164,13 +164,13 @@ namespace Minesweeper.View_Controller
 
         public void AlteraImagem()
         {
-            pictureBoxOnline.Image = Image.FromFile(@"/Botoes/online.png");
+            pictureBoxOnline.Image = Image.FromFile(Environment.CurrentDirectory + @"/Botoes/online.png");
             
 
         }
         public void ShowConsultaPerfil()
         {
-            buttonConsultarPerfil.Visible = false;
+            buttonConsultarPerfil.Visible = true;
         }
     }
 }

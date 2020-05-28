@@ -401,7 +401,7 @@ namespace Minesweeper_UWP_
         {
             if (path != null)
             {
-                button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.None };
+                button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.UniformToFill };
             }
             else
             {
@@ -481,7 +481,8 @@ namespace Minesweeper_UWP_
         }
         private void ButtonCara_Click(object sender, RoutedEventArgs e)
         {
-
+            //timer1.Stop();
+            //auxTimer = 0;
             if(numMinas != 0)
             {
                 LimparForm();
