@@ -56,9 +56,9 @@ namespace Minesweeper.View_Controller
                 string base64NomeAbreviado = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("nomeabreviado").Value;
                 textBoxNomeAbreviado.Text = base64NomeAbreviado;
                 string base64Email = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("email").Value;
-                textBoxEmail.Text = base64NomeAbreviado;
+                textBoxEmail.Text = base64Email;
                 string base64Pais = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("pais").Value;
-                textBoxPais.Text = base64NomeAbreviado;
+                textBoxPais.Text = base64Pais;
                 string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
                 string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
                 byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
@@ -87,6 +87,11 @@ namespace Minesweeper.View_Controller
         private void buttonVoltarMenu_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void FormConsultarPerfil_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.V_Menu.Show();
         }
     }
 }

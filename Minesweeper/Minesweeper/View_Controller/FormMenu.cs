@@ -13,10 +13,11 @@ using Menu = Minesweeper.Models.Menu; //diferenciar o menu classe do form.menu
 
 namespace Minesweeper.View_Controller
 {
-    
+    public delegate void VerPerfil();
     public partial class FormMenu : Form
     {
         public event startGame play;
+        public event VerPerfil ConsultarPerfil;
 
         private TextBox TBnumLinhas = new TextBox();
         private TextBox TBnumColunas = new TextBox();
@@ -160,8 +161,10 @@ namespace Minesweeper.View_Controller
         private void buttonConsultarPerfil_Click(object sender, EventArgs e)
         {
 
-
+            ConsultarPerfil();
+            this.Hide();
             Program.V_ConsultarPerfil.Show();
+
         }
 
         public void AlteraImagem()

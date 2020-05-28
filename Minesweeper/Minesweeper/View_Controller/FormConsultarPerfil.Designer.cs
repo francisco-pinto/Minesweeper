@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsultarPerfil));
             this.labelPais = new System.Windows.Forms.Label();
             this.labelfoto = new System.Windows.Forms.Label();
             this.labelemail = new System.Windows.Forms.Label();
@@ -37,7 +38,6 @@
             this.labelNomeAbreviado = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxFoto = new System.Windows.Forms.PictureBox();
-            this.buttonVoltarMenu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFoto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,22 +121,11 @@
             this.pictureBoxFoto.TabIndex = 48;
             this.pictureBoxFoto.TabStop = false;
             // 
-            // buttonVoltarMenu
-            // 
-            this.buttonVoltarMenu.Location = new System.Drawing.Point(637, 320);
-            this.buttonVoltarMenu.Name = "buttonVoltarMenu";
-            this.buttonVoltarMenu.Size = new System.Drawing.Size(118, 59);
-            this.buttonVoltarMenu.TabIndex = 49;
-            this.buttonVoltarMenu.Text = "Voltar ao Menu";
-            this.buttonVoltarMenu.UseVisualStyleBackColor = true;
-            this.buttonVoltarMenu.Click += new System.EventHandler(this.buttonVoltarMenu_Click);
-            // 
             // FormConsultarPerfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.buttonVoltarMenu);
+            this.ClientSize = new System.Drawing.Size(623, 450);
             this.Controls.Add(this.pictureBoxFoto);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelPais);
@@ -146,9 +135,12 @@
             this.Controls.Add(this.textBoxEmail);
             this.Controls.Add(this.textBoxNomeAbreviado);
             this.Controls.Add(this.labelNomeAbreviado);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormConsultarPerfil";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormConsultarPerfil";
+            this.Text = "Minesweeper";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConsultarPerfil_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -165,6 +157,5 @@
         private System.Windows.Forms.Label labelNomeAbreviado;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBoxFoto;
-        private System.Windows.Forms.Button buttonVoltarMenu;
     }
 }
