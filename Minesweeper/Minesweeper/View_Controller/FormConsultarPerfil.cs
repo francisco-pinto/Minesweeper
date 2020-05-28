@@ -52,13 +52,49 @@ namespace Minesweeper.View_Controller
             {
                 // obtem todos os elementos do perfil do jogador...
                 // ...como, por exemplo, a fotografia:
-
+                //NOMEABREVIADO
                 string base64NomeAbreviado = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("nomeabreviado").Value;
                 textBoxNomeAbreviado.Text = base64NomeAbreviado;
+                //EMAIL
                 string base64Email = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("email").Value;
                 textBoxEmail.Text = base64Email;
+                //PAIS
                 string base64Pais = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("pais").Value;
                 textBoxPais.Text = base64Pais;
+
+                //JOGOS GANHOS
+                string base64jogosganhos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("ganhos").Value;
+                if (base64jogosganhos == null)
+                {
+                    textBoxJogosGanhos.Text = "0";
+                }
+                else
+                    textBoxJogosGanhos.Text = base64jogosganhos;
+                //JOGOS PERDIDOS
+                string base64jogosperdidos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("perdidos").Value;
+                if (base64jogosperdidos == null)
+                {
+                    textBoxJogosPerdidos.Text = "0";
+                }
+                else
+                     textBoxJogosPerdidos.Text = base64jogosperdidos;
+                //TEMPOS FACIL
+                string base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Facil").Value;
+                if (base64tempofacil == null)
+                {
+                    textBoxTempoFacil.Text = "0";
+                }
+                else
+                    textBoxTempoFacil.Text = base64tempofacil;
+                //TEMPOS MEDIO
+                string base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Medio").Value;
+                if (base64tempomedio == null)
+                {
+                    textBoxTempoMedio.Text = "0";
+                }
+                else
+                   textBoxTempoMedio.Text = base64tempomedio;
+                //FOTO
                 string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
                 string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
                 byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
