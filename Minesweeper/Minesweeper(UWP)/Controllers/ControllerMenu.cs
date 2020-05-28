@@ -169,15 +169,15 @@ namespace Minesweeper.View_Controller
 
         //    } while (contador != numMinas);
         //}
-        private void ShowForm()
-        {
-            //Erro ao inicializar o mapa 2x
-            if (!Program.V_MainPage.IsVisible())
-            {
-                Program.V_MainPage.InicializarVariaveis();
-            }
-            Program.V_MainPage.showPage();
-        }
+        //private void ShowForm()
+        //{
+        //    //Erro ao inicializar o mapa 2x
+        //    if (!Program.V_MainPage.IsVisible())
+        //    {
+        //        Program.V_MainPage.InicializarVariaveis();
+        //    }
+        //    Program.V_MainPage.showPage();
+        //}
         private void CreateMapa(int numMinas, int nLinhas, int nColunas)
         {
             //Program.V_MainPage.CreateMapa(numMinas, nLinhas, nColunas);

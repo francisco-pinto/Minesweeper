@@ -22,7 +22,14 @@ namespace Minesweeper.View_Controller
             Program.V_MainPage.MostraConteudoQuadrado += V_Mapa_MostraConteudoQuadrado;
             //Program.V_MainPage.getMinas += V_Mapa_getMinas;
             Program.V_MainPage.AtualizarMinas += V_Mapa_AtualizarMinas;
+            //Program.V_MainPage.getMinas += V_MainPage_getMinas;
         }
+
+        private int V_MainPage_getMinas()
+        {
+            return Program.M_mapa.NMinasTotais;
+        }
+
         //private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)
         //{
         //    for (int linha = 0; linha < numLinhas; linha++)

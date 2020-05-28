@@ -35,8 +35,14 @@ namespace Minesweeper_UWP_
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    ///
+
+    //public delegate int GetMinas();
     public sealed partial class MainPage : Page
     {
+        //public event GetMinas getMinas;
+
+
         private int numMinas;
         private int numLinhas;
         private int numColunas;
@@ -340,6 +346,7 @@ namespace Minesweeper_UWP_
             if(auxTimer == 0)
             {
                 timer1.Start();
+                auxTimer++;
             }
             ButtonCara.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/boca.png")), Stretch = Stretch.None };
         }
@@ -488,8 +495,11 @@ namespace Minesweeper_UWP_
         private void ButtonCara_Click(object sender, RoutedEventArgs e)
         {
             //timer1.Stop();
-            //auxTimer = 0;
-            if(numMinas != 0)
+            auxTimer = 0;
+            TextBlockMinas.Text = "000";
+            segundos = 0;
+
+            if (numMinas != 0)
             {
                 LimparForm();
                 Program.C_menu.V_Menu_play(numColunas, numLinhas, Program.M_mapa.NMinasTotais);
