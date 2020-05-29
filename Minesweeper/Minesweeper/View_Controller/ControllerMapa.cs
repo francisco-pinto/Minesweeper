@@ -61,8 +61,7 @@ namespace Minesweeper.View_Controller
                 File.Create(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
             }
         
-            doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
-               
+            doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");    
         }
         private void V_PedirNome_AtribuirNome(string nome)
         {

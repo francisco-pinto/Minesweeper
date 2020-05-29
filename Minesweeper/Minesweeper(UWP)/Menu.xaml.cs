@@ -34,6 +34,14 @@ namespace Minesweeper_UWP_
             TextBoxNumBombas.Visibility = Visibility.Collapsed;
             TextBoxNumLinhas.Visibility = Visibility.Collapsed;
             TextBoxNumColunas.Visibility = Visibility.Collapsed;
+
+            TextBoxNumLinhas.Text = "";
+            TextBoxNumColunas.Text = "";
+            TextBoxNumBombas.Text = "";
+
+            TextBlockNumLinhas.Visibility = Visibility.Collapsed;
+            TextBlockNumColunas.Visibility = Visibility.Collapsed;
+            TextBlockNumBombas.Visibility = Visibility.Collapsed;
         }
         private void ButtonInstrucoes_Click(object sender, RoutedEventArgs e)
         {
@@ -50,6 +58,19 @@ namespace Minesweeper_UWP_
         //    Program.C_menu = new ControllerMenu();
         //}
 
+            //Impedem a inserção de letras nas textboxs
+        private void TextBoxNumBombas_OnBeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+        }
+        private void TextBoxNumLinhas_OnBeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+        }
+        private void TextBoxNumColunas_OnBeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+        }
         private void ButtonJogar_Click(object sender, RoutedEventArgs e)
         {
 
@@ -127,14 +148,14 @@ namespace Minesweeper_UWP_
             }
         }
         private void RadioButtonCustom_Checked(object sender, RoutedEventArgs e)
-        {
-            TextBoxNumBombas.Text = "Num Bombas";
-            TextBoxNumLinhas.Text = "Num Linhas";
-            TextBoxNumColunas.Text = "Num Colunas";
-            
+        {            
             TextBoxNumBombas.Visibility = Visibility.Visible;
             TextBoxNumLinhas.Visibility = Visibility.Visible;
             TextBoxNumColunas.Visibility = Visibility.Visible;
+
+            TextBlockNumLinhas.Visibility = Visibility.Visible;
+            TextBlockNumColunas.Visibility = Visibility.Visible;
+            TextBlockNumBombas.Visibility = Visibility.Visible;
         }
         private void TextBoxNumBombas_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -159,12 +180,28 @@ namespace Minesweeper_UWP_
             TextBoxNumBombas.Visibility = Visibility.Collapsed;
             TextBoxNumLinhas.Visibility = Visibility.Collapsed;
             TextBoxNumColunas.Visibility = Visibility.Collapsed;
+
+            TextBlockNumLinhas.Visibility = Visibility.Collapsed;
+            TextBlockNumColunas.Visibility = Visibility.Collapsed;
+            TextBlockNumBombas.Visibility = Visibility.Collapsed;
+
+            TextBoxNumLinhas.Text = "";
+            TextBoxNumColunas.Text = "";
+            TextBoxNumBombas.Text = "";
         }
         private void RadioButtonFacil_Checked(object sender, RoutedEventArgs e)
         {
             TextBoxNumBombas.Visibility = Visibility.Collapsed;
             TextBoxNumLinhas.Visibility = Visibility.Collapsed;
             TextBoxNumColunas.Visibility = Visibility.Collapsed;
+
+            TextBlockNumLinhas.Visibility = Visibility.Collapsed;
+            TextBlockNumColunas.Visibility = Visibility.Collapsed;
+            TextBlockNumBombas.Visibility = Visibility.Collapsed;
+
+            TextBoxNumLinhas.Text = "";
+            TextBoxNumColunas.Text = "";
+            TextBoxNumBombas.Text = "";
         }
     }
 }
