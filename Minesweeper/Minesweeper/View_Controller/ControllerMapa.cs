@@ -59,7 +59,6 @@ namespace Minesweeper.View_Controller
             {
                 Directory.CreateDirectory(Environment.CurrentDirectory + @"\Save");
                 File.Create(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
-
             }
         
             doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");

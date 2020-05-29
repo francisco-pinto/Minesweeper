@@ -266,17 +266,18 @@ namespace Minesweeper.View_Controller
                 foreach (XElement level1Element in xmlResposta.Element("resultado").Element("objeto").Element("top").Elements("nivel"))
                     {
                     result.AppendLine(level1Element.Attribute("dificudade").Value);
+                    
                     foreach (XElement level2Element in level1Element.Elements("jogador"))
-                        {
+                    {
                         result.AppendLine(level2Element.Attribute("username").Value);
                         result.AppendLine(level2Element.Attribute("tempo").Value);
                         result.AppendLine(level2Element.Attribute("quando").Value);
                     }
 
-                    // if dificuldade facil
-                    //listBoxFacil.Items.Add();
+                    //if dificuldade facil
+                    //    listBoxFacil.Items.Add();
                     //else
-                    //listBoxMedio.Items.Add();
+                    //    listBoxMedio.Items.Add();
                 }
             }
         }
