@@ -43,7 +43,6 @@ namespace Minesweeper
         private void Form1_Load(object sender, EventArgs e)
         {
             //Timer
-            
 
             //Nº minas
             labelMinas.Text = getMinas();

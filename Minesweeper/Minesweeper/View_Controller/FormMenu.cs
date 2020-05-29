@@ -21,6 +21,8 @@ namespace Minesweeper.View_Controller
         public event startGame play;
         public event VerPerfil ConsultarPerfil;
 
+        public bool online = false;
+
         private TextBox TBnumLinhas = new TextBox();
         private TextBox TBnumColunas = new TextBox();
         private TextBox TBnumBombas = new TextBox();
@@ -28,25 +30,25 @@ namespace Minesweeper.View_Controller
         {
             InitializeComponent();
             ConfigRadioButtons();
-            
+
         }
 
         private void buttonJogar_Click(object sender, EventArgs e)
         {
             int nLinhasCustom, nColunasCustom, nBombasCustom;
-            
+
 
             if (TBnumBombas.Visible)
             {
-                if(!((Int32.TryParse(TBnumLinhas.Text, out nLinhasCustom)) && (Int32.TryParse(TBnumColunas.Text, out nColunasCustom) && (Int32.TryParse(TBnumBombas.Text, out nBombasCustom)))))
+                if (!((Int32.TryParse(TBnumLinhas.Text, out nLinhasCustom)) && (Int32.TryParse(TBnumColunas.Text, out nColunasCustom) && (Int32.TryParse(TBnumBombas.Text, out nBombasCustom)))))
                 {
                     MessageBox.Show("Insira valores corretos!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 else
                 {
-                 
-                    if(nLinhasCustom < 9)
+
+                    if (nLinhasCustom < 9)
                     {
                         nLinhasCustom = 9;
                     }
@@ -71,7 +73,8 @@ namespace Minesweeper.View_Controller
                     {
                         this.Hide();
                         play(nLinhasCustom, nColunasCustom, numMaxBombas);
-                    }else if(nBombasCustom < numMinBombas)
+                    }
+                    else if (nBombasCustom < numMinBombas)
                     {
                         this.Hide();
                         play(nLinhasCustom, nColunasCustom, numMinBombas);
@@ -88,7 +91,7 @@ namespace Minesweeper.View_Controller
                 this.Hide();
                 if (play != null)
                 {
-                play(9, 9, 10);
+                    play(9, 9, 10);
                 }
             }
             else if (radioButtonMedia.Checked)
@@ -172,7 +175,7 @@ namespace Minesweeper.View_Controller
         public void AlteraImagem()
         {
             pictureBoxOnline.Image = Image.FromFile(Environment.CurrentDirectory + @"/Botoes/online.png");
-            
+
 
         }
         public void ShowConsultaPerfil()
@@ -214,6 +217,68 @@ namespace Minesweeper.View_Controller
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
             return true;
+        }
+
+        private void FormMenu_Load(object sender, EventArgs e)
+        {
+            if (online)
+            {
+                ShowTop10();
+            }
+        }
+
+        private void ShowTop10()
+        {
+            //Prepara o pedido ao servidor com o URL adequado
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/top10");
+
+            // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
+            ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
+            request.Method = "GET"; // método usado para enviar o pedido
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse(); // faz o envio do pedido
+
+            Stream receiveStream = response.GetResponseStream(); // obtem o stream associado à resposta.
+            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8); // Canaliza o stream para um leitor de stream de nível superior com o
+                                                                                      //formato de codificação necessário.
+            string resultado = readStream.ReadToEnd();
+
+            response.Close();
+            readStream.Close();
+
+            // converte para objeto XML para facilitar a extração da informação e ...
+            XDocument xmlResposta = XDocument.Parse(resultado);
+            // ...interpretar o resultado de acordo com a lógica da aplicação (exemplificativo)
+            if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
+            {
+                // apresenta mensagem de erro usando o texto (contexto) da resposta
+                MessageBox.Show(
+                    xmlResposta.Element("resultado").Element("contexto").Value,
+                     "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+             );
+            }
+            else
+            {
+                StringBuilder result = new StringBuilder();
+                foreach (XElement level1Element in xmlResposta.Element("resultado").Element("objeto").Element("top").Elements("nivel"))
+                    {
+                    result.AppendLine(level1Element.Attribute("dificudade").Value);
+                    foreach (XElement level2Element in level1Element.Elements("jogador"))
+                        {
+                        result.AppendLine(level2Element.Attribute("username").Value);
+                        result.AppendLine(level2Element.Attribute("tempo").Value);
+                        result.AppendLine(level2Element.Attribute("quando").Value);
+                    }
+
+                    // if dificuldade facil
+                    //listBoxFacil.Items.Add();
+                    //else
+                    //listBoxMedio.Items.Add();
+                }
+            }
         }
     }
 }
