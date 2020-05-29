@@ -12,7 +12,7 @@ namespace Minesweeper.View_Controller
 {
     class ControllerMapa
     {
-
+        string dificuldade;
         public ControllerMapa()
         {
             Program.V_Mapa.MostraBombasTodas += V_Mapa_MostraBombasTodas;
@@ -26,7 +26,7 @@ namespace Minesweeper.View_Controller
 
         public void EscritaFicheiroXML()
         {
-            string dificuldade;
+            
 
             if (Program.M_mapa.NumColunas == 9)
             {
