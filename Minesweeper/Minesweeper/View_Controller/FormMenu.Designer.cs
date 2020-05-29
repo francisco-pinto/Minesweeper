@@ -132,15 +132,15 @@
             // 
             this.listBoxMedio.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.listBoxMedio.FormattingEnabled = true;
-            this.listBoxMedio.Location = new System.Drawing.Point(314, 364);
+            this.listBoxMedio.Location = new System.Drawing.Point(308, 338);
             this.listBoxMedio.Name = "listBoxMedio";
-            this.listBoxMedio.Size = new System.Drawing.Size(109, 95);
+            this.listBoxMedio.Size = new System.Drawing.Size(202, 277);
             this.listBoxMedio.TabIndex = 15;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(357, 333);
+            this.label3.Location = new System.Drawing.Point(397, 319);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 14;
@@ -149,7 +149,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(131, 333);
+            this.label2.Location = new System.Drawing.Point(110, 319);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 13;
@@ -159,9 +159,9 @@
             // 
             this.listBoxFacil.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.listBoxFacil.FormattingEnabled = true;
-            this.listBoxFacil.Location = new System.Drawing.Point(98, 364);
+            this.listBoxFacil.Location = new System.Drawing.Point(30, 338);
             this.listBoxFacil.Name = "listBoxFacil";
-            this.listBoxFacil.Size = new System.Drawing.Size(109, 95);
+            this.listBoxFacil.Size = new System.Drawing.Size(204, 277);
             this.listBoxFacil.TabIndex = 12;
             // 
             // label1
@@ -177,7 +177,7 @@
             // buttonConsultarPerfil
             // 
             this.buttonConsultarPerfil.Location = new System.Drawing.Point(443, 101);
-            this.buttonConsultarPerfil.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonConsultarPerfil.Margin = new System.Windows.Forms.Padding(2);
             this.buttonConsultarPerfil.Name = "buttonConsultarPerfil";
             this.buttonConsultarPerfil.Size = new System.Drawing.Size(67, 40);
             this.buttonConsultarPerfil.TabIndex = 17;
@@ -190,7 +190,7 @@
             // 
             this.pictureBoxOnline.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxOnline.Image")));
             this.pictureBoxOnline.Location = new System.Drawing.Point(9, 9);
-            this.pictureBoxOnline.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxOnline.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxOnline.Name = "pictureBoxOnline";
             this.pictureBoxOnline.Size = new System.Drawing.Size(34, 37);
             this.pictureBoxOnline.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -200,7 +200,7 @@
             // pictureBoxFotoMenu
             // 
             this.pictureBoxFotoMenu.Location = new System.Drawing.Point(443, 12);
-            this.pictureBoxFotoMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxFotoMenu.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxFotoMenu.Name = "pictureBoxFotoMenu";
             this.pictureBoxFotoMenu.Size = new System.Drawing.Size(67, 80);
             this.pictureBoxFotoMenu.TabIndex = 19;
@@ -211,7 +211,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(534, 482);
+            this.ClientSize = new System.Drawing.Size(534, 630);
             this.Controls.Add(this.pictureBoxFotoMenu);
             this.Controls.Add(this.pictureBoxOnline);
             this.Controls.Add(this.buttonConsultarPerfil);

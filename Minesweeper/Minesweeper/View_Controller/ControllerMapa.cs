@@ -28,7 +28,7 @@ namespace Minesweeper.View_Controller
 
         public void EscritaFicheiroXML()
         {
-            
+            XDocument doc;
 
             if (Program.M_mapa.NumColunas == 9)
             {
@@ -40,19 +40,40 @@ namespace Minesweeper.View_Controller
             }
 
             //Criado documento XML em memória com a declaração XML e a estrutura (comentário, elemento Alunos, subelementos Inscritos e NaoInscritos
-            XDocument doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
-                new XComment("Recorde em facil e medio"),
-                new XElement("pontuacoes",
-                    new XElement("Facil",
-                        new XElement("Nome", Program.M_jogador.Nome),
-                        new XElement("Tempo", Program.M_jogador.Pontuacao)
-                    ),
-                    new XElement("Medio",
-                        new XElement("Nome"),
-                        new XElement("Tempo")
-                        )
-                )
-            );
+            
+            if(dificuldade == "facil")
+            {
+                doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+                                new XComment("Recorde em facil e medio"),
+                                new XElement("pontuacoes",
+                                    new XElement("Facil",
+                                        new XElement("Nome", Program.M_jogador.Nome),
+                                        new XElement("Tempo", Program.M_jogador.Pontuacao)
+                                    ),
+                                    new XElement("Medio",
+                                        new XElement("Nome"),
+                                        new XElement("Tempo")
+                                        )
+                                )
+                            );
+            }
+            else
+            {
+                doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+                                new XComment("Recorde em facil e medio"),
+                                new XElement("pontuacoes",
+                                    new XElement("Facil",
+                                        new XElement("Nome"),
+                                        new XElement("Tempo")
+                                    ),
+                                    new XElement("Medio",
+                                        new XElement("Nome", Program.M_jogador.Nome),
+                                        new XElement("Tempo", Program.M_jogador.Pontuacao)
+                                        )
+                                )
+                            );
+            }
+            
 
             //Guarda o documento em ficheiro XML
             if(!File.Exists(Environment.CurrentDirectory + @"\Save\pontuacao.xml"))
@@ -67,7 +88,12 @@ namespace Minesweeper.View_Controller
         {
             Program.M_jogador.Nome = nome;
             Program.M_jogador.Pontuacao = Program.V_Mapa.segundos;
+            
+            //verificar condicao if file exist 
+            //se nao existir 
             EscritaFicheiroXML();
+
+            //se existir abre ficheiro verifica, substitui dados
         }
 
         private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)

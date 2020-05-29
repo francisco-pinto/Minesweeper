@@ -262,22 +262,40 @@ namespace Minesweeper.View_Controller
             }
             else
             {
-                StringBuilder result = new StringBuilder();
+                StringBuilder dificuldade = new StringBuilder();
+                StringBuilder username = new StringBuilder();
+                StringBuilder tempo = new StringBuilder();
+                StringBuilder quando = new StringBuilder();
                 foreach (XElement level1Element in xmlResposta.Element("resultado").Element("objeto").Element("top").Elements("nivel"))
                     {
-                    result.AppendLine(level1Element.Attribute("dificudade").Value);
+                    dificuldade.AppendLine(level1Element.FirstAttribute.Value);
                     
                     foreach (XElement level2Element in level1Element.Elements("jogador"))
                     {
-                        result.AppendLine(level2Element.Attribute("username").Value);
-                        result.AppendLine(level2Element.Attribute("tempo").Value);
-                        result.AppendLine(level2Element.Attribute("quando").Value);
-                    }
+                        username.AppendLine(level2Element.Attribute("username").Value);
+                        tempo.AppendLine(level2Element.Attribute("tempo").Value);
+                        quando.AppendLine(level2Element.Attribute("quando").Value);
 
-                    //if dificuldade facil
-                    //    listBoxFacil.Items.Add();
-                    //else
-                    //    listBoxMedio.Items.Add();
+                        //MessageBox.Show(dificuldade.ToString());
+                        string nova = dificuldade.ToString().Remove(5,2);
+                        if (nova =="Facil")
+                        {
+                            listBoxFacil.Items.Add(username);
+                            listBoxFacil.Items.Add(tempo);
+                            listBoxFacil.Items.Add(quando);
+
+                        } else
+                        {
+                            listBoxMedio.Items.Add(username);
+                            listBoxMedio.Items.Add(tempo);
+                            listBoxMedio.Items.Add(quando);
+
+                        }
+
+                        username.Clear();
+                        tempo.Clear();
+                        quando.Clear();
+                    }
                 }
             }
         }
