@@ -26,7 +26,7 @@ namespace Minesweeper.View_Controller
             Program.V_PedirNome.AtribuirNome += V_PedirNome_AtribuirNome;
         }
 
-        public void EscritaFicheiroXML()
+        public void EscritaFicheiroXML(string nome, int pontuacao)
         {
             XDocument doc;
 
@@ -38,8 +38,8 @@ namespace Minesweeper.View_Controller
                                 new XComment("Recorde em facil e medio"),
                                 new XElement("pontuacoes",
                                     new XElement("Facil",
-                                        new XElement("Nome", Program.M_jogador.Nome),
-                                        new XElement("Tempo", Program.M_jogador.Pontuacao)
+                                        new XElement("Nome", nome),
+                                        new XElement("Tempo", pontuacao)
                                     ),
                                     new XElement("Medio",
                                         new XElement("Nome"),
@@ -58,8 +58,8 @@ namespace Minesweeper.View_Controller
                                         new XElement("Tempo")
                                     ),
                                     new XElement("Medio",
-                                        new XElement("Nome", Program.M_jogador.Nome),
-                                        new XElement("Tempo", Program.M_jogador.Pontuacao)
+                                        new XElement("Nome", nome),
+                                        new XElement("Tempo", pontuacao)
                                         )
                                 )
                             );
@@ -83,47 +83,39 @@ namespace Minesweeper.View_Controller
 
 
             //verificar condicao if file exist 
-            if (!File.Exists(Environment.CurrentDirectory + @"\Save\pontuacao.xml"))
-            {
-                Directory.CreateDirectory(Environment.CurrentDirectory + @"\Save");
-                File.Create(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
-                EscritaFicheiroXML();
-            }
-            else
-            {
-                BuscarPontuacao(Program.M_jogador.Pontuacao,nome);
-            }
-
-            //se existir abre ficheiro verifica, substitui dados
+            //if (!File.Exists(Environment.CurrentDirectory + @"\Save\pontuacao.xml"))
+            //{
+            //    Directory.CreateDirectory(Environment.CurrentDirectory + @"\Save");
+            //    File.Create(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
+            BuscarPontuacao(Program.M_jogador.Pontuacao, nome);
         }
-
         private bool CheckRecorde(int pontuacao)
         {
             try
             {
                 XDocument document = XDocument.Load(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
                 
-                if (dificuldade == "facil")
-            {
-                int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+                if (Program.M_mapa.NumColunas == 9)
+                {
+                    int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
 
                 if (pontuacao < recordeAnterior)
                 {
                     return true;
                 }
 
-            }
-            else
-            {
-                int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
-
-                if (pontuacao < recordeAnterior)
-                {
-                    return true;
                 }
-            }
+                else if(Program.M_mapa.NumColunas == 16)
+                {
+                    int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
 
-                return false;
+                    if (pontuacao < recordeAnterior)
+                    {
+                        return true;
+                    }
+                }
+
+                    return false;
 
             }
             catch
@@ -136,12 +128,22 @@ namespace Minesweeper.View_Controller
         }
         private void BuscarPontuacao(int pontuacao, string nome)
         {
+
+            int recordeAnterior = 999;
+
             XDocument document = XDocument.Load(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
             
             if(dificuldade=="facil")
             {
-                int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
-
+                try
+                {
+                    recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+                }
+                catch
+                {
+                    EscritaFicheiroXML(nome, pontuacao);
+                }
+                
                 if(pontuacao < recordeAnterior)
                 {
                     document.Element("pontuacoes").Element("Facil").Element("Tempo").Value = pontuacao.ToString();
@@ -150,8 +152,14 @@ namespace Minesweeper.View_Controller
 
             }else
             {
-                int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
-
+                try
+                {
+                    recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
+                }
+                catch
+                {
+                    EscritaFicheiroXML(nome, pontuacao);
+                }
                 if (pontuacao < recordeAnterior)
                 {
                     document.Element("pontuacoes").Element("Medio").Element("Tempo").Value = pontuacao.ToString();
@@ -161,7 +169,6 @@ namespace Minesweeper.View_Controller
 
             document.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
         }
-
         private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)
         {
             for (int linha = 0; linha < numLinhas; linha++)

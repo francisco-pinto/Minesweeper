@@ -50,6 +50,11 @@ namespace Minesweeper.View_Controller
             }
             else
             {
+                string base64jogosganhos;
+                string base64jogosperdidos;
+                string base64tempofacil;
+                string base64tempomedio;
+
                 // obtem todos os elementos do perfil do jogador...
                 // ...como, por exemplo, a fotografia:
                 //NOMEABREVIADO
@@ -63,32 +68,28 @@ namespace Minesweeper.View_Controller
                 textBoxPais.Text = base64Pais;
 
                 //JOGOS GANHOS
-                string base64jogosganhos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("ganhos").Value;
-                if (base64jogosganhos == null)
+                if((base64jogosganhos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("ganhos").Value) == null)
                 {
                     textBoxJogosGanhos.Text = "0";
                 }
                 else
                     textBoxJogosGanhos.Text = base64jogosganhos;
                 //JOGOS PERDIDOS
-                string base64jogosperdidos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("perdidos").Value;
-                if (base64jogosperdidos == null)
+                if((base64jogosperdidos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("perdidos").Value) == null)
                 {
                     textBoxJogosPerdidos.Text = "0";
                 }
                 else
                      textBoxJogosPerdidos.Text = base64jogosperdidos;
                 //TEMPOS FACIL
-                string base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Facil").Value;
-                if (base64tempofacil == null)
+                if((base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Facil").Value) == null)
                 {
                     textBoxTempoFacil.Text = "0";
                 }
                 else
                     textBoxTempoFacil.Text = base64tempofacil;
                 //TEMPOS MEDIO
-                string base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Medio").Value;
-                if (base64tempomedio == null)
+                if ( (base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Medio").Value) == null)
                 {
                     textBoxTempoMedio.Text = "0";
                 }
@@ -109,7 +110,6 @@ namespace Minesweeper.View_Controller
             {
                 return true;
             }
-
         public FormConsultarPerfil()
         {
             InitializeComponent();

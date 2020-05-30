@@ -29,6 +29,7 @@ namespace Minesweeper.View_Controller
                 AtribuirNome(textBoxNomeJogador.Text);
                 textBoxNomeJogador.Clear();
                 this.Hide();
+                Program.V_Menu.AtualizaValoresRecorde();
                 Program.V_Menu.Show();
             }
         }

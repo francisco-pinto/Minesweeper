@@ -246,9 +246,10 @@ namespace Minesweeper
         public void InicializarVariaveis()
         {
             //Timer
-           
+
 
             //Nº minas
+            segundos = 0;
             labelMinas.Text = getMinas();
             labelTime.Text = "000";
         }

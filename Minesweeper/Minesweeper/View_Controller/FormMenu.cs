@@ -72,16 +72,34 @@ namespace Minesweeper.View_Controller
                     if (nBombasCustom > numMaxBombas)
                     {
                         this.Hide();
+                        TBnumColunas.Text = "Num Colunas";
+                        TBnumColunas.Visible = false;
+                        TBnumLinhas.Text = "Num Linhas";
+                        TBnumLinhas.Visible = false;
+                        TBnumBombas.Text = "Num Bombas";
+                        TBnumBombas.Visible = false;
                         play(nLinhasCustom, nColunasCustom, numMaxBombas);
                     }
                     else if (nBombasCustom < numMinBombas)
                     {
                         this.Hide();
+                        TBnumColunas.Text = "Num Colunas";
+                        TBnumColunas.Visible = false;
+                        TBnumLinhas.Text = "Num Linhas";
+                        TBnumLinhas.Visible = false;
+                        TBnumBombas.Text = "Num Bombas";
+                        TBnumBombas.Visible = false;
                         play(nLinhasCustom, nColunasCustom, numMinBombas);
                     }
                     else
                     {
                         this.Hide();
+                        TBnumColunas.Text = "Num Colunas";
+                        TBnumColunas.Visible = false;
+                        TBnumLinhas.Text = "Num Linhas";
+                        TBnumLinhas.Visible = false;
+                        TBnumBombas.Text = "Num Bombas";
+                        TBnumBombas.Visible = false;
                         play(nLinhasCustom, nColunasCustom, nBombasCustom);
                     }
                 }
@@ -230,6 +248,19 @@ namespace Minesweeper.View_Controller
             }
         }
 
+        public void AtualizaValoresRecorde()
+        {
+            listBoxFacil.Items.Clear();
+            listBoxMedio.Items.Clear();
+            if (online)
+            {
+                ShowTop10();
+            }
+            else
+            {
+                ShowRecorde();
+            }
+        }
         private void ShowRecorde()
         {
             try
@@ -237,19 +268,45 @@ namespace Minesweeper.View_Controller
                 XDocument document = XDocument.Load(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
 
                 //listBoxFacil.Items.Add(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
-                listBoxFacil.Items.Add(document.Element("pontuacoes").Element("Facil").Element("Nome").Value + " - " + document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
-
-                
-                listBoxMedio.Items.Add(document.Element("pontuacoes").Element("Medio").Element("Nome").Value + " - " + document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
+                listBoxFacil.Items.Add(document.Element("pontuacoes").Element("Facil").Element("Nome").Value + "  " + document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+                listBoxMedio.Items.Add(document.Element("pontuacoes").Element("Medio").Element("Nome").Value + "  " + document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
             }
             catch
             {
-                //a definir
+                listBoxFacil.Items.Clear();
+                listBoxMedio.Items.Clear();
+                CriarDocumentoXML();
             }
             
 
         }
+        private void CriarDocumentoXML()
+        {
 
+            if (!Directory.Exists(Environment.CurrentDirectory + @"\Save"))
+            {
+                Directory.CreateDirectory(Environment.CurrentDirectory + @"\Save");
+            }
+
+            XDocument doc;
+
+            {
+                doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+                                new XComment("Recorde em facil e medio"),
+                                new XElement("pontuacoes",
+                                    new XElement("Facil",
+                                        new XElement("Nome"),
+                                        new XElement("Tempo")
+                                    ),
+                                    new XElement("Medio",
+                                        new XElement("Nome"),
+                                        new XElement("Tempo")
+                                        )
+                                )
+                            );
+            }
+            doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
+        }
         private void ShowTop10()
         {
             //Prepara o pedido ao servidor com o URL adequado
