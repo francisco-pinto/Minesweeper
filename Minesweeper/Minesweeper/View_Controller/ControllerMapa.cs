@@ -30,15 +30,6 @@ namespace Minesweeper.View_Controller
         {
             XDocument doc;
 
-            if (Program.M_mapa.NumColunas == 9)
-            {
-                dificuldade = "facil";
-            }
-            else
-            {
-                dificuldade = "medio";
-            }
-
             //Criado documento XML em memória com a declaração XML e a estrutura (comentário, elemento Alunos, subelementos Inscritos e NaoInscritos
             
             if(dificuldade == "facil")
@@ -73,27 +64,102 @@ namespace Minesweeper.View_Controller
                                 )
                             );
             }
-            
-
-            //Guarda o documento em ficheiro XML
-            if(!File.Exists(Environment.CurrentDirectory + @"\Save\pontuacao.xml"))
-            {
-                Directory.CreateDirectory(Environment.CurrentDirectory + @"\Save");
-                File.Create(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
-            }
-        
-            doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");    
+                doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");    
         }
         private void V_PedirNome_AtribuirNome(string nome)
         {
+
+            if (Program.M_mapa.NumColunas == 9)
+            {
+                dificuldade = "facil";
+            }
+            else
+            {
+                dificuldade = "medio";
+            }
+
             Program.M_jogador.Nome = nome;
             Program.M_jogador.Pontuacao = Program.V_Mapa.segundos;
-            
+
+
             //verificar condicao if file exist 
-            //se nao existir 
-            EscritaFicheiroXML();
+            if (!File.Exists(Environment.CurrentDirectory + @"\Save\pontuacao.xml"))
+            {
+                Directory.CreateDirectory(Environment.CurrentDirectory + @"\Save");
+                File.Create(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
+                EscritaFicheiroXML();
+            }
+            else
+            {
+                BuscarPontuacao(Program.M_jogador.Pontuacao,nome);
+            }
 
             //se existir abre ficheiro verifica, substitui dados
+        }
+
+        private bool CheckRecorde(int pontuacao)
+        {
+            try
+            {
+                XDocument document = XDocument.Load(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
+                
+                if (dificuldade == "facil")
+            {
+                int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+
+                if (pontuacao < recordeAnterior)
+                {
+                    return true;
+                }
+
+            }
+            else
+            {
+                int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
+
+                if (pontuacao < recordeAnterior)
+                {
+                    return true;
+                }
+            }
+
+                return false;
+
+            }
+            catch
+            {
+                return true;
+            }
+            
+
+            
+        }
+        private void BuscarPontuacao(int pontuacao, string nome)
+        {
+            XDocument document = XDocument.Load(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
+            
+            if(dificuldade=="facil")
+            {
+                int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+
+                if(pontuacao < recordeAnterior)
+                {
+                    document.Element("pontuacoes").Element("Facil").Element("Tempo").Value = pontuacao.ToString();
+                    document.Element("pontuacoes").Element("Facil").Element("Nome").Value = nome;
+                }
+
+            }else
+            {
+                int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
+
+                if (pontuacao < recordeAnterior)
+                {
+                    document.Element("pontuacoes").Element("Medio").Element("Tempo").Value = pontuacao.ToString();
+                    document.Element("pontuacoes").Element("Medio").Element("Nome").Value = nome;
+                }
+            }
+
+            document.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
         }
 
         private void V_Mapa_MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas)
@@ -133,7 +199,16 @@ namespace Minesweeper.View_Controller
 
             Program.V_Mapa.Hide();
             Program.V_Mapa.LimparForm();
-            Program.V_PedirNome.Show();
+
+
+            if(CheckRecorde(Program.V_Mapa.segundos) == true)
+            {
+                Program.V_PedirNome.Show();
+            }
+            else
+            {
+                Program.V_Menu.Show();
+            }
             
         }
         private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)

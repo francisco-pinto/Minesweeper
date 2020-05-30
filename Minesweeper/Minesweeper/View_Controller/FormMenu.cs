@@ -224,7 +224,30 @@ namespace Minesweeper.View_Controller
             if (online)
             {
                 ShowTop10();
+            } else
+            {
+                ShowRecorde();
             }
+        }
+
+        private void ShowRecorde()
+        {
+            try
+            {
+                XDocument document = XDocument.Load(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
+
+                //listBoxFacil.Items.Add(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+                listBoxFacil.Items.Add(document.Element("pontuacoes").Element("Facil").Element("Nome").Value + " - " + document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+
+                
+                listBoxMedio.Items.Add(document.Element("pontuacoes").Element("Medio").Element("Nome").Value + " - " + document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
+            }
+            catch
+            {
+                //a definir
+            }
+            
+
         }
 
         private void ShowTop10()
