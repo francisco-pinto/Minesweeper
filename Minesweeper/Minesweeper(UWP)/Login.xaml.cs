@@ -1,26 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Security;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,6 +24,7 @@ namespace Minesweeper_UWP_
     /// </summary>
     public sealed partial class Login : Page
     {
+        private App Program = App.Current as App;
         FileOpenPicker picker = new FileOpenPicker();
         
         public Login()
@@ -43,9 +37,7 @@ namespace Minesweeper_UWP_
             //mainGrid.Width = 1000;
             
             ApplicationView.PreferredLaunchViewSize = new Size { Height = 520, Width = 1020 };
-          
         }
-
         private void PropriedadesRegistar()
         {
             TBLogin_Email.Visibility = Visibility.Collapsed;
@@ -88,7 +80,7 @@ namespace Minesweeper_UWP_
             ButtonRegistar.Visibility = Visibility.Visible;
             ButtonInserirfoto.Visibility = Visibility.Visible;
         }
-        public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        public bool AcceptAllCertifications(object sender, X509Certificate certification, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
          return true;
         }
@@ -144,28 +136,24 @@ namespace Minesweeper_UWP_
             else
             {
                 MessageBoxAsync("Entrou");
+                Program.M_menu.online = true;
+               
+
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("id").Value
             }
-
-            
-
-
             this.Frame.Navigate(typeof(Menu), null);
         }
-
-        private async System.Threading.Tasks.Task MessageBoxAsync(string message)
+        private async Task MessageBoxAsync(string message)
         {
             var messageDialog = new MessageDialog(message);
             await messageDialog.ShowAsync();
         }
-
         private void ButtonInserirfoto_ClickAsync(object sender, RoutedEventArgs e)
         {
             PhotoPickerAsync();
         }
-
-        private async System.Threading.Tasks.Task PhotoPickerAsync()
+        private async Task PhotoPickerAsync()
         {
             picker.ViewMode = PickerViewMode.Thumbnail;
             picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;

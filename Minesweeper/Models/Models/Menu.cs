@@ -9,6 +9,9 @@ namespace Minesweeper.Models
 {
     public class Menu
     {
-        public Menu() { }
+        public bool online;
+        public Menu() {
+            online = false;
+        }
     }
 }

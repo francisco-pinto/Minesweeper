@@ -113,9 +113,6 @@ namespace Minesweeper.View_Controller
         public FormConsultarPerfil()
         {
             InitializeComponent();
-            
-
-
         }
 
         OpenFileDialog ofd = new OpenFileDialog();

@@ -13,7 +13,7 @@
                    Introduza o seu nome: " 
                    TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
         <TextBox Name="TextBoxPedirNome" Text="" TextWrapping="Wrap" Margin="104,184,104,184"/>
-        <Button Name="ButtonAdicionar" Content="Adicionar" Margin="0,260,0,0" VerticalAlignment="Top" Height="30" Width="72" HorizontalAlignment="Center"/>
+        <Button Name="ButtonAdicionar" Content="Adicionar" Margin="0,260,0,0" VerticalAlignment="Top" Height="30" Width="72" HorizontalAlignment="Center" Click="ButtonAdicionar_ClickAsync"/>
 
     </Grid>
 </Page>

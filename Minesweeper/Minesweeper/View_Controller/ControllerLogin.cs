@@ -21,6 +21,7 @@ namespace Minesweeper.View_Controller
         }
         private void V_Login_EnviarDados()
         {
+            Program.M_menu.online = true;
             Program.V_Menu.online = true;
             Program.V_Menu.AlteraImagem();
             Program.V_Menu.ShowConsultaPerfil();

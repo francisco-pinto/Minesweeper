@@ -25,7 +25,6 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.AtualizarMinas += V_Mapa_AtualizarMinas;
             Program.V_PedirNome.AtribuirNome += V_PedirNome_AtribuirNome;
         }
-
         public void EscritaFicheiroXML(string nome, int pontuacao)
         {
             XDocument doc;
@@ -208,14 +207,22 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.LimparForm();
 
 
-            if(CheckRecorde(Program.V_Mapa.segundos) == true)
+            if (Program.M_menu.online)
             {
-                Program.V_PedirNome.Show();
+                //Enviar os dados para o server
             }
             else
             {
-                Program.V_Menu.Show();
+                if (CheckRecorde(Program.V_Mapa.segundos) == true)
+                {
+                    Program.V_PedirNome.Show();
+                }
+                else
+                {
+                    Program.V_Menu.Show();
+                }
             }
+           
             
         }
         private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)

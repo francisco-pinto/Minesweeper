@@ -30,9 +30,7 @@ namespace Minesweeper.View_Controller
         {
             InitializeComponent();
             ConfigRadioButtons();
-
         }
-
         private void buttonJogar_Click(object sender, EventArgs e)
         {
             int nLinhasCustom, nColunasCustom, nBombasCustom;
@@ -180,7 +178,6 @@ namespace Minesweeper.View_Controller
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
         }
-
         private void buttonConsultarPerfil_Click(object sender, EventArgs e)
         {
 
@@ -189,7 +186,6 @@ namespace Minesweeper.View_Controller
             Program.V_ConsultarPerfil.Show();
 
         }
-
         public void AlteraImagem()
         {
             pictureBoxOnline.Image = Image.FromFile(Environment.CurrentDirectory + @"/Botoes/online.png");
@@ -236,7 +232,6 @@ namespace Minesweeper.View_Controller
         {
             return true;
         }
-
         private void FormMenu_Load(object sender, EventArgs e)
         {
             if (online)
@@ -247,7 +242,6 @@ namespace Minesweeper.View_Controller
                 ShowRecorde();
             }
         }
-
         public void AtualizaValoresRecorde()
         {
             listBoxFacil.Items.Clear();

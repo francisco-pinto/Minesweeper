@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -27,6 +28,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Size = Windows.Foundation.Size;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -164,7 +166,7 @@ namespace Minesweeper_UWP_
             //button[linha, coluna].Content = nome;
 
             //Eventos
-            button[linha, coluna].Tapped += MainPage_Tapped;
+            button[linha, coluna].Tapped += MainPage_TappedAsync;
             button[linha, coluna].RightTapped += MainPage_RightTapped;
             button[linha, coluna].PointerPressed += MainPage_PointerPressed; 
             button[linha, coluna].PointerReleased += MainPage_PointerReleased;
@@ -193,7 +195,7 @@ namespace Minesweeper_UWP_
             Grid.SetRow(button[linha, coluna], linha);
 
         }
-        private void MainPage_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void MainPage_TappedAsync(object sender, TappedRoutedEventArgs e)
         {
             Button b = (Button)sender;
 
@@ -205,35 +207,101 @@ namespace Minesweeper_UWP_
             }
             else if(aux == -1)       //Perder o jogo
             {
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Explosion.wav"));
-                mediaPlayer.Play();
-                auxTimer = 0;
-                timer1.Stop();
-                setVariaveisFinais("-1", false);
-                MostraTodasBombas();
-                string[] posErradas = Program.M_mapa.GetBandeirasErradas(); //Colcoar um get no controller
-                MostraBandeirasErradas(posErradas);
-                PerderSad();
-                BlockControls();
-                //LimparForm();
-                Sleep(5);
-                //Task.Run(async () => await Task.Delay(TimeSpan.FromMilliseconds(10000)));
+                PerderJogo();
             }
             else if(aux == 1)       //Ganhar Jogo
             {
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Winning.wav"));
-                mediaPlayer.Play();
-                auxTimer = 0;
-                timer1.Stop();
-                MostraBandeirasTodas();
-                setVariaveisFinais("00", false);
-                GanharHappy();
-                BlockControls();
-                //LimparForm();
-                Sleep(5);
+                await GanharJogoAsync();
             }   
+        }
+        private void PerderJogo()
+        {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Explosion.wav"));
+            mediaPlayer.Play();
+            auxTimer = 0;
+            timer1.Stop();
+            setVariaveisFinais("-1", false);
+            MostraTodasBombas();
+            string[] posErradas = Program.M_mapa.GetBandeirasErradas(); //Colcoar um get no controller
+            MostraBandeirasErradas(posErradas);
+            PerderSad();
+            BlockControls();
+            //LimparForm();
+            Sleep(3);
+
+            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+            this.Frame.Navigate(typeof(Menu));
+            //Task.Run(async () => await Task.Delay(TimeSpan.FromMilliseconds(10000)));
+        }
+        private async Task GanharJogoAsync()
+        {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Winning.wav"));
+            mediaPlayer.Play();
+
+            Program.M_jogador.Pontuacao = segundos;
+
+            auxTimer = 0;
+            timer1.Stop();
+            MostraBandeirasTodas();
+            setVariaveisFinais("00", false);
+            GanharHappy();
+            BlockControls();
+            //LimparForm();
+
+            if (Program.M_menu.online)
+            {
+                //Enviar os dados para o server
+            }
+            else
+            {
+                await CheckRecorde(segundos);
+            }
+        }
+        private async Task<string> getFilePathAsync()
+        {
+            StorageFolder folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Save");
+            StorageFile file = await folder.GetFileAsync("pontuacao.xml");
+
+            return file.Path;
+        }
+        private async Task CheckRecorde(int pontuacao)
+        {
+
+            try
+            {
+                string filepath = await getFilePathAsync();
+                XDocument document = XDocument.Load(filepath);
+
+                if (numColunas == 9)
+                {
+                    int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+
+                    if (pontuacao < recordeAnterior)
+                    {
+                        this.Frame.Navigate(typeof(PedirNome));
+                    }
+
+                }
+                else if (numColunas == 16)
+                {
+                    int recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
+
+                    if (pontuacao < recordeAnterior)
+                    {
+                        this.Frame.Navigate(typeof(PedirNome));
+                    }
+                }
+
+                Sleep(3);
+                this.Frame.Navigate(typeof(Menu));
+
+            }
+            catch
+            {
+                this.Frame.Navigate(typeof(PedirNome));
+            }
         }
         private void BlockControls()
         {
@@ -244,7 +312,7 @@ namespace Minesweeper_UWP_
             {
                 for (int coluna = 0; coluna < numColunas; coluna++)
                 {
-                    button[linha, coluna].Tapped -= new TappedEventHandler(MainPage_Tapped);
+                    button[linha, coluna].Tapped -= new TappedEventHandler(MainPage_TappedAsync);
                     button[linha, coluna].RightTapped -= new RightTappedEventHandler(MainPage_RightTapped);
                     button[linha, coluna].PointerPressed -= new PointerEventHandler(MainPage_PointerPressed);
                     button[linha, coluna].PointerReleased -= new PointerEventHandler(MainPage_PointerReleased);

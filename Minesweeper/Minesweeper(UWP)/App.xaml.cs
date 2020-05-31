@@ -27,9 +27,10 @@ namespace Minesweeper_UWP_
     sealed partial class App : Application
     {
         public Mapa M_mapa { get; set; }
-        public Menu M_menu { get; set; }
+        public Minesweeper.Models.Menu M_menu { get; set; }
         public Jogador M_jogador { get; set; }
         public Minesweeper.Models.Login M_Login { get; set; }
+        public ConsultaPerfil V_ConsultaPerfil { get; set; }
         public MainPage V_MainPage { get; set; }
         public Instrucoes V_Instrucoes { get; set; }
         public PedirNome V_PedirNome { get; set; }
@@ -51,7 +52,7 @@ namespace Minesweeper_UWP_
             this.Suspending += OnSuspending;
 
             M_mapa = new Mapa();
-            M_menu = new Menu();
+            M_menu = new Minesweeper.Models.Menu();
             M_jogador = new Jogador();
             M_Login = new Minesweeper.Models.Login();
         }
@@ -107,7 +108,7 @@ namespace Minesweeper_UWP_
             //V_MainPage = rootFrame.Content as MainPage;
             //V_PedirNome = rootFrame.Content as PedirNome;
             V_On_Off = rootFrame.Content as On_Off;
-
+            V_ConsultaPerfil = new ConsultaPerfil();
             V_Menu = new Menu();
             V_Login = new Login();
             V_Instrucoes = new Instrucoes();

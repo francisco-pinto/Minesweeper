@@ -119,6 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConsultaPerfil.xaml.cs">
+      <DependentUpon>ConsultaPerfil.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ControllerInstrucoes.cs" />
     <Compile Include="Controllers\ControllerJogador.cs" />
     <Compile Include="Controllers\ControllerLogin.cs" />
@@ -197,6 +200,8 @@
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\MinesweeperLogo.png" />
+    <Content Include="Assets\Offline.png" />
+    <Content Include="Assets\online.png" />
     <Content Include="Assets\sad.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
@@ -236,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ConsultaPerfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Instrucoes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
