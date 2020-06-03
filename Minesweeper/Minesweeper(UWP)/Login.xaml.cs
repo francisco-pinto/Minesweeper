@@ -86,7 +86,7 @@ namespace Minesweeper_UWP_
         }
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+            
 
             //Login
 
@@ -142,6 +142,7 @@ namespace Minesweeper_UWP_
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("id").Value
             }
+            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
             this.Frame.Navigate(typeof(Menu), null);
         }
         private async Task MessageBoxAsync(string message)

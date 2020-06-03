@@ -20,7 +20,6 @@ namespace Minesweeper.View_Controller
         public FormLogin()
         {
             InitializeComponent();
-
         }
 
         OpenFileDialog ofd = new OpenFileDialog();
@@ -28,7 +27,6 @@ namespace Minesweeper.View_Controller
             {
                 return true;
             }
-
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -92,12 +90,10 @@ namespace Minesweeper.View_Controller
             Program.V_Menu.Show();
 
         }
-
         private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.ExitThread();
         }
-
         private void buttonRegistar_Click(object sender, EventArgs e)
         {
             Program.V_Login.Size = new System.Drawing.Size(500, 400);
@@ -117,7 +113,6 @@ namespace Minesweeper.View_Controller
 
             // Colocar Online
         }
-
         private void FormLogin_Load(object sender, EventArgs e)
         {
             Program.V_Login.Size = new System.Drawing.Size(500, 100);
@@ -131,7 +126,6 @@ namespace Minesweeper.View_Controller
             // The control will allow no more than 14 characters.
             //textBoxPasse.MaxLength = 14;
         }
-
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
             ofd.Filter = "PNG|*.png; *.jpg; *.jpeg";
@@ -142,6 +136,11 @@ namespace Minesweeper.View_Controller
                 textBoxSAvedFileName.Text = ofd.FileName;
                 pictureBoxFoto.Image = new Bitmap(ofd.FileName);
             }
+        }
+        private void buttonSubmeter_Click(object sender, EventArgs e)
+        {
+            //EnviarServidor()
+            //Voltatr
         }
 
     }

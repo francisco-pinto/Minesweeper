@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -33,7 +34,7 @@ namespace Minesweeper_UWP_
             this.InitializeComponent();
         }
 
-        public async System.Threading.Tasks.Task AcessoPerfilAsync()
+        public async Task AcessoPerfilAsync()
         {
             //Prepara o pedido ao servidor com o URL adequado
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/perfil/" + "xcoelho");
@@ -66,7 +67,7 @@ namespace Minesweeper_UWP_
                 //       MessageBoxIcon.Error
                 //);
 
-                MessageBoxAsync("Erro na consulta dos dados do jogdor");
+                /*await */MessageBoxAsync("Erro na consulta dos dados do jogdor");
 
             }
             else
@@ -108,7 +109,7 @@ namespace Minesweeper_UWP_
                 try
                 {
                     if ((base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Facil").Value) != null)
-                        TextBoxTempoFacil.Text = "base64tempofacil";
+                        TextBoxTempoFacil.Text = base64tempofacil;
                 }
                 catch
                 {
@@ -138,7 +139,7 @@ namespace Minesweeper_UWP_
                 ImageJogador.Source = image;
             }
         }
-        private async System.Threading.Tasks.Task MessageBoxAsync(string message)
+        private async Task MessageBoxAsync(string message)
         {
             var messageDialog = new MessageDialog(message);
             await messageDialog.ShowAsync();
