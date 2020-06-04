@@ -17,6 +17,10 @@ namespace Minesweeper.View_Controller
     {
         public event fazlogin FazerLogin;
         public event dadosUtilizador EnviarDados;
+        Bitmap image;
+        string base64Text;
+        string imagem;
+
         public FormLogin()
         {
             InitializeComponent();
@@ -74,9 +78,9 @@ namespace Minesweeper.View_Controller
             } else
             {
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
-                string id = xmlResposta.Element("resultado").Element("objeto").Element("ID").Value;
+                string ID = xmlResposta.Element("resultado").Element("objeto").Element("ID").Value;
                 MessageBox.Show("Entrou!");
-                EnviarDados(id, textBoxNome.Text);
+                EnviarDados(ID, textBoxNome.Text);
 
             
             }
@@ -127,12 +131,24 @@ namespace Minesweeper.View_Controller
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
             ofd.Filter = "PNG|*.png; *.jpg; *.jpeg";
+            ofd.CheckFileExists = true;
+
 
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 textBoxFileName.Text = ofd.SafeFileName;
                 textBoxSAvedFileName.Text = ofd.FileName;
-                pictureBoxFoto.Image = new Bitmap(ofd.FileName);
+                //pictureBoxFoto.Image = new Bitmap(ofd.FileName);
+               
+               
+                    image = new Bitmap(ofd.FileName);
+                    pictureBoxFoto.Image = (Image)image;
+
+                    byte[] imageArray = System.IO.File.ReadAllBytes(ofd.FileName);
+                    string base64Text = Convert.ToBase64String(imageArray); //base64Text must be global but I'll use  richtext
+                string fileEXT = ofd.FileName;
+                 imagem = "data:" + fileEXT + ";base64," + base64Text;
+                
             }
         }
         private void buttonSubmeter_Click(object sender, EventArgs e)
@@ -150,15 +166,68 @@ namespace Minesweeper.View_Controller
             // prepara os dados do pedido a partir de uma string só com a estrutura do XML (sem dados)
             XDocument xmlPedido = XDocument.Parse("<registo><nomeabreviado></nomeabreviado><username></username><password></password><email></email><fotografia></fotografia><pais></pais></registo>");
             //preenche os dados no XML
-            xmlPedido.Element("registo").Element("nomeabreviado").Value = textBoxNomeAbreviado.Text;
-            xmlPedido.Element("registo").Element("username").Value = textBoxUsername.Text; // colocar aqui o username do utilizador
-            xmlPedido.Element("registo").Element("password").Value = textBoxPassword.Text;
-            xmlPedido.Element("registo").Element("email").Value = textBoxEmail.Text;// colocar aqui a palavra passe do utilizador
 
-            //Image image = Image.FromStream(new MemoryStream (bytes));        
-            //xmlPedido.Element("registo").Element("fotografia").Value = image;
+            // Nome Abreviado
+            if (textBoxNomeAbreviado.Text == null) 
+            {
+                MessageBox.Show("Preencha todos os campos");
+            }
+            else
+            {
+                xmlPedido.Element("registo").Element("nomeabreviado").Value = textBoxNomeAbreviado.Text;
+            }
+
+            //Username
+            if (textBoxUsername.Text == null)
+            {
+                
+            }
+            else
+            {
+                 xmlPedido.Element("registo").Element("username").Value = textBoxUsername.Text; // colocar aqui o username do utilizador
+            }
+
+
+            //Password
+            if (textBoxPassword.Text == null)
+            {
+                
+            }
+            else
+            {
+                xmlPedido.Element("registo").Element("password").Value = textBoxPassword.Text;
+            }
+
+
+            if (textBoxEmail.Text == null)
+            {
+                
+            }
+            else
+            {
+                xmlPedido.Element("registo").Element("email").Value = textBoxEmail.Text;// colocar aqui a palavra passe do utilizador
+            }
+
+            //Imagem
+            if (imagem == null)
+            {
+                
+            }
+            else
+            {
+               xmlPedido.Element("registo").Element("fotografia").Value = imagem;
+            }
+
+            if (textBoxPais.Text == null)
+            {
+                
+            }
+            else
+            {
+                xmlPedido.Element("registo").Element("pais").Value = textBoxPais.Text;
+            }
+
             
-            xmlPedido.Element("registo").Element("pais").Value = textBoxPais.Text;
             string mensagem = xmlPedido.Root.ToString();
 
             byte[] data = Encoding.Default.GetBytes(mensagem); // note: choose appropriate encoding
@@ -194,7 +263,7 @@ namespace Minesweeper.View_Controller
             }
             else
             {
-
+                Program.V_Login.Size = new System.Drawing.Size(500, 100);
                 MessageBox.Show( "submeteu o seu registo com sucesso"  );
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("ID").Value }

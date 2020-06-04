@@ -18,8 +18,10 @@ namespace Minesweeper.View_Controller
         public event GetNome getNomeJogador;
         public void AcessoPerfil()
         {
+            string nome = getNomeJogador();
+
             //Prepara o pedido ao servidor com o URL adequado
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/perfil/"+ getNomeJogador);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/perfil/"+ nome);
 
             // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
             ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
