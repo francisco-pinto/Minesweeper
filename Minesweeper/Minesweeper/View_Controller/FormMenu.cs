@@ -240,6 +240,7 @@ namespace Minesweeper.View_Controller
             {
                 ShowTop10();
                 radioButtonCustom.Visible = false;
+                radioButtonMedia.Location = new Point(253, 19);
                 //radioButtonMedia.Location = new Point(300, 200);
                 
             } else

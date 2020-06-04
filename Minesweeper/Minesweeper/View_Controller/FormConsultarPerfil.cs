@@ -133,6 +133,8 @@ namespace Minesweeper.View_Controller
 
         private void FormConsultarPerfil_FormClosing(object sender, FormClosingEventArgs e)
         {
+            e.Cancel = true;
+            this.Hide();
             Program.V_Menu.Show();
         }
     }
