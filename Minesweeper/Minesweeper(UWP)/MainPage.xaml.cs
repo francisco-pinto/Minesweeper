@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Security;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -578,20 +582,7 @@ namespace Minesweeper_UWP_
 
             if (Program.M_menu.online)
             {
-
-
-
-
-
-                ////Receber parâmetros Online
-
-
-
-
-
-
-
-
+                ReceberDadosOnline();
             }
             else
             {
@@ -604,6 +595,59 @@ namespace Minesweeper_UWP_
             
             Resize(110 + 32 * numColunas, 32 * numLinhas);
             TextBlockMinas.Text = numMinas.ToString();
+        }
+
+        public bool AcceptAllCertifications(object sender, X509Certificate certification, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
+
+        private void ReceberDadosOnline()
+        {
+            //Prepara o pedido ao servidor com o URL adequado
+            HttpWebRequest request = null;
+            //Verificar qual o nível de jogo
+            if (Program.M_mapa.NumColunas == 9)
+            {
+                request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/facil/" + Program.M_jogador.Id); // ou outro qualquer username
+            }
+            else if(Program.M_mapa.NumColunas == 16)
+            {
+                request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/medio/" + Program.M_jogador.Id); // ou outro qualquer username
+            }
+
+
+            
+            // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(AcceptAllCertifications);
+            
+            request.Method = "GET"; // método usado para enviar o pedido
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse(); // faz o envio do pedido
+            
+            Stream receiveStream = response.GetResponseStream(); // obtem o stream associado à resposta.
+            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8); // Canaliza o stream para um leitor de stream de nível superior com o
+
+            string resultado = readStream.ReadToEnd();
+            response.Close();
+            readStream.Close();
+           
+            XDocument xmlResposta = XDocument.Parse(resultado);
+             // ...interpretar o resultado de acordo com a lógica da aplicação (exemplificativo)
+            if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
+            {
+                 // apresenta mensagem de erro usando o texto (contexto) da resposta
+                //MessageBox.Show(
+                //xmlResposta.Element("resultado").Element("contexto").Value,
+                // "Erro",
+                //MessageBoxButtons.OK,
+                //MessageBoxIcon.Error
+                //);
+            }
+            else
+                {
+                
+            }
         }
         public void CreateButtonModel(int numLinhas, int numColunas, int numBombas)
         {

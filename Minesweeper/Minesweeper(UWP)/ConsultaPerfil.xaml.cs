@@ -29,6 +29,7 @@ namespace Minesweeper_UWP_
     /// </summary>
     public sealed partial class ConsultaPerfil : Page
     {
+        private App Program = App.Current as App;
         public ConsultaPerfil()
         {
             this.InitializeComponent();
@@ -37,7 +38,7 @@ namespace Minesweeper_UWP_
         public async Task AcessoPerfilAsync()
         {
             //Prepara o pedido ao servidor com o URL adequado
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/perfil/" + "xcoelho");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/perfil/" + Program.M_jogador.Nome);
 
             // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
             ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);

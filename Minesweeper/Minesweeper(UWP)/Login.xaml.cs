@@ -132,7 +132,9 @@ namespace Minesweeper_UWP_
             {
                 MessageBoxAsync("Entrou");
                 Program.M_menu.online = true;
-               
+                Program.M_jogador.Nome = TextboxName.Text;
+                Program.M_jogador.Id = xmlResposta.Element("resultado").Element("objeto").Element("ID").Value;
+
 
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("id").Value
