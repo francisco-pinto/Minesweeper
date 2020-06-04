@@ -25,8 +25,7 @@ namespace Minesweeper_UWP_
     public sealed partial class Login : Page
     {
         private App Program = App.Current as App;
-        FileOpenPicker picker = new FileOpenPicker();
-        
+        FileOpenPicker picker = new FileOpenPicker();     
         public Login()
         {
             this.InitializeComponent();
@@ -86,15 +85,11 @@ namespace Minesweeper_UWP_
         }
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            
-
-            //Login
-
             //Autenticar
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/Autentica");
             // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, temos de configurar o cliente para aceitar sempre o certificado.
 
-            ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(AcceptAllCertifications);
 
 
             // prepara os dados do pedido a partir de uma string só com a estrutura do XML (sem dados)

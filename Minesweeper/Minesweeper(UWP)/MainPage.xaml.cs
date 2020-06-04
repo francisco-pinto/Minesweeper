@@ -109,7 +109,7 @@ namespace Minesweeper_UWP_
                 TextBlockTimer.Text = "999";
             }
         }
-        public void CreateMapa(int nLinhas, int nColunas, int nMinas)
+        public void InicializarValoresMapaView(int nLinhas, int nColunas, int nMinas)
         {
             numMinas = Program.M_mapa.NMinasTotais;
             numLinhas = Program.M_mapa.NumLinhas;
@@ -567,13 +567,41 @@ namespace Minesweeper_UWP_
             TextBlockMinas.Text = "000";
             segundos = 0;
 
+            //Reiniciar o Jogo novamente
             if (numMinas != 0)
             {
                 LimparForm();
                 Program.C_menu.V_Menu_play(numColunas, numLinhas, Program.M_mapa.NMinasTotais);
             }
-            CreateMapa(numMinas, numLinhas, numColunas);
-            CreateButtonModel(numLinhas, numColunas, numMinas);
+
+
+
+            if (Program.M_menu.online)
+            {
+
+
+
+
+
+                ////Receber parâmetros Online
+
+
+
+
+
+
+
+
+            }
+            else
+            {
+                
+                //Começar o jogo apenasporque ainda não existe      
+                InicializarValoresMapaView(numMinas, numLinhas, numColunas);
+                CreateButtonModel(numLinhas, numColunas, numMinas); 
+            }
+
+            
             Resize(110 + 32 * numColunas, 32 * numLinhas);
             TextBlockMinas.Text = numMinas.ToString();
         }

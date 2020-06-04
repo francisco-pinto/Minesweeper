@@ -106,9 +106,7 @@ namespace Minesweeper_UWP_
             args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
         }
         private void ButtonJogar_Click(object sender, RoutedEventArgs e)
-        {
-
-
+        {  
             if (RadioButtonFacil.IsChecked == true)
             {
                 TextBoxNumBombas.Visibility = Visibility.Collapsed;

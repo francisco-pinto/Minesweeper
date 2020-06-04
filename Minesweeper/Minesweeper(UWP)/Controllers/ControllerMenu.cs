@@ -182,8 +182,6 @@ namespace Minesweeper.View_Controller
         {
             //Program.V_MainPage.CreateMapa(numMinas, nLinhas, nColunas);
             Program.M_mapa.CreateMapa(numMinas, nLinhas, nColunas);
-            
-            
             //CriarButtons(nLinhas, nColunas, numMinas);
             //Program.V_MainPage.InserirBotoes(); 
         }
