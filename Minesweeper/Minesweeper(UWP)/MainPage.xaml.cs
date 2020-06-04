@@ -566,6 +566,16 @@ namespace Minesweeper_UWP_
         }
         private void ButtonCara_Click(object sender, RoutedEventArgs e)
         {
+
+            //Melhorar código destas funções
+
+
+
+
+
+
+
+
             //timer1.Stop();
             auxTimer = 0;
             TextBlockMinas.Text = "000";
@@ -582,12 +592,11 @@ namespace Minesweeper_UWP_
 
             if (Program.M_menu.online)
             {
+                InicializarValoresMapaView(Program.M_mapa.NumLinhas, Program.M_mapa.NumColunas, Program.M_mapa.NMinasTotais);
                 ReceberDadosOnline();
             }
             else
-            {
-                
-                //Começar o jogo apenasporque ainda não existe      
+            { 
                 InicializarValoresMapaView(numMinas, numLinhas, numColunas);
                 CreateButtonModel(numLinhas, numColunas, numMinas); 
             }
@@ -596,12 +605,10 @@ namespace Minesweeper_UWP_
             Resize(110 + 32 * numColunas, 32 * numLinhas);
             TextBlockMinas.Text = numMinas.ToString();
         }
-
         public bool AcceptAllCertifications(object sender, X509Certificate certification, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;
         }
-
         private void ReceberDadosOnline()
         {
             //Prepara o pedido ao servidor com o URL adequado
@@ -609,11 +616,11 @@ namespace Minesweeper_UWP_
             //Verificar qual o nível de jogo
             if (Program.M_mapa.NumColunas == 9)
             {
-                request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/facil/" + Program.M_jogador.Id); // ou outro qualquer username
+                request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/Facil/" + Program.M_jogador.Id); // ou outro qualquer username
             }
             else if(Program.M_mapa.NumColunas == 16)
             {
-                request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/medio/" + Program.M_jogador.Id); // ou outro qualquer username
+                request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/Medio/" + Program.M_jogador.Id); // ou outro qualquer username
             }
 
 
@@ -636,6 +643,13 @@ namespace Minesweeper_UWP_
              // ...interpretar o resultado de acordo com a lógica da aplicação (exemplificativo)
             if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
             {
+
+
+                //Mensagem de erro do carregar campo
+
+
+
+
                  // apresenta mensagem de erro usando o texto (contexto) da resposta
                 //MessageBox.Show(
                 //xmlResposta.Element("resultado").Element("contexto").Value,
@@ -645,8 +659,53 @@ namespace Minesweeper_UWP_
                 //);
             }
             else
+            {
+                CONTEUDO[,] conteudoQuadrado = new CONTEUDO[Program.M_mapa.NumLinhas, Program.M_mapa.NumColunas];
+                conteudoQuadrado = getConteudoQuadradoOnline(conteudoQuadrado, xmlResposta);
+                CreateButtonModelOnline(Program.M_mapa.NumLinhas, Program.M_mapa.NumColunas, Program.M_mapa.NMinasTotais, conteudoQuadrado);
+            }
+        }
+        private CONTEUDO[,] getConteudoQuadradoOnline(CONTEUDO[,] conteudoQuadrado, XDocument xmlResposta)
+        {
+            XElement posicao = xmlResposta.Element("resultado").Element("objeto").Element("campo");
+            foreach (XElement xe in posicao.Descendants("posicao"))
+            {
+                if(Convert.ToInt32(xe.Value) == -1)
                 {
-                
+                    int linha = Convert.ToInt32(xe.Attribute("linha").Value);
+                    int coluna = Convert.ToInt32(xe.Attribute("coluna").Value);
+
+                    conteudoQuadrado[linha, coluna] = CONTEUDO.BOMBA;
+                }
+            }
+
+            return conteudoQuadrado;
+        }
+        public void CreateButtonModelOnline(int numLinhas, int numColunas, int numBombas, CONTEUDO[,] conteudoQuadrado)
+        {
+            int ButtonX = 0, ButtonY = 40;
+            int[,] distanciaBomba = new int[numLinhas, numColunas];
+
+            //preencherQuadrado(numLinhas, numColunas, numBombas, conteudoQuadrado);
+            preencherDistancias(numLinhas, numColunas, conteudoQuadrado, distanciaBomba);
+
+            for (int linha = 0; linha < numLinhas; linha++)
+            {
+                ButtonX = 5;
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    //Nome irá identificar a posição dos botões
+                    string nome = linha.ToString() + "-" + coluna.ToString();
+
+                    //Possível Evento de set do quadrado
+                    Program.M_mapa.setQuadrado(distanciaBomba[linha, coluna], conteudoQuadrado[linha, coluna], coluna, linha, ButtonX, ButtonY);
+                    //quadrado[linha, coluna] = new Quadrado(distanciaBomba[linha, coluna], conteudoQuadrado[linha, coluna], coluna, linha, ButtonX, ButtonY, nome);
+
+
+                    CreateButton(linha, coluna, conteudoQuadrado[linha, coluna], ButtonX, ButtonY, nome);
+                    ButtonX += 40;
+                }
+                ButtonY += 40;
             }
         }
         public void CreateButtonModel(int numLinhas, int numColunas, int numBombas)
