@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +26,12 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.AtualizarMinas += V_Mapa_AtualizarMinas;
             Program.V_PedirNome.AtribuirNome += V_PedirNome_AtribuirNome;
         }
+
+        public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
+
         public void EscritaFicheiroXML(string nome, int pontuacao)
         {
             XDocument doc;
@@ -209,7 +216,61 @@ namespace Minesweeper.View_Controller
 
             if (Program.M_menu.online)
             {
-                //Enviar os dados para o server
+                int tempo = Program.V_Mapa.segundos;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/resultado/{id}");
+
+                ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
+                XDocument xmlPedido = XDocument.Parse("<resultado_jogo><nivel></nivel><tempo></tempo><vitoria></vitoria></resultado_jogo>");
+
+                if (dificuldade == "facil")
+                {
+                    xmlPedido.Element("credenciais").Element("nivel").Value = "facil";
+                }
+                else
+                {
+                    xmlPedido.Element("credenciais").Element("nivel").Value = "medio";
+                }
+
+                xmlPedido.Element("credenciais").Element("tempo").Value = tempo.ToString();
+                //xmlPedido.Element("credenciais").Element("vitoria").Value =   true ou false
+
+                string mensagem = xmlPedido.Root.ToString();
+
+                byte[] data = Encoding.Default.GetBytes(mensagem);
+                request.Method = "POST";
+                request.ContentType = "application/xml";
+                request.ContentLength = data.Length;
+
+                Stream newStream = request.GetRequestStream();
+                newStream.Write(data, 0, data.Length);
+                newStream.Close();
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                Stream receiveStream = response.GetResponseStream();
+                StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+
+                string resultado = readStream.ReadToEnd();
+                response.Close();
+                readStream.Close();
+
+                XDocument xmlResposta = XDocument.Parse(resultado);
+
+                if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
+                {
+                    MessageBox.Show(
+                        xmlResposta.Element("resultado").Element("contexto").Value,
+                        "Erro",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                        );
+                }
+                else
+                {
+                    // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
+                    //xmlResposta.Element("resultado").Element("objeto").Element("id").Value = Program.M_jogador.ID;
+                }
             }
             else
             {
@@ -222,8 +283,8 @@ namespace Minesweeper.View_Controller
                     Program.V_Menu.Show();
                 }
             }
-           
-            
+
+
         }
         private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)
         {  
