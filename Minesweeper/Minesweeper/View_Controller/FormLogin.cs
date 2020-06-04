@@ -146,8 +146,8 @@ namespace Minesweeper.View_Controller
 
                     byte[] imageArray = System.IO.File.ReadAllBytes(ofd.FileName);
                     string base64Text = Convert.ToBase64String(imageArray); //base64Text must be global but I'll use  richtext
-                string fileEXT = ofd.FileName;
-                 imagem = "data:" + fileEXT + ";base64," + base64Text;
+                    string fileEXT = ofd.FileName;
+                    imagem = "data:" + fileEXT + ";base64," + base64Text;
                 
             }
         }

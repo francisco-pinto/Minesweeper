@@ -211,14 +211,18 @@ namespace Minesweeper_UWP_
             }
             else if(aux == -1)       //Perder o jogo
             {
-                PerderJogo();
+                await PerderJogoAsync();
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+                this.Frame.Navigate(typeof(Menu));
             }
             else if(aux == 1)       //Ganhar Jogo
             {
                 await GanharJogoAsync();
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+                this.Frame.Navigate(typeof(Menu));
             }   
         }
-        private void PerderJogo()
+        private async Task PerderJogoAsync()
         {
             MediaPlayer mediaPlayer = new MediaPlayer();
             mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Explosion.wav"));
@@ -233,7 +237,7 @@ namespace Minesweeper_UWP_
             BlockControls();
             //LimparForm();
             Sleep(3);
-
+            await MessageBoxAsync("Perdeu o Jogo!");
             ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
             this.Frame.Navigate(typeof(Menu));
             //Task.Run(async () => await Task.Delay(TimeSpan.FromMilliseconds(10000)));
@@ -245,14 +249,16 @@ namespace Minesweeper_UWP_
             mediaPlayer.Play();
 
             Program.M_jogador.Pontuacao = segundos;
-
             auxTimer = 0;
             timer1.Stop();
             MostraBandeirasTodas();
             setVariaveisFinais("00", false);
             GanharHappy();
             BlockControls();
+            await MessageBoxAsync("Ganhou o Jogo!");
             //LimparForm();
+
+
 
             if (Program.M_menu.online)
             {
@@ -262,6 +268,11 @@ namespace Minesweeper_UWP_
             {
                 await CheckRecorde(segundos);
             }
+        }
+        private async Task MessageBoxAsync(string message)
+        {
+            var messageDialog = new MessageDialog(message);
+            await messageDialog.ShowAsync();
         }
         private async Task<string> getFilePathAsync()
         {

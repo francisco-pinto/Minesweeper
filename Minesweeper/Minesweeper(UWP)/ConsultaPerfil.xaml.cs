@@ -149,13 +149,10 @@ namespace Minesweeper_UWP_
         {
             return true;
         }
-
-        //Load event
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             AcessoPerfilAsync();
         }
-
         private void ButtonVoltar_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Menu));

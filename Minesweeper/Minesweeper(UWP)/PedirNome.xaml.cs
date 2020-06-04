@@ -61,7 +61,7 @@ namespace Minesweeper_UWP_
             ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
             this.Frame.Navigate(typeof(Menu));
         }
-        private async System.Threading.Tasks.Task BuscarPontuacaoAsync(int pontuacao, string nome)
+        private async Task BuscarPontuacaoAsync(int pontuacao, string nome)
         {
 
             StorageFolder folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Save");
