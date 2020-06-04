@@ -13,13 +13,13 @@ namespace Minesweeper
     {
         private string nome;
         private int pontuacao;
-        private string id;
+        private string ID;
         private FileInfo fi = new FileInfo(@"pontuacao.txt");
 
         public Jogador() { }
         public string Nome { get => nome; set => nome = value; }
         public int Pontuacao { get => pontuacao; set => pontuacao = value; }
-        public string Id { get => id; set => id = value; }
+        public string Id { get => ID; set => ID = value; }
 
         //Jogador jogador = new Jogador();
 

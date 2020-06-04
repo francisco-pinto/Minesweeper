@@ -18,10 +18,10 @@ namespace Minesweeper.View_Controller
         {
             Program.M_Login.FazerLogin();
         }
-        private void V_Login_EnviarDados(string id, string Nome)
+        private void V_Login_EnviarDados(string ID, string Nome)
         {
             Program.M_jogador.Nome = Nome;
-            Program.M_jogador.Id = id;
+            Program.M_jogador.Id = ID;
             Program.M_menu.online = true;
             Program.V_Menu.online = true;
             Program.V_Menu.AlteraImagem();

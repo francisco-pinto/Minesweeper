@@ -14,10 +14,15 @@ namespace Minesweeper.View_Controller
             Program.V_Menu.play += V_Menu_play;
             Program.V_Mapa.play += V_Menu_play;
             Program.V_Menu.ConsultarPerfil += V_Menu_ConsultarPerfil;
+            Program.V_ConsultarPerfil.getNomeJogador += V_ConsultarPerfil_getNomeJogador;
         }
 
+        private string V_ConsultarPerfil_getNomeJogador()
+        {
+            return Program.M_jogador.Nome;
+        }
 
-    private void V_Menu_ConsultarPerfil()
+        private void V_Menu_ConsultarPerfil()
         {
             Program.V_ConsultarPerfil.AcessoPerfil();
         }

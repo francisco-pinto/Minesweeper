@@ -154,7 +154,10 @@ namespace Minesweeper.View_Controller
             xmlPedido.Element("registo").Element("username").Value = textBoxUsername.Text; // colocar aqui o username do utilizador
             xmlPedido.Element("registo").Element("password").Value = textBoxPassword.Text;
             xmlPedido.Element("registo").Element("email").Value = textBoxEmail.Text;// colocar aqui a palavra passe do utilizador
-            xmlPedido.Element("registo").Element("fotografia").Value = pictureBoxFoto;
+
+            //Image image = Image.FromStream(new MemoryStream (bytes));        
+            //xmlPedido.Element("registo").Element("fotografia").Value = image;
+            
             xmlPedido.Element("registo").Element("pais").Value = textBoxPais.Text;
             string mensagem = xmlPedido.Root.ToString();
 
