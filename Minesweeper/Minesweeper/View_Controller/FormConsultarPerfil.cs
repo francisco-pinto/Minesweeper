@@ -85,19 +85,25 @@ namespace Minesweeper.View_Controller
                 else
                      textBoxJogosPerdidos.Text = base64jogosperdidos;
                 //TEMPOS FACIL
-                if((base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Facil").Value) == null)
-                {
-                    textBoxTempoFacil.Text = "0";
-                }
-                else
-                    textBoxTempoFacil.Text = base64tempofacil;
+
+                try { 
+                    if((base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Facil").Value) != null)
+                        {
+                            textBoxTempoFacil.Text = base64tempofacil; 
+                        }
+                    }
+                catch {textBoxTempoFacil.Text = "0" ;}
+
                 //TEMPOS MEDIO
-                if ( (base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Medio").Value) == null)
-                {
+                try { 
+                        if ( (base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Medio").Value) != null)
+                        {
+                           textBoxTempoMedio.Text = base64tempomedio;
+                        }
+                    }
+                catch { 
                     textBoxTempoMedio.Text = "0";
-                }
-                else
-                   textBoxTempoMedio.Text = base64tempomedio;
+                      }
                 //FOTO
                 string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
                 string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
