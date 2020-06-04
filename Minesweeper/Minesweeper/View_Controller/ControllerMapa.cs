@@ -272,6 +272,7 @@ namespace Minesweeper.View_Controller
 
             Program.V_Mapa.Hide();
             Program.V_Mapa.LimparForm();
+            Program.V_Menu.ShowTop10();
 
 
             if (Program.M_menu.online)
@@ -338,6 +339,7 @@ namespace Minesweeper.View_Controller
             MessageBox.Show("Perdeu o jogo!");
             Program.V_Mapa.Hide();
             Program.V_Mapa.LimparForm();
+            Program.V_Menu.ShowTop10();
             Program.V_Menu.Show();
             if(Program.M_menu.online)
             {

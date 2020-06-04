@@ -239,10 +239,16 @@ namespace Minesweeper.View_Controller
             if (online)
             {
                 ShowTop10();
+                radioButtonCustom.Visible = false;
+                radioButtonMedia.Location = new Point(253, 19);
+                //radioButtonMedia.Location = new Point(300, 200);
+                
             } else
             {
                 ShowRecorde();
             }
+
+            
         }
         public void AtualizaValoresRecorde()
         {
@@ -303,7 +309,7 @@ namespace Minesweeper.View_Controller
             }
             doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
         }
-        private void ShowTop10()
+        public void ShowTop10()
         {
             //Prepara o pedido ao servidor com o URL adequado
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/top10");
@@ -338,6 +344,8 @@ namespace Minesweeper.View_Controller
             }
             else
             {
+                listBoxFacil.Items.Clear();
+                listBoxMedio.Items.Clear();
                 StringBuilder dificuldade = new StringBuilder();
                 StringBuilder username = new StringBuilder();
                 StringBuilder tempo = new StringBuilder();

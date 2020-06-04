@@ -263,8 +263,18 @@ namespace Minesweeper.View_Controller
             }
             else
             {
-                Program.V_Login.Size = new System.Drawing.Size(500, 100);
+                
                 MessageBox.Show( "submeteu o seu registo com sucesso"  );
+                Program.V_Login.Size = new System.Drawing.Size(500, 100);
+
+
+                textBoxEmail.Text = null;
+                textBoxNomeAbreviado.Text = null;
+                textBoxPais.Text = null;
+                textBoxPassword.Text = null;
+                textBoxUsername.Text = null;
+                pictureBoxFoto.Image = null;
+
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("ID").Value }
 
