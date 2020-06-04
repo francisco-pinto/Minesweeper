@@ -303,7 +303,7 @@ namespace Minesweeper.View_Controller
             }
             doc.Save(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
         }
-        private void ShowTop10()
+        public void ShowTop10()
         {
             //Prepara o pedido ao servidor com o URL adequado
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/top10");
@@ -338,6 +338,8 @@ namespace Minesweeper.View_Controller
             }
             else
             {
+                listBoxFacil.Items.Clear();
+                listBoxMedio.Items.Clear();
                 StringBuilder dificuldade = new StringBuilder();
                 StringBuilder username = new StringBuilder();
                 StringBuilder tempo = new StringBuilder();
