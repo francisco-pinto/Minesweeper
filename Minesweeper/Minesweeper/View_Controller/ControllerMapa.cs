@@ -189,51 +189,31 @@ namespace Minesweeper.View_Controller
                 }
             }
         }
-        private void GanharJogo()
+
+        public void EnviarDadosFimJogo(bool vitoria)
         {
-            //Som de vitória
-            string path = Environment.CurrentDirectory + @"\Music\Winning.wav";
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
-            player.Play();
-            
-            //this.Hide();
-            
-            
-            //verificar online offline
-
-
-            Program.V_Mapa.MostraTodasBandeiras();
-            Program.V_Mapa.setVariaveisFinais("00", false);
-            Program.V_Mapa.GanharHappy();
-            MessageBox.Show("Ganhou o jogo!");
-
-            
-            //Program.V_Mapa.VerificarRecorde();
-
-            Program.V_Mapa.Hide();
-            Program.V_Mapa.LimparForm();
-
-
-            if (Program.M_menu.online)
+            if(Program.M_menu.online)
             {
                 int tempo = Program.V_Mapa.segundos;
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/resultado/{id}");
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/resultado/" + Program.M_jogador.Id);
 
                 ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
 
                 XDocument xmlPedido = XDocument.Parse("<resultado_jogo><nivel></nivel><tempo></tempo><vitoria></vitoria></resultado_jogo>");
 
-                if (dificuldade == "facil")
+                //if (dificuldade == "facil")
+                if(Program.M_mapa.NumLinhas == 9)
                 {
-                    xmlPedido.Element("credenciais").Element("nivel").Value = "facil";
+                    xmlPedido.Element("resultado_jogo").Element("nivel").Value = "facil";
                 }
                 else
                 {
-                    xmlPedido.Element("credenciais").Element("nivel").Value = "medio";
+                    xmlPedido.Element("resultado_jogo").Element("nivel").Value = "medio";
                 }
 
-                xmlPedido.Element("credenciais").Element("tempo").Value = tempo.ToString();
-                //xmlPedido.Element("credenciais").Element("vitoria").Value =   true ou false
+                xmlPedido.Element("resultado_jogo").Element("tempo").Value = tempo.ToString();
+
+                xmlPedido.Element("resultado_jogo").Element("vitoria").Value = vitoria.ToString();
 
                 string mensagem = xmlPedido.Root.ToString();
 
@@ -266,11 +246,38 @@ namespace Minesweeper.View_Controller
                         MessageBoxIcon.Error
                         );
                 }
-                else
-                {
-                    // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
-                    //xmlResposta.Element("resultado").Element("objeto").Element("id").Value = Program.M_jogador.ID;
-                }
+            }
+            
+        }
+        private void GanharJogo()
+        {
+            //Som de vitória
+            string path = Environment.CurrentDirectory + @"\Music\Winning.wav";
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
+            player.Play();
+            
+            //this.Hide();
+            
+            
+            //verificar online offline
+
+
+            Program.V_Mapa.MostraTodasBandeiras();
+            Program.V_Mapa.setVariaveisFinais("00", false);
+            Program.V_Mapa.GanharHappy();
+            MessageBox.Show("Ganhou o jogo!");
+
+            
+            //Program.V_Mapa.VerificarRecorde();
+
+            Program.V_Mapa.Hide();
+            Program.V_Mapa.LimparForm();
+
+
+            if (Program.M_menu.online)
+            {
+                EnviarDadosFimJogo(true);
+                Program.V_Menu.Show();
             }
             else
             {
@@ -332,6 +339,11 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.Hide();
             Program.V_Mapa.LimparForm();
             Program.V_Menu.Show();
+            if(Program.M_menu.online)
+            {
+                EnviarDadosFimJogo(false);
+            }
+            
             /*Pontuação*/
         }
         private void V_Mapa_MostraConteudoQuadrado(Button b)

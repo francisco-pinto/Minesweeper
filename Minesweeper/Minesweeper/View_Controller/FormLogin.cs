@@ -74,7 +74,7 @@ namespace Minesweeper.View_Controller
             } else
             {
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
-                string id = xmlResposta.Element("resultado").Element("objeto").Element("id").Value;
+                string id = xmlResposta.Element("resultado").Element("objeto").Element("ID").Value;
                 MessageBox.Show("Entrou!");
                 EnviarDados(id, textBoxNome.Text);
 
