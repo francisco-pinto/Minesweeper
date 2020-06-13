@@ -12,6 +12,7 @@ using Menu = Minesweeper.Models.Menu; //diferenciar o menu classe do form.menu
 using System.Net;
 using System.IO;
 using System.Xml.Linq;
+using System.Net.Security;
 
 namespace Minesweeper.View_Controller
 {
@@ -19,6 +20,7 @@ namespace Minesweeper.View_Controller
     public partial class FormMenu : Form
     {
         public event startGame play;
+        public event startGameOnline playOnline;
         public event VerPerfil ConsultarPerfil;
         public event GetNome getNomeJogador;
 
@@ -32,93 +34,159 @@ namespace Minesweeper.View_Controller
             InitializeComponent();
             ConfigRadioButtons();
         }
+        public void RestartOnlineGame()
+        {
+            buttonJogar_Click(null, null);
+        }
         private void buttonJogar_Click(object sender, EventArgs e)
         {
-            int nLinhasCustom, nColunasCustom, nBombasCustom;
+            int nLinhasCustom = 0;
+            int nColunasCustom = 0;
+            int nBombasCustom = 0;
 
-
-            if (TBnumBombas.Visible)
+            if (online)
             {
-                if (!((Int32.TryParse(TBnumLinhas.Text, out nLinhasCustom)) && (Int32.TryParse(TBnumColunas.Text, out nColunasCustom) && (Int32.TryParse(TBnumBombas.Text, out nBombasCustom)))))
+                //Prepara o pedido ao servidor com o URL adequado
+                HttpWebRequest request = null;
+                //Verificar qual o nível de jogo
+                if (radioButtonFacil.Checked)
                 {
-                    MessageBox.Show("Insira valores corretos!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    nLinhasCustom = 9;
+                    nColunasCustom = 9;
+                    nBombasCustom = 10;
+
+                    request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/Facil/" + Program.M_jogador.Id); // ou outro qualquer username
+                }
+                else if (radioButtonMedia.Checked)
+                {
+                    nLinhasCustom = 16;
+                    nColunasCustom = 16;
+                    nBombasCustom = 40;
+
+                    request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/Medio/" + Program.M_jogador.Id); // ou outro qualquer username
+                }
+
+
+
+                // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(AcceptAllCertifications);
+
+                request.Method = "GET"; // método usado para enviar o pedido
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse(); // faz o envio do pedido
+
+                Stream receiveStream = response.GetResponseStream(); // obtem o stream associado à resposta.
+                StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8); // Canaliza o stream para um leitor de stream de nível superior com o
+
+                string resultado = readStream.ReadToEnd();
+                response.Close();
+                readStream.Close();
+
+                XDocument xmlResposta = XDocument.Parse(resultado);
+                // ...interpretar o resultado de acordo com a lógica da aplicação (exemplificativo)
+                if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
+                {
+                    // apresenta mensagem de erro usando o texto (contexto) da resposta
+                    MessageBox.Show(
+                    xmlResposta.Element("resultado").Element("contexto").Value,
+                     "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
                 }
                 else
                 {
-
-                    if (nLinhasCustom < 9)
+                    if (playOnline != null)
                     {
-                        nLinhasCustom = 9;
-                    }
-                    if (nColunasCustom < 9)
-                    {
-                        nColunasCustom = 9;
-                    }
-                    if (nLinhasCustom > 20)
-                    {
-                        nLinhasCustom = 20;
-                    }
-                    if (nColunasCustom > 22)
-                    {
-                        nColunasCustom = 22;
-                    }
-
-                    int numMaxBombas = (nLinhasCustom * nColunasCustom) - (nLinhasCustom + nColunasCustom) + 1;
-                    int numMinBombas = 10;
-
-
-                    if (nBombasCustom > numMaxBombas)
-                    {
-                        this.Hide();
-                        TBnumColunas.Text = "Num Colunas";
-                        TBnumColunas.Visible = false;
-                        TBnumLinhas.Text = "Num Linhas";
-                        TBnumLinhas.Visible = false;
-                        TBnumBombas.Text = "Num Bombas";
-                        TBnumBombas.Visible = false;
-                        play(nLinhasCustom, nColunasCustom, numMaxBombas);
-                    }
-                    else if (nBombasCustom < numMinBombas)
-                    {
-                        this.Hide();
-                        TBnumColunas.Text = "Num Colunas";
-                        TBnumColunas.Visible = false;
-                        TBnumLinhas.Text = "Num Linhas";
-                        TBnumLinhas.Visible = false;
-                        TBnumBombas.Text = "Num Bombas";
-                        TBnumBombas.Visible = false;
-                        play(nLinhasCustom, nColunasCustom, numMinBombas);
-                    }
-                    else
-                    {
-                        this.Hide();
-                        TBnumColunas.Text = "Num Colunas";
-                        TBnumColunas.Visible = false;
-                        TBnumLinhas.Text = "Num Linhas";
-                        TBnumLinhas.Visible = false;
-                        TBnumBombas.Text = "Num Bombas";
-                        TBnumBombas.Visible = false;
-                        play(nLinhasCustom, nColunasCustom, nBombasCustom);
+                        playOnline(xmlResposta, nLinhasCustom, nColunasCustom, nBombasCustom);
                     }
                 }
-            }
-            else if (radioButtonFacil.Checked)
-            {
-                this.Hide();
-                if (play != null)
-                {
-                    play(9, 9, 10);
-                }
-            }
-            else if (radioButtonMedia.Checked)
-            {
-                this.Hide();
-                play(16, 16, 40);
             }
             else
             {
-                MessageBox.Show("Escolha uma das dificuldades", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (TBnumBombas.Visible)
+                {
+                    if (!((Int32.TryParse(TBnumLinhas.Text, out nLinhasCustom)) && (Int32.TryParse(TBnumColunas.Text, out nColunasCustom) && (Int32.TryParse(TBnumBombas.Text, out nBombasCustom)))))
+                    {
+                        MessageBox.Show("Insira valores corretos!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else
+                    {
+
+                        if (nLinhasCustom < 9)
+                        {
+                            nLinhasCustom = 9;
+                        }
+                        if (nColunasCustom < 9)
+                        {
+                            nColunasCustom = 9;
+                        }
+                        if (nLinhasCustom > 20)
+                        {
+                            nLinhasCustom = 20;
+                        }
+                        if (nColunasCustom > 22)
+                        {
+                            nColunasCustom = 22;
+                        }
+
+                        int numMaxBombas = (nLinhasCustom * nColunasCustom) - (nLinhasCustom + nColunasCustom) + 1;
+                        int numMinBombas = 10;
+
+
+                        if (nBombasCustom > numMaxBombas)
+                        {
+                            this.Hide();
+                            TBnumColunas.Text = "Num Colunas";
+                            TBnumColunas.Visible = false;
+                            TBnumLinhas.Text = "Num Linhas";
+                            TBnumLinhas.Visible = false;
+                            TBnumBombas.Text = "Num Bombas";
+                            TBnumBombas.Visible = false;
+                            play(nLinhasCustom, nColunasCustom, numMaxBombas);
+                        }
+                        else if (nBombasCustom < numMinBombas)
+                        {
+                            this.Hide();
+                            TBnumColunas.Text = "Num Colunas";
+                            TBnumColunas.Visible = false;
+                            TBnumLinhas.Text = "Num Linhas";
+                            TBnumLinhas.Visible = false;
+                            TBnumBombas.Text = "Num Bombas";
+                            TBnumBombas.Visible = false;
+                            play(nLinhasCustom, nColunasCustom, numMinBombas);
+                        }
+                        else
+                        {
+                            this.Hide();
+                            TBnumColunas.Text = "Num Colunas";
+                            TBnumColunas.Visible = false;
+                            TBnumLinhas.Text = "Num Linhas";
+                            TBnumLinhas.Visible = false;
+                            TBnumBombas.Text = "Num Bombas";
+                            TBnumBombas.Visible = false;
+                            play(nLinhasCustom, nColunasCustom, nBombasCustom);
+                        }
+                    }
+                }
+                else if (radioButtonFacil.Checked)
+                {
+                    this.Hide();
+                    if (play != null)
+                    {
+                        play(9, 9, 10);
+                    }
+                }
+                else if (radioButtonMedia.Checked)
+                {
+                    this.Hide();
+                    play(16, 16, 40);
+                }
+                else
+                {
+                    MessageBox.Show("Escolha uma das dificuldades", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
         private void buttonInstrucoes_Click(object sender, EventArgs e)

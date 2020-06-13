@@ -25,13 +25,18 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.getMinas += V_Mapa_getMinas;
             Program.V_Mapa.AtualizarMinas += V_Mapa_AtualizarMinas;
             Program.V_PedirNome.AtribuirNome += V_PedirNome_AtribuirNome;
+            Program.V_Mapa.RestartOnlineGame += V_Mapa_RestartOnlineGame;
+        }
+
+        private void V_Mapa_RestartOnlineGame()
+        {
+            Program.V_Menu.RestartOnlineGame();
         }
 
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
             return true;
         }
-
         public void EscritaFicheiroXML(string nome, int pontuacao)
         {
             XDocument doc;
@@ -189,7 +194,6 @@ namespace Minesweeper.View_Controller
                 }
             }
         }
-
         public void EnviarDadosFimJogo(bool vitoria)
         {
             if(Program.M_menu.online)

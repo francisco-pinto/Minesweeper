@@ -16,18 +16,74 @@ namespace Minesweeper.View_Controller
             Program.V_Menu.ConsultarPerfil += V_Menu_ConsultarPerfil;
             Program.V_ConsultarPerfil.getNomeJogador += V_ConsultarPerfil_getNomeJogador;
             Program.V_Menu.getNomeJogador += V_ConsultarPerfil_getNomeJogador;
+            Program.V_Menu.playOnline += V_Menu_playOnline;
         }
 
+        private void V_Menu_playOnline(XDocument xmlResposta, int numLinhas, int numColunas, int numBombas)
+        {
+            //Criar dados auxiliares e model
+            Program.V_Mapa.CreateMapa(numBombas, numLinhas, numColunas);
+            Program.M_mapa.CreateMapa(numBombas, numLinhas, numColunas);
+
+            //GetMinas
+            CONTEUDO[,] conteudoQuadrado = new CONTEUDO[numLinhas, numColunas];
+            conteudoQuadrado = getConteudoQuadradoOnline(conteudoQuadrado, xmlResposta);
+            CreateButtonModelOnline(Program.M_mapa.NumLinhas, Program.M_mapa.NumColunas, Program.M_mapa.NMinasTotais, conteudoQuadrado);
+            ResizeForm(30 + 40 * numColunas, 90 + 40 * numLinhas);
+
+            Program.V_Mapa.InserirBotoes();
+            ShowForm();
+        }
+        public void CreateButtonModelOnline(int numLinhas, int numColunas, int numBombas, CONTEUDO[,] conteudoQuadrado)
+        {
+            int ButtonX = 0, ButtonY = 40;
+            int[,] distanciaBomba = new int[numLinhas, numColunas];
+
+            //preencherQuadrado(numLinhas, numColunas, numBombas, conteudoQuadrado);
+            preencherDistancias(numLinhas, numColunas, conteudoQuadrado, distanciaBomba);
+
+            for (int linha = 0; linha < numLinhas; linha++)
+            {
+                ButtonX = 5;
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    //Nome irá identificar a posição dos botões
+                    string nome = linha.ToString() + "-" + coluna.ToString();
+
+                    //Possível Evento de set do quadrado
+                    Program.M_mapa.setQuadrado(distanciaBomba[linha, coluna], conteudoQuadrado[linha, coluna], coluna, linha, ButtonX, ButtonY);
+                    //quadrado[linha, coluna] = new Quadrado(distanciaBomba[linha, coluna], conteudoQuadrado[linha, coluna], coluna, linha, ButtonX, ButtonY, nome);
+
+                    Program.V_Mapa.CreateButton(linha, coluna, conteudoQuadrado[linha, coluna], ButtonX, ButtonY, nome);
+                    ButtonX += 40;
+                }
+                ButtonY += 40;
+            }
+        }
+        private CONTEUDO[,] getConteudoQuadradoOnline(CONTEUDO[,] conteudoQuadrado, XDocument xmlResposta)
+        {
+            XElement posicao = xmlResposta.Element("resultado").Element("objeto").Element("campo");
+            foreach (XElement xe in posicao.Descendants("posicao"))
+            {
+                if (Convert.ToInt32(xe.Value) == -1)
+                {
+                    int linha = Convert.ToInt32(xe.Attribute("linha").Value);
+                    int coluna = Convert.ToInt32(xe.Attribute("coluna").Value);
+
+                    conteudoQuadrado[linha, coluna] = CONTEUDO.BOMBA;
+                }
+            }
+
+            return conteudoQuadrado;
+        }
         private string V_ConsultarPerfil_getNomeJogador()
         {
             return Program.M_jogador.Nome;
         }
-
         private void V_Menu_ConsultarPerfil()
         {
             Program.V_ConsultarPerfil.AcessoPerfil();
         }
-
         private void V_Menu_play(int numLinhas, int numColunas, int numMinas)
         {
             CreateMapa(numMinas, numLinhas, numColunas);

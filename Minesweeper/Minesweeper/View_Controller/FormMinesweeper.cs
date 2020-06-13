@@ -21,6 +21,7 @@ namespace Minesweeper
         private int aux = 0;
         private Button[,] button;
 
+        public event RestartOnlineGame RestartOnlineGame;
         public event startGame play;
         public event MostraBandeirasTodas MostraBandeirasTodas;
         public event MostraBombasTodas MostraBombasTodas;
@@ -265,7 +266,16 @@ namespace Minesweeper
         private void buttonReiniciar_Click(object sender, EventArgs e)
         {       
             LimparForm();
-            play(numColunas, numLinhas, numMinas);
+
+            if (Program.M_menu.online)
+            {
+                RestartOnlineGame();
+            }
+            else
+            {
+                play(numColunas, numLinhas, numMinas);
+            }
+            
             labelMinas.Text = getMinas();
         }
 

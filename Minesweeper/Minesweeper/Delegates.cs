@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Minesweeper
 {
+    public delegate void RestartOnlineGame();
+    public delegate void startGameOnline(XDocument xmlresposta, int numLinhas, int numColunas, int numBombas);
     public delegate void startGame(int numLinhas, int numColunas, int numBombas);
     public delegate void MostraBandeirasTodas(Button[,] b, int numLinhas, int numColunas);
     public delegate void MostraBombasTodas(Button[,] b, int numLinhas, int numColunas);
