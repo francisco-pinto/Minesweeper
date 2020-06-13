@@ -258,15 +258,69 @@ namespace Minesweeper_UWP_
             await MessageBoxAsync("Ganhou o Jogo!");
             //LimparForm();
 
-
-
             if (Program.M_menu.online)
             {
                 //Enviar os dados para o server
+                await EnviarDadosFimJogoAsync(true);
+
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+                this.Frame.Navigate(typeof(Menu), null);
             }
             else
             {
                 await CheckRecorde(segundos);
+            }
+        }
+        public async Task EnviarDadosFimJogoAsync(bool vitoria)
+        {
+            int tempo = segundos;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/resultado/" + Program.M_jogador.Id);
+
+            ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
+            XDocument xmlPedido = XDocument.Parse("<resultado_jogo><nivel></nivel><tempo></tempo><vitoria></vitoria></resultado_jogo>");
+
+            //if (dificuldade == "facil")
+            if (Program.M_mapa.NumLinhas == 9)
+            {
+                xmlPedido.Element("resultado_jogo").Element("nivel").Value = "facil";
+            }
+            else
+            {
+                xmlPedido.Element("resultado_jogo").Element("nivel").Value = "medio";
+            }
+
+            xmlPedido.Element("resultado_jogo").Element("tempo").Value = tempo.ToString();
+
+            xmlPedido.Element("resultado_jogo").Element("vitoria").Value = vitoria.ToString();
+
+            string mensagem = xmlPedido.Root.ToString();
+
+            byte[] data = Encoding.Default.GetBytes(mensagem);
+            request.Method = "POST";
+            request.ContentType = "application/xml";
+            request.ContentLength = data.Length;
+
+            Stream newStream = request.GetRequestStream();
+            newStream.Write(data, 0, data.Length);
+            newStream.Close();
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            Stream receiveStream = response.GetResponseStream();
+            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+
+            string resultado = readStream.ReadToEnd();
+            response.Close();
+            readStream.Close();
+
+            XDocument xmlResposta = XDocument.Parse(resultado);
+
+            if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
+            {
+
+                await MessageBoxAsync(xmlResposta.Element("resultado").Element("contexto").Value.ToString());
+
             }
         }
         private async Task MessageBoxAsync(string message)

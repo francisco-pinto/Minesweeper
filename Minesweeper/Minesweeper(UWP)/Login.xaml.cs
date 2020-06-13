@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Security;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,15 @@ namespace Minesweeper_UWP_
         }
         private void PropriedadesRegistar()
         {
+            ImageBox.Source = null;
+
+            TBLogin_Email.Text = "";
+            TBLogin_Fotografia.Text = "";
+            TBLogin_Name.Text = "";
+            TBLogin_Pais.Text = "";
+            TBLogin_Password.Text = "";
+            TBLogin_Username.Text = "";
+
             TBLogin_Email.Visibility = Visibility.Collapsed;
             TBLogin_Fotografia.Visibility = Visibility.Collapsed;
             TBLogin_Name.Visibility = Visibility.Collapsed;
@@ -64,7 +74,6 @@ namespace Minesweeper_UWP_
             //ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 790, Width = 1020 });
             //mainGrid.Height = 684;
             //mainGrid.Width = 1000;
-
             TBLogin_Email.Visibility = Visibility.Visible;
             TBLogin_Fotografia.Visibility = Visibility.Visible;
             TBLogin_Name.Visibility = Visibility.Visible;
@@ -169,15 +178,30 @@ namespace Minesweeper_UWP_
 
                 //Adicionar Picture box que mostra a foto
                 TBLogin_Fotografia.Text = file.Path.ToString();
+                
+                //Inserir imagem na variável imagem
+                BitmapImage bitmapImage = new BitmapImage();
+                FileRandomAccessStream fStream = (FileRandomAccessStream)await file.OpenAsync(FileAccessMode.Read);
+                bitmapImage.SetSource(fStream);
+                ImageBox.Source = bitmapImage;
 
-                //byte[] imageArray = File.ReadAllBytes(file.Path);
-                //string base64Text = Convert.ToBase64String(imageArray); //base64Text must be global but I'll use  richtext
-                //string fileEXT = file.Path;
-                //imagem = "data:" + fileEXT + ";base64," + base64Text;
 
-                //Inserir imagem na imagem
-                ImageBox.Source = new BitmapImage(new Uri(file.Path));
 
+                //Colocar algo na imagem para verificação posterior
+                byte[] imageArray;
+                using (Stream stream = await file.OpenStreamForReadAsync())
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        stream.CopyTo(memoryStream);
+                        imageArray = memoryStream.ToArray();
+                    }
+                }
+                
+                
+                string base64Text = Convert.ToBase64String(imageArray); //base64Text must be global but I'll use  richtext
+                string fileEXT = file.Path.ToString();
+                imagem = "data:" + fileEXT + ";base64," + base64Text;
             }
             else
             {
@@ -297,16 +321,13 @@ namespace Minesweeper_UWP_
             else
             {
                 //Program.V_Login.Size = new System.Drawing.Size(500, 100);
-                
-
-                
-
-                //Fazer Resize do Login e clea das TextBoxes
 
 
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 1000 });
+                PropriedadesRegistar();
 
-                
-                MessageBoxAsync("submeteu o seu registo com sucesso");
+
+                MessageBoxAsync("Submeteu o seu registo com sucesso");
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("ID").Value }
 
