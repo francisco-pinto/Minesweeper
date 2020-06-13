@@ -20,4 +20,5 @@ namespace Minesweeper
     public delegate void dadosUtilizador(string id, string Nome);
     public delegate void AtribuirNome(string nome);
     public delegate string GetNome();
+    public delegate void ConsultarTop10(string nome);
 }

@@ -54,7 +54,7 @@
             // 
             this.pictureBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLogo.Image")));
             this.pictureBoxLogo.Location = new System.Drawing.Point(160, 15);
-            this.pictureBoxLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxLogo.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxLogo.Name = "pictureBoxLogo";
             this.pictureBoxLogo.Size = new System.Drawing.Size(384, 158);
             this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -65,7 +65,7 @@
             // 
             this.radioButtonFacil.AutoSize = true;
             this.radioButtonFacil.Location = new System.Drawing.Point(20, 23);
-            this.radioButtonFacil.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonFacil.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonFacil.Name = "radioButtonFacil";
             this.radioButtonFacil.Size = new System.Drawing.Size(58, 21);
             this.radioButtonFacil.TabIndex = 2;
@@ -78,7 +78,7 @@
             // 
             this.radioButtonMedia.AutoSize = true;
             this.radioButtonMedia.Location = new System.Drawing.Point(184, 23);
-            this.radioButtonMedia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonMedia.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonMedia.Name = "radioButtonMedia";
             this.radioButtonMedia.Size = new System.Drawing.Size(67, 21);
             this.radioButtonMedia.TabIndex = 3;
@@ -93,9 +93,9 @@
             this.groupBoxInserirDificuldade.Controls.Add(this.radioButtonFacil);
             this.groupBoxInserirDificuldade.Controls.Add(this.radioButtonMedia);
             this.groupBoxInserirDificuldade.Location = new System.Drawing.Point(131, 208);
-            this.groupBoxInserirDificuldade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxInserirDificuldade.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxInserirDificuldade.Name = "groupBoxInserirDificuldade";
-            this.groupBoxInserirDificuldade.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxInserirDificuldade.Padding = new System.Windows.Forms.Padding(4);
             this.groupBoxInserirDificuldade.Size = new System.Drawing.Size(433, 52);
             this.groupBoxInserirDificuldade.TabIndex = 4;
             this.groupBoxInserirDificuldade.TabStop = false;
@@ -105,7 +105,7 @@
             // 
             this.radioButtonCustom.AutoSize = true;
             this.radioButtonCustom.Location = new System.Drawing.Point(337, 23);
-            this.radioButtonCustom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonCustom.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonCustom.Name = "radioButtonCustom";
             this.radioButtonCustom.Size = new System.Drawing.Size(76, 21);
             this.radioButtonCustom.TabIndex = 4;
@@ -117,7 +117,7 @@
             // buttonJogar
             // 
             this.buttonJogar.Location = new System.Drawing.Point(288, 267);
-            this.buttonJogar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonJogar.Margin = new System.Windows.Forms.Padding(4);
             this.buttonJogar.Name = "buttonJogar";
             this.buttonJogar.Size = new System.Drawing.Size(100, 28);
             this.buttonJogar.TabIndex = 5;
@@ -128,7 +128,7 @@
             // buttonInstrucoes
             // 
             this.buttonInstrucoes.Location = new System.Drawing.Point(288, 320);
-            this.buttonInstrucoes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonInstrucoes.Margin = new System.Windows.Forms.Padding(4);
             this.buttonInstrucoes.Name = "buttonInstrucoes";
             this.buttonInstrucoes.Size = new System.Drawing.Size(100, 28);
             this.buttonInstrucoes.TabIndex = 7;
@@ -142,10 +142,11 @@
             this.listBoxMedio.FormattingEnabled = true;
             this.listBoxMedio.ItemHeight = 16;
             this.listBoxMedio.Location = new System.Drawing.Point(411, 416);
-            this.listBoxMedio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxMedio.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxMedio.Name = "listBoxMedio";
             this.listBoxMedio.Size = new System.Drawing.Size(268, 340);
             this.listBoxMedio.TabIndex = 15;
+            this.listBoxMedio.SelectedIndexChanged += new System.EventHandler(this.listBoxMedio_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -173,10 +174,11 @@
             this.listBoxFacil.FormattingEnabled = true;
             this.listBoxFacil.ItemHeight = 16;
             this.listBoxFacil.Location = new System.Drawing.Point(40, 416);
-            this.listBoxFacil.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxFacil.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxFacil.Name = "listBoxFacil";
             this.listBoxFacil.Size = new System.Drawing.Size(271, 340);
             this.listBoxFacil.TabIndex = 12;
+            this.listBoxFacil.SelectedIndexChanged += new System.EventHandler(this.listBoxFacil_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -241,7 +243,7 @@
             this.Controls.Add(this.pictureBoxLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FormMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

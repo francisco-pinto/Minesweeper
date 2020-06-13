@@ -17,12 +17,14 @@ using System.Net.Security;
 namespace Minesweeper.View_Controller
 {
     public delegate void VerPerfil();
+    
     public partial class FormMenu : Form
     {
         public event startGame play;
         public event startGameOnline playOnline;
         public event VerPerfil ConsultarPerfil;
         public event GetNome getNomeJogador;
+        public event ConsultarTop10 verPerfilTop10;
 
         public bool online = false;
 
@@ -416,15 +418,15 @@ namespace Minesweeper.View_Controller
                         string nova = dificuldade.ToString().Remove(5,2);
                         if (nova =="Facil")
                         {
-                            listBoxFacil.Items.Add(username);
-                            listBoxFacil.Items.Add(tempo);
-                            listBoxFacil.Items.Add(quando);
+                            listBoxFacil.Items.Add(username + "-" + tempo);
+                           // listBoxFacil.Items.Add(tempo);
+                           // listBoxFacil.Items.Add(quando);
 
                         } else
                         {
-                            listBoxMedio.Items.Add(username);
-                            listBoxMedio.Items.Add(tempo);
-                            listBoxMedio.Items.Add(quando);
+                            listBoxMedio.Items.Add(username + "-" + tempo);
+                           // listBoxMedio.Items.Add(tempo);
+                            //listBoxMedio.Items.Add(quando);
 
                         }
 
@@ -434,6 +436,26 @@ namespace Minesweeper.View_Controller
                     }
                 }
             }
+        }
+
+        private void listBoxFacil_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string [] nome = listBoxFacil.SelectedItem.ToString().Split('-');
+
+            verPerfilTop10(nome[0]);
+
+            this.Hide();
+            Program.V_ConsultarPerfil.Show();
+        }
+
+        private void listBoxMedio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] nome = listBoxMedio.SelectedItem.ToString().Split('-');
+
+            verPerfilTop10(nome[0]);
+
+            this.Hide();
+            Program.V_ConsultarPerfil.Show();
         }
     }
 }

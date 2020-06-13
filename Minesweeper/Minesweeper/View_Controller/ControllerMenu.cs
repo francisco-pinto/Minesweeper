@@ -17,6 +17,12 @@ namespace Minesweeper.View_Controller
             Program.V_ConsultarPerfil.getNomeJogador += V_ConsultarPerfil_getNomeJogador;
             Program.V_Menu.getNomeJogador += V_ConsultarPerfil_getNomeJogador;
             Program.V_Menu.playOnline += V_Menu_playOnline;
+            Program.V_Menu.verPerfilTop10 += V_Menu_verPerfilTop10;
+        }
+
+        private void V_Menu_verPerfilTop10(string nome)
+        {
+            Program.V_ConsultarPerfil.AcessoPerfilTop10(nome);
         }
 
         private void V_Menu_playOnline(XDocument xmlResposta, int numLinhas, int numColunas, int numBombas)
