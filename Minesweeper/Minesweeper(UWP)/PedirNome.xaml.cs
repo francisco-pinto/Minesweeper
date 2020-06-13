@@ -69,7 +69,7 @@ namespace Minesweeper_UWP_
             int recordeAnterior = 999;
             XDocument document;
 
-            using (Stream fileStream = await file.OpenStreamForWriteAsync())
+            using (Stream fileStream = await file.OpenStreamForReadAsync())
             {
                 document = XDocument.Load(fileStream);
             }
@@ -84,13 +84,14 @@ namespace Minesweeper_UWP_
                 }
                 catch
                 {
-                    EscritaFicheiroXMLAsync(nome, pontuacao);
+                    //Documento vazio
+                    await EscritaFicheiroXMLAsync(nome, pontuacao);
                 }
 
                 if (pontuacao < recordeAnterior)
                 {
-                    document.Element("pontuacoes").Element("Facil").Element("Tempo").Value = pontuacao.ToString();
-                    document.Element("pontuacoes").Element("Facil").Element("Nome").Value = nome;
+                    //Novo recorde
+                    await EscritaFicheiroXMLAsync(nome, pontuacao);
                 }
 
             }
@@ -102,23 +103,38 @@ namespace Minesweeper_UWP_
                 }
                 catch
                 {
-                    EscritaFicheiroXMLAsync(nome, pontuacao);
+                    //Documento vazio
+                    await EscritaFicheiroXMLAsync(nome, pontuacao);
                 }
                 if (pontuacao < recordeAnterior)
                 {
-                    document.Element("pontuacoes").Element("Medio").Element("Tempo").Value = pontuacao.ToString();
-                    document.Element("pontuacoes").Element("Medio").Element("Nome").Value = nome;
+                    //Novo recorde
+                    await EscritaFicheiroXMLAsync(nome, pontuacao);
                 }
             
-            using (Stream fileStream = await file.OpenStreamForWriteAsync())
-            {
-                document.Save(fileStream);
+                //using (Stream fileStream = await file.OpenStreamForWriteAsync())
+                //{
+                //    document.Save(fileStream);
+                //}
             }
-        }
     
         }
-        public async void EscritaFicheiroXMLAsync(string nome, int pontuacao)
+        private async Task EsvaziarDocumento()
         {
+            //Elimina documento
+            StorageFolder folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Save");
+            StorageFile file = await folder.GetFileAsync("pontuacao.xml");
+
+            await file.DeleteAsync();
+
+
+            //Cria Documento
+            await folder.CreateFileAsync("pontuacao.xml");
+        }
+        public async Task EscritaFicheiroXMLAsync(string nome, int pontuacao)
+        {
+            await EsvaziarDocumento();
+
             XDocument doc;
 
             //Criado documento XML em memória com a declaração XML e a estrutura (comentário, elemento Alunos, subelementos Inscritos e NaoInscritos

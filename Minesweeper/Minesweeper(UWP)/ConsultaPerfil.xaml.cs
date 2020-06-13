@@ -151,7 +151,7 @@ namespace Minesweeper_UWP_
         }
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            AcessoPerfilAsync();
+            await AcessoPerfilAsync();
         }
         private void ButtonVoltar_Click(object sender, RoutedEventArgs e)
         {
