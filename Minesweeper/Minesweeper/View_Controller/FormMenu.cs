@@ -440,22 +440,30 @@ namespace Minesweeper.View_Controller
 
         private void listBoxFacil_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string [] nome = listBoxFacil.SelectedItem.ToString().Split('-');
+            if(online)
+            {
+                string [] nome = listBoxFacil.SelectedItem.ToString().Split('-');
 
-            verPerfilTop10(nome[0]);
+                verPerfilTop10(nome[0]);
 
-            this.Hide();
-            Program.V_ConsultarPerfil.Show();
+                this.Hide();
+                Program.V_ConsultarPerfil.Show();
+            }
+            
         }
 
         private void listBoxMedio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string[] nome = listBoxMedio.SelectedItem.ToString().Split('-');
+            if(online)
+            {
+                string[] nome = listBoxMedio.SelectedItem.ToString().Split('-');
 
-            verPerfilTop10(nome[0]);
+                verPerfilTop10(nome[0]);
 
-            this.Hide();
-            Program.V_ConsultarPerfil.Show();
+                this.Hide();
+                Program.V_ConsultarPerfil.Show();
+            }
+            
         }
     }
 }

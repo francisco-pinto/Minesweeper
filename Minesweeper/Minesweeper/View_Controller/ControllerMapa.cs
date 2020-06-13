@@ -28,7 +28,30 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.AtualizarMinas += V_Mapa_AtualizarMinas;
             Program.V_PedirNome.AtribuirNome += V_PedirNome_AtribuirNome;
             Program.V_Mapa.RestartOnlineGame += V_Mapa_RestartOnlineGame;
+            Program.V_Mapa.VerificarBandeiras += V_Mapa_VerificarBandeiras;
         }
+
+        private void V_Mapa_VerificarBandeiras(int numLinhas, int numColunas, int numMinas)
+        {
+            int count = 0;
+
+            for (int linha = 0; linha < numLinhas; linha++)
+            {
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA && Program.M_mapa.GetQuadrado(linha, coluna).SimboloQuadrado == SIMBOLO.BANDEIRA)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            if(count == numMinas)
+            {
+                GanharJogo();
+            }
+        }
+
         private void V_Mapa_RestartOnlineGame()
         {
             Program.V_Menu.RestartOnlineGame();
@@ -179,8 +202,10 @@ namespace Minesweeper.View_Controller
                 {
                     if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
+                        
                         string path = Environment.CurrentDirectory + @"\Botoes\btnFlag.png";
                         AtualizaImagemConteudo(b[linha, coluna].Name, path);
+
                     }
                 }
             }
@@ -243,6 +268,21 @@ namespace Minesweeper.View_Controller
                 }
             }
         }
+
+        //public void VerificarBandeiras(int numLinhas, int numColunas)
+        //{
+        //    for (int linha = 0; linha < numLinhas; linha++)
+        //    {
+        //        for (int coluna = 0; coluna < numColunas; coluna++)
+        //        {
+        //            if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA && Program.M_mapa.GetQuadrado(linha, coluna).SimboloQuadrado == SIMBOLO.BANDEIRA)
+        //            {
+        //                GanharJogo();
+        //            }
+        //        }
+        //    }
+        //}
+
         private void GanharJogo()
         {
             //Som de vitória
@@ -289,8 +329,10 @@ namespace Minesweeper.View_Controller
                 {
                     if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA)
                     {
+                       
                         string path = Environment.CurrentDirectory + Program.M_mapa.getImagePath(Program.M_mapa.GetQuadrado(linha, coluna));
                         AtualizaImagemConteudo(b[linha, coluna].Name, path);
+                        
                     }
                 }
             }
@@ -378,7 +420,7 @@ namespace Minesweeper.View_Controller
         public void VerificarQuadradosExpostos(int numLinhas, int numColunas, int numMinas)
         {
             int quadradoPorVer = numColunas * numLinhas;
-
+            
             for (int linha = 0; linha < numLinhas; linha++)
             {
                 for (int coluna = 0; coluna < numColunas; coluna++)
@@ -396,11 +438,7 @@ namespace Minesweeper.View_Controller
                 GanharJogo();
             }
 
-
-
-
-
-
+            
 
             //Função de checkar se as bandeiras estão todas selecionadas
         }

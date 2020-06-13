@@ -29,6 +29,7 @@ namespace Minesweeper
         public event AtualizarMinas AtualizarMinas;
         public event MostraConteudoQuadrado MostraConteudoQuadrado;
         public event AdicionaFlag AdicionaFlag;
+        public event VerificarBandeiras VerificarBandeiras;
 
         public FormMineSweeper()
         {
@@ -69,6 +70,7 @@ namespace Minesweeper
                 AdicionaFlag(b);
                 AtualizarMinas(b);
                 labelMinas.Text = getMinas();
+                VerificarBandeiras(numLinhas, numColunas, numMinas);
 
             }
             if (me.Button == MouseButtons.Left)
