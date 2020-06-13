@@ -131,10 +131,10 @@ namespace Minesweeper.View_Controller
 
             Quadrado quadrado = Program.M_mapa.GetQuadrado(linha, coluna);
 
-            if (Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) && (quadrado.SimboloQuadrado == SIMBOLO.VAZIO))
+            if (Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) && ((quadrado.SimboloQuadrado == SIMBOLO.VAZIO) || (quadrado.SimboloQuadrado == SIMBOLO.QUESTION)))
             {
                 //Botão vazio fazer abrir todos os vazios
-                if (Program.M_mapa.getImagePath(quadrado).Contains("Vazio"))
+                if (quadrado.DistanciaBomba == -1)
                 {
                     MostraQuadradosVaziosTodos(linha, coluna, quadrado, numLinhas, numColunas);
                 }
@@ -144,7 +144,7 @@ namespace Minesweeper.View_Controller
             }
 
             //Verifica se perdeu o jogo
-            if (quadrado.ConteudoQuadrado == CONTEUDO.BOMBA)
+            if (quadrado.ConteudoQuadrado == CONTEUDO.BOMBA && quadrado.SimboloQuadrado != SIMBOLO.BANDEIRA)
             {
                 //PerderJogo();
                 return -1;
@@ -188,7 +188,7 @@ namespace Minesweeper.View_Controller
         public void MostraQuadradosVaziosTodos(int linha, int coluna, Quadrado quadrado, int numLinhas, int numColunas)
         {
             
-            if ((!quadrado.Selecionado) && (quadrado.ConteudoQuadrado != CONTEUDO.NUM) && (quadrado.SimboloQuadrado == SIMBOLO.VAZIO))
+            if ((!quadrado.Selecionado) && (quadrado.ConteudoQuadrado != CONTEUDO.NUM) && ((quadrado.SimboloQuadrado == SIMBOLO.VAZIO) || (quadrado.SimboloQuadrado == SIMBOLO.QUESTION)))
             {
                 MostrarQuadrado(linha, coluna, quadrado);
 
