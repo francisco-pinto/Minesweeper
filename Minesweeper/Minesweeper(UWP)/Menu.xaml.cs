@@ -292,7 +292,7 @@ namespace Minesweeper_UWP_
                 StorageFile file = await folder.GetFileAsync("pontuacao.xml");
                 XDocument document;
 
-                using (Stream fileStream = await file.OpenStreamForWriteAsync())
+                using (Stream fileStream = await file.OpenStreamForReadAsync())
                 {
                     document = XDocument.Load(fileStream);
                 }
@@ -382,6 +382,18 @@ namespace Minesweeper_UWP_
                 }
             }
         }
+        private async Task EsvaziarDocumento()
+        {
+            //Elimina documento
+            StorageFolder folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Save");
+            //StorageFile file = await folder.GetFileAsync("pontuacao.xml");
+
+            //await file.DeleteAsync();
+
+
+            //Cria Documento
+            await folder.CreateFileAsync("pontuacao.xml");
+        }
         private async Task CriarDocumentoXMLAsync()
         {
             StorageFolder folder=null;
@@ -398,8 +410,7 @@ namespace Minesweeper_UWP_
             }
             else
             {
-                folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Save");
-                file = await folder.GetFileAsync("pontuacao.xml");
+                await EsvaziarDocumento();
             }
 
             XDocument doc;
@@ -422,11 +433,15 @@ namespace Minesweeper_UWP_
 
             //var randomAccessStream = await file.OpenStreamForWriteAsync();
             //Stream stream = randomAccessStream.AsInputStream();
+            folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Save");
+            file = await folder.GetFileAsync("pontuacao.xml");
 
             using (Stream fileStream = await file.OpenStreamForWriteAsync())
             {
                 doc.Save(fileStream);
             }
+
+            
 
             //doc.Save();
         }

@@ -63,13 +63,13 @@ namespace Minesweeper_UWP_
         private DispatcherTimer timer1;
 
         public event startGame play;
-        //public event CreateButton CreateButtonModel;
-        //public event MostraBandeirasTodas MostraBandeirasTodas;
-        public event MostraBombasTodas MostraBombasTodas;
-        //public event GetMinas getMinas;
-        public event AtualizarMinas AtualizarMinas;
-        public event MostraConteudoQuadrado MostraConteudoQuadrado;
-        public event AdicionaFlag AdicionaFlag;
+        ////public event CreateButton CreateButtonModel;
+        ////public event MostraBandeirasTodas MostraBandeirasTodas;
+        //public event MostraBombasTodas MostraBombasTodas;
+        ////public event GetMinas getMinas;
+        //public event AtualizarMinas AtualizarMinas;
+        //public event MostraConteudoQuadrado MostraConteudoQuadrado;
+        //public event AdicionaFlag AdicionaFlag;
 
         public MainPage()
         {   
@@ -218,8 +218,8 @@ namespace Minesweeper_UWP_
             else if(aux == 1)       //Ganhar Jogo
             {
                 await GanharJogoAsync();
-                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
-                this.Frame.Navigate(typeof(Menu));
+                //ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+                //this.Frame.Navigate(typeof(Menu));
             }   
         }
         private async Task PerderJogoAsync()
@@ -362,10 +362,11 @@ namespace Minesweeper_UWP_
                         this.Frame.Navigate(typeof(PedirNome));
                     }
                 }
-
-                Sleep(3);
-                this.Frame.Navigate(typeof(Menu));
-
+                else
+                {
+                    Sleep(3);
+                    this.Frame.Navigate(typeof(Menu));
+                }
             }
             catch
             {
@@ -516,31 +517,7 @@ namespace Minesweeper_UWP_
         {
             //string path = Environment.CurrentDirectory + @"/btns/smile glasses.png";
             ButtonCara.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/smile glasses.png")), Stretch = Stretch.None };
-        }
-
-        // Adaptar codigo ao criar botao em cima
-        //public void CreateButton(int linha, int coluna, CONTEUDO conteudoQuadrado, int ButtonX, int ButtonY, string nome)
-        //{
-        //    /*Colocar inicialmente imagem de fundo normal*/
-        //    button[linha, coluna] = new Button();
-        //    button[linha, coluna].Name = nome;
-        //    button[linha, coluna].Size = new Size(40, 40);
-        //    button[linha, coluna].Location = new Point(ButtonX, ButtonY);
-
-        //    //Configurar os botões para permitir retirar margens a estes
-        //    button[linha, coluna].FlatStyle = FlatStyle.Flat;
-        //    button[linha, coluna].FlatAppearance.BorderColor = Color.Gray;
-        //    button[linha, coluna].FlatAppearance.BorderSize = 1;
-
-        //    button[linha, coluna].MouseDown += B_MouseDown;
-        //    button[linha, coluna].MouseUp += B_MouseUp;
-
-        //    //Só para testar
-        //    if (conteudoQuadrado == CONTEUDO.BOMBA)
-        //    {
-        //        button[linha, coluna].BackColor = Color.Red;
-        //    }
-        //}
+        }     
         public void AtualizaSimboloBotao(int linha, int coluna, string path)
         {
             if (path == "Vazio")
@@ -559,21 +536,6 @@ namespace Minesweeper_UWP_
             }
 
         }
-        //public void AtualizaImagemConteudo(string nome, string path)
-        //{
-        //    for (int linha = 0; linha < numLinhas; linha++)
-        //    {
-        //        for (int coluna = 0; coluna < numColunas; coluna++)
-        //        {
-        //            if (nome == button[linha, coluna].Name)
-        //            {
-
-        //                button[linha, coluna].Background = new ImageBrush { ImageSource = new BitmapImage(new Uri(this.BaseUri, "Assets/" + path)), Stretch = Stretch.None };
-        //                return;
-        //            }
-        //        }
-        //    }
-        //}
         public void MostraTodasBombas()
         {
             string path = @"/btnBomba.png";
@@ -951,17 +913,6 @@ namespace Minesweeper_UWP_
                 }
             }
         }
-        //private void FormMineSweeper_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    //Esconder e não eliminar form
-        //    if (e.CloseReason == CloseReason.UserClosing)
-        //    {
-        //        e.Cancel = true;
-        //        Hide();
-        //    }
-        //    LimparForm();
-        //    Program.V_Menu.Show();
-        //}
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
