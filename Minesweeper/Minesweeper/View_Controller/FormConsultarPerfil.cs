@@ -86,8 +86,10 @@ namespace Minesweeper.View_Controller
                      textBoxJogosPerdidos.Text = base64jogosperdidos;
                 //TEMPOS FACIL
 
+                base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("facil").Value;
+
                 try { 
-                    if((base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Facil").Value) != null)
+                    if(base64tempofacil != null)
                         {
                             textBoxTempoFacil.Text = base64tempofacil; 
                         }
@@ -95,8 +97,11 @@ namespace Minesweeper.View_Controller
                 catch {textBoxTempoFacil.Text = "0" ;}
 
                 //TEMPOS MEDIO
+
+                base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("medio").Value;
+
                 try { 
-                        if ( (base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Medio").Value) != null)
+                        if ( base64tempomedio != null)
                         {
                            textBoxTempoMedio.Text = base64tempomedio;
                         }
