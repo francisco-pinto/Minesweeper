@@ -27,6 +27,7 @@ namespace Minesweeper.View_Controller
 
         private void V_Menu_playOnline(XDocument xmlResposta, int numLinhas, int numColunas, int numBombas)
         {
+            Program.V_Menu.Hide();
             //Criar dados auxiliares e model
             Program.V_Mapa.CreateMapa(numBombas, numLinhas, numColunas);
             Program.M_mapa.CreateMapa(numBombas, numLinhas, numColunas);
