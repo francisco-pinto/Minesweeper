@@ -70,7 +70,7 @@ namespace Minesweeper
                 AdicionaFlag(b);
                 AtualizarMinas(b);
                 labelMinas.Text = getMinas();
-                VerificarBandeiras(numLinhas, numColunas, numMinas);
+                VerificarBandeiras(numLinhas, numColunas, numMinas, labelMinas.Text);
 
             }
             if (me.Button == MouseButtons.Left)

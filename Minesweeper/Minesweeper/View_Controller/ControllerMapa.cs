@@ -31,7 +31,7 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.VerificarBandeiras += V_Mapa_VerificarBandeiras;
         }
 
-        private void V_Mapa_VerificarBandeiras(int numLinhas, int numColunas, int numMinas)
+        private void V_Mapa_VerificarBandeiras(int numLinhas, int numColunas, int numMinas, string MinasRestantes)
         {
             int count = 0;
 
@@ -46,7 +46,7 @@ namespace Minesweeper.View_Controller
                 }
             }
 
-            if(count == numMinas)
+            if(count == numMinas && MinasRestantes == "0")
             {
                 GanharJogo();
             }
@@ -269,20 +269,6 @@ namespace Minesweeper.View_Controller
             }
         }
 
-        //public void VerificarBandeiras(int numLinhas, int numColunas)
-        //{
-        //    for (int linha = 0; linha < numLinhas; linha++)
-        //    {
-        //        for (int coluna = 0; coluna < numColunas; coluna++)
-        //        {
-        //            if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA && Program.M_mapa.GetQuadrado(linha, coluna).SimboloQuadrado == SIMBOLO.BANDEIRA)
-        //            {
-        //                GanharJogo();
-        //            }
-        //        }
-        //    }
-        //}
-
         private void GanharJogo()
         {
             //Som de vitória
@@ -425,7 +411,7 @@ namespace Minesweeper.View_Controller
             {
                 for (int coluna = 0; coluna < numColunas; coluna++)
                 {
-                    if (!Program.M_mapa.CheckQuadradoSelecionado(linha, coluna))
+                    if (!Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) || (Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) && Program.M_mapa.GetQuadrado(linha, coluna).SimboloQuadrado == SIMBOLO.BANDEIRA))
                     {
                         quadradoPorVer = quadradoPorVer - 1;
                         //MessageBox.Show("YAAAAAAAAAAA");
@@ -437,9 +423,6 @@ namespace Minesweeper.View_Controller
             {
                 GanharJogo();
             }
-
-            
-
             //Função de checkar se as bandeiras estão todas selecionadas
         }
         private void MostrarQuadrado(int linha, int coluna, Quadrado quadrado)
