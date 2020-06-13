@@ -19,13 +19,13 @@
             <TextBlock HorizontalAlignment="Right" Margin="0,0,958,220" Text="Tempo Fácil" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
             <TextBlock HorizontalAlignment="Right" Margin="0,0,945,170" Text="Tempo Médio" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
             <TextBlock HorizontalAlignment="Right" Margin="0,0,967,100" Text="Fotografia" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
-            <TextBox x:Name="TextBoxNome" HorizontalAlignment="Right" Margin="0,0,576,463" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303"/>
-            <TextBox x:Name="TextBoxEmail" Margin="0,0,576,413" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Right" Width="303" Height="32" VerticalAlignment="Bottom"/>
-            <TextBox x:Name="TextBoxPais" HorizontalAlignment="Right" Margin="0,0,576,363" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303"/>
-            <TextBox x:Name="TextBoxJogosGanhos" HorizontalAlignment="Right" Margin="0,0,576,313" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303"/>
-            <TextBox x:Name="TextBoxJogosPerdidos" HorizontalAlignment="Right" Margin="0,0,576,263" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303"/>
-            <TextBox x:Name="TextBoxTempoFacil" HorizontalAlignment="Right" Margin="0,0,576,213" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303"/>
-            <TextBox x:Name="TextBoxTempoMedio" HorizontalAlignment="Right" Margin="0,0,576,163" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303"/>
+            <TextBox x:Name="TextBoxNome" HorizontalAlignment="Right" Margin="0,0,576,463" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxEmail" Margin="0,0,576,413" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Right" Width="303" Height="32" VerticalAlignment="Bottom" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxPais" HorizontalAlignment="Right" Margin="0,0,576,363" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxJogosGanhos" HorizontalAlignment="Right" Margin="0,0,576,313" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxJogosPerdidos" HorizontalAlignment="Right" Margin="0,0,576,263" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxTempoFacil" HorizontalAlignment="Right" Margin="0,0,576,213" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxTempoMedio" HorizontalAlignment="Right" Margin="0,0,576,163" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
             <Image Name="ImageJogador" HorizontalAlignment="Right" Height="100" Margin="0,0,689,40" VerticalAlignment="Bottom" Width="100"/>
             <Button x:Name="ButtonVoltar" Content="Voltar" Margin="529,524,0,0" VerticalAlignment="Top" Width="77" Click="ButtonVoltar_Click"/>
 
