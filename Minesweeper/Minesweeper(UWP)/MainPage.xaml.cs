@@ -171,7 +171,7 @@ namespace Minesweeper_UWP_
 
             //Eventos
             button[linha, coluna].Tapped += MainPage_TappedAsync;
-            button[linha, coluna].RightTapped += MainPage_RightTapped;
+            button[linha, coluna].RightTapped += MainPage_RightTappedAsync;
             button[linha, coluna].PointerPressed += MainPage_PointerPressed; 
             button[linha, coluna].PointerReleased += MainPage_PointerReleased;
 
@@ -383,7 +383,7 @@ namespace Minesweeper_UWP_
                 for (int coluna = 0; coluna < numColunas; coluna++)
                 {
                     button[linha, coluna].Tapped -= new TappedEventHandler(MainPage_TappedAsync);
-                    button[linha, coluna].RightTapped -= new RightTappedEventHandler(MainPage_RightTapped);
+                    button[linha, coluna].RightTapped -= new RightTappedEventHandler(MainPage_RightTappedAsync);
                     button[linha, coluna].PointerPressed -= new PointerEventHandler(MainPage_PointerPressed);
                     button[linha, coluna].PointerReleased -= new PointerEventHandler(MainPage_PointerReleased);
                 }
@@ -451,7 +451,7 @@ namespace Minesweeper_UWP_
                 }
             }
         }
-        private void MainPage_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        private async void MainPage_RightTappedAsync(object sender, RightTappedRoutedEventArgs e)
         {
             Button b = (Button)sender;
             string nome = b.Name;
@@ -470,6 +470,27 @@ namespace Minesweeper_UWP_
             Program.C_mapa.V_Mapa_AtualizarMinas(b);
             AtualizaNumMinasMapa();
             TextBlockMinas.Text = numMinas.ToString();
+            await VerificarBandeirasAsync();
+        }
+        private async Task VerificarBandeirasAsync()
+        {
+            int count = 0;
+
+            for (int linha = 0; linha < numLinhas; linha++)
+            {
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    if (Program.M_mapa.GetQuadrado(linha, coluna).ConteudoQuadrado == CONTEUDO.BOMBA && Program.M_mapa.GetQuadrado(linha, coluna).SimboloQuadrado == SIMBOLO.BANDEIRA)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            if (count == numMinas)
+            {
+                await GanharJogoAsync();
+            }
         }
         private void AtualizaNumMinasMapa()
         {

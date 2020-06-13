@@ -14,9 +14,9 @@
         <Button Content="Jogar" Margin="451,320,451,0" VerticalAlignment="Top" Click="ButtonJogar_Click" Height="32" HorizontalAlignment="Stretch"/>
         <Button Content="Instruções" Margin="0,390,440,0" VerticalAlignment="Top" Click="ButtonInstrucoes_Click" Width="120" HorizontalAlignment="Right"/>
         <TextBlock Margin="300,0,548,320" Text="Melhores Tempos Fácil" TextWrapping="Wrap" Height="19" VerticalAlignment="Bottom"/>
-        <ListView  Name="ListViewFacil" Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="200,0,568,114" Height="193" VerticalAlignment="Bottom"/>
+        <ListView  Name="ListViewFacil" Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="161,0,549,114" Height="193" VerticalAlignment="Bottom" SelectionChanged="ListViewFacil_SelectionChanged"/>
         <TextBlock Margin="547,0,300,320"  Text="Melhores Tempos Médio" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
-        <ListView  Name="ListViewMedio" Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="550,0,200,113"  Height="191" VerticalAlignment="Bottom"/>
+        <ListView  Name="ListViewMedio" Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="550,0,160,113"  Height="191" VerticalAlignment="Bottom" SelectionChanged="ListViewMedio_SelectionChanged"/>
         <RadioButton x:Name="RadioButtonFacil"  Content="Fácil"  Margin="329,0,551,520"  VerticalAlignment="Bottom" Height="32" Checked="RadioButtonFacil_Checked" HorizontalAlignment="Stretch"/>
         <RadioButton x:Name="RadioButtonMedio" Content="Médio"  Margin="474,0,406,518"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="32" Checked="RadioButtonMedio_Checked"/>
         <RadioButton x:Name="RadioButtonCustom" Content="Custom"  Margin="608,0,272,518"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="32" Checked="RadioButtonCustom_Checked"/>

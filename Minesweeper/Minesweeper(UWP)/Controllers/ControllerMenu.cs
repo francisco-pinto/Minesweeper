@@ -15,7 +15,13 @@ namespace Minesweeper.View_Controller
             Program = App.Current as App;
             Program.V_Menu.play += V_Menu_play;
             Program.V_MainPage.play += V_Menu_play;
+            Program.V_Menu.verPerfilTop10 += V_Menu_verPerfilTop10;
             //Program.V_MainPage.CreateButtonModel += V_MainPage_CreateButtonModel;
+        }
+
+        private void V_Menu_verPerfilTop10(string nome)
+        {
+            Program.V_ConsultaPerfil.AcessoPerfilTop10Async(nome);
         }
 
         //public void V_MainPage_CreateButtonModel(int numLinhas, int numColunas, int numBombas)

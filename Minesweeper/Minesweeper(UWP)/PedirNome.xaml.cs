@@ -30,6 +30,10 @@ namespace Minesweeper_UWP_
     {
         private App Program = App.Current as App;
         string dificuldade;
+        string nomeRecordFacilAnterior = "";
+        string nomeRecordMedioAnterior = "";
+        int recordeFacilAnterior = 0;
+        int recordeMedioAnterior = 0;
         public PedirNome()
         {
             this.InitializeComponent();
@@ -80,6 +84,7 @@ namespace Minesweeper_UWP_
             {
                 try
                 {
+                    await GetOtherRecordsAsync("Facil");
                     recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
                 }
                 catch
@@ -99,7 +104,8 @@ namespace Minesweeper_UWP_
             {
                 try
                 {
-                    recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
+                    await GetOtherRecordsAsync("Medio");
+                    recordeAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value); 
                 }
                 catch
                 {
@@ -118,6 +124,28 @@ namespace Minesweeper_UWP_
                 //}
             }
     
+        }
+        private async Task GetOtherRecordsAsync(string dificuldade)
+        {
+            StorageFolder folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Save");
+            StorageFile file = await folder.GetFileAsync("pontuacao.xml");
+            XDocument document;
+
+            using (Stream fileStream = await file.OpenStreamForReadAsync())
+            {
+                document = XDocument.Load(fileStream);
+            }
+
+            if (dificuldade == "Medio")
+            {
+                recordeFacilAnterior = Int32.Parse(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+                nomeRecordFacilAnterior = document.Element("pontuacoes").Element("Facil").Element("Nome").Value;
+            }
+            else
+            {
+                recordeMedioAnterior = Int32.Parse(document.Element("pontuacoes").Element("Medio").Element("Tempo").Value);
+                nomeRecordMedioAnterior = document.Element("pontuacoes").Element("Medio").Element("Nome").Value;
+            }
         }
         private async Task EsvaziarDocumento()
         {
@@ -141,7 +169,25 @@ namespace Minesweeper_UWP_
 
             if (dificuldade == "facil")
             {
-                doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+                if(recordeMedioAnterior != 0)
+                {
+                    doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+                                new XComment("Recorde em facil e medio"),
+                                new XElement("pontuacoes",
+                                    new XElement("Facil",
+                                        new XElement("Nome", nome),
+                                        new XElement("Tempo", pontuacao)
+                                    ),
+                                    new XElement("Medio",
+                                        new XElement("Nome", nomeRecordMedioAnterior),
+                                        new XElement("Tempo", recordeMedioAnterior)
+                                        )
+                                )
+                            );
+                }
+                else
+                {
+                    doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
                                 new XComment("Recorde em facil e medio"),
                                 new XElement("pontuacoes",
                                     new XElement("Facil",
@@ -154,10 +200,29 @@ namespace Minesweeper_UWP_
                                         )
                                 )
                             );
+                }
             }
             else
             {
-                doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+                if(recordeFacilAnterior != 0)
+                {
+                    doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
+                                new XComment("Recorde em facil e medio"),
+                                new XElement("pontuacoes",
+                                    new XElement("Facil",
+                                        new XElement("Nome", nomeRecordFacilAnterior),
+                                        new XElement("Tempo", recordeFacilAnterior)
+                                    ),
+                                    new XElement("Medio",
+                                        new XElement("Nome", nome),
+                                        new XElement("Tempo", pontuacao)
+                                        )
+                                )
+                            );
+                }
+                else
+                {
+                    doc = new XDocument(new XDeclaration("1.0", Encoding.UTF8.ToString(), "yes"),
                                 new XComment("Recorde em facil e medio"),
                                 new XElement("pontuacoes",
                                     new XElement("Facil",
@@ -170,6 +235,8 @@ namespace Minesweeper_UWP_
                                         )
                                 )
                             );
+                }
+                
             }
 
             StorageFolder folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Save");

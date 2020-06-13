@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Foundation;
@@ -31,6 +32,7 @@ namespace Minesweeper_UWP_
     public sealed partial class Menu : Page
     {
         public event startGame play;
+        public event ShowProfile verPerfilTop10;
         private App Program = App.Current as App;
         public Menu()
         {
@@ -364,13 +366,15 @@ namespace Minesweeper_UWP_
                         string nova = dificuldade.ToString().Remove(5, 2);
                         if (nova == "Facil")
                         {
-                            ListViewFacil.Items.Add(username.ToString() + tempo.ToString());
+                            string new_username = Regex.Replace(username.ToString(), @"\t|\n|\r", "");
+                            ListViewFacil.Items.Add(new_username + "-" +  tempo.ToString());
                             //ListViewFacil.Items.Add(quando);
 
                         }
                         else
                         {
-                            ListViewMedio.Items.Add(username.ToString() + tempo.ToString());
+                            string new_username = Regex.Replace(username.ToString(), @"\t|\n|\r", "");
+                            ListViewMedio.Items.Add(new_username + "-" + tempo.ToString());
                             //ListViewMedio.Items.Add(quando);
 
                         }
@@ -449,6 +453,24 @@ namespace Minesweeper_UWP_
         {
             var messageDialog = new MessageDialog(message);
             await messageDialog.ShowAsync();
+        }
+
+        private void ListViewFacil_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Program.M_menu.online)
+            {
+                string[] nome = ListViewFacil.SelectedItem.ToString().Split('-');
+                this.Frame.Navigate(typeof(ConsultaPerfil), nome[0]);
+            }
+        }
+
+        private void ListViewMedio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Program.M_menu.online)
+            {
+                string[] nome = ListViewMedio.SelectedItem.ToString().Split('-');
+                this.Frame.Navigate(typeof(ConsultaPerfil), nome[0]);
+            }
         }
     }
 }

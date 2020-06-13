@@ -10,4 +10,5 @@ namespace Minesweeper
     public delegate string AdicionaFlag(Button b);
     public delegate void AtualizarMinas(Button b);
     public delegate string GetMinas();
+    public delegate void ShowProfile(string nome);
 }

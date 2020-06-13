@@ -146,7 +146,7 @@ namespace Minesweeper.View_Controller
             //Verifica se perdeu o jogo
             if (quadrado.ConteudoQuadrado == CONTEUDO.BOMBA)
             {
-                PerderJogo();
+                //PerderJogo();
                 return -1;
             }
 
@@ -163,7 +163,7 @@ namespace Minesweeper.View_Controller
             {
                 for (int coluna = 0; coluna < numColunas; coluna++)
                 {
-                    if (!Program.M_mapa.CheckQuadradoSelecionado(linha, coluna))
+                    if (!Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) || (Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) && Program.M_mapa.GetQuadrado(linha, coluna).SimboloQuadrado == SIMBOLO.BANDEIRA))
                     {
                         quadradoporver = quadradoporver - 1;
                         //MessageBox.Show("YAAAAAAAAAAA");
@@ -173,7 +173,7 @@ namespace Minesweeper.View_Controller
 
             if (quadradoporver == numMinas)
             {
-                GanharJogo();
+                //GanharJogo();
                 return 1;
             }
             return 0;
