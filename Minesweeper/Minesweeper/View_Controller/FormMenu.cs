@@ -46,8 +46,8 @@ namespace Minesweeper.View_Controller
 
             if (online)
             {
-                //Prepara o pedido ao servidor com o URL adequado
                 HttpWebRequest request = null;
+
                 //Verificar qual o nível de jogo
                 if (radioButtonFacil.Checked)
                 {
@@ -66,27 +66,23 @@ namespace Minesweeper.View_Controller
                     request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/novo/Medio/" + Program.M_jogador.Id); // ou outro qualquer username
                 }
 
-
-
-                // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
                 ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(AcceptAllCertifications);
 
-                request.Method = "GET"; // método usado para enviar o pedido
+                request.Method = "GET";
 
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse(); // faz o envio do pedido
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse(); 
 
-                Stream receiveStream = response.GetResponseStream(); // obtem o stream associado à resposta.
-                StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8); // Canaliza o stream para um leitor de stream de nível superior com o
+                Stream receiveStream = response.GetResponseStream(); 
+                StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
 
                 string resultado = readStream.ReadToEnd();
                 response.Close();
                 readStream.Close();
 
                 XDocument xmlResposta = XDocument.Parse(resultado);
-                // ...interpretar o resultado de acordo com a lógica da aplicação (exemplificativo)
+                
                 if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
                 {
-                    // apresenta mensagem de erro usando o texto (contexto) da resposta
                     MessageBox.Show(
                     xmlResposta.Element("resultado").Element("contexto").Value,
                      "Erro",
@@ -224,21 +220,21 @@ namespace Minesweeper.View_Controller
         }
         private void ConfigRadioButtons()
         {
-            TBnumLinhas.Size = new System.Drawing.Size(70, 20);
+            TBnumLinhas.Size = new Size(70, 20);
             TBnumLinhas.Text = "NumLinhas";
-            TBnumLinhas.Location = new System.Drawing.Point(351, 220);
+            TBnumLinhas.Location = new Point(351, 220);
             TBnumLinhas.Click += TB_Click;
             this.Controls.Add(TBnumLinhas);
 
-            TBnumColunas.Size = new System.Drawing.Size(70, 20);
+            TBnumColunas.Size = new Size(70, 20);
             TBnumColunas.Text = "NumColunas";
-            TBnumColunas.Location = new System.Drawing.Point(351, 250);
+            TBnumColunas.Location = new Point(351, 250);
             TBnumColunas.Click += TB_Click;
             this.Controls.Add(TBnumColunas);
 
-            TBnumBombas.Size = new System.Drawing.Size(70, 20);
+            TBnumBombas.Size = new Size(70, 20);
             TBnumBombas.Text = "NumBombas";
-            TBnumBombas.Location = new System.Drawing.Point(351, 280);
+            TBnumBombas.Location = new Point(351, 280);
             TBnumBombas.Click += TB_Click;
             this.Controls.Add(TBnumBombas);
         }
@@ -249,17 +245,13 @@ namespace Minesweeper.View_Controller
         }
         private void buttonConsultarPerfil_Click(object sender, EventArgs e)
         {
-
             ConsultarPerfil();
             this.Hide();
             Program.V_ConsultarPerfil.Show();
-
         }
         public void AlteraImagem()
         {
             pictureBoxOnline.Image = Image.FromFile(Environment.CurrentDirectory + @"/Botoes/online.png");
-
-
         }
         public void ShowConsultaPerfil()
         {
@@ -268,25 +260,21 @@ namespace Minesweeper.View_Controller
         public void ShowFoto()
         {
             string nome = getNomeJogador();
-            //Prepara o pedido ao servidor com o URL adequado
+            
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/perfil/" + nome);
 
-            // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
             ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
 
-            request.Method = "GET"; // método usado para enviar o pedido
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse(); // faz o envio do pedido
-
-            Stream receiveStream = response.GetResponseStream(); // obtem o stream associado à resposta.
-            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8); // Canaliza o stream para um leitor de stream de nível superior com o
-                                                                                      //formato de codificação necessário.
+            request.Method = "GET";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse(); 
+            Stream receiveStream = response.GetResponseStream();
+            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8); 
+            
             string resultado = readStream.ReadToEnd();
 
             response.Close();
             readStream.Close();
 
-            // converte para objeto XML para facilitar a extração da informação e ...
             XDocument xmlResposta = XDocument.Parse(resultado);
 
             string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
@@ -294,7 +282,6 @@ namespace Minesweeper.View_Controller
             byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
             Image image = Image.FromStream(new MemoryStream(bytes));//... e, por fim, para Image
 
-            // pode mostrar a imagem num qualquer componente...como por exemplo:
             pictureBoxFotoMenu.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBoxFotoMenu.BackgroundImage = image;
         }
@@ -309,7 +296,6 @@ namespace Minesweeper.View_Controller
                 ShowTop10();
                 radioButtonCustom.Visible = false;
                 radioButtonMedia.Location = new Point(253, 19);
-                //radioButtonMedia.Location = new Point(300, 200);
                 
             } else
             {
@@ -379,27 +365,25 @@ namespace Minesweeper.View_Controller
         }
         public void ShowTop10()
         {
-            //Prepara o pedido ao servidor com o URL adequado
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/top10");
 
-            // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
             ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
 
-            request.Method = "GET"; // método usado para enviar o pedido
+            request.Method = "GET"; 
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse(); // faz o envio do pedido
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse(); 
 
-            Stream receiveStream = response.GetResponseStream(); // obtem o stream associado à resposta.
-            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8); // Canaliza o stream para um leitor de stream de nível superior com o
-                                                                                      //formato de codificação necessário.
+            Stream receiveStream = response.GetResponseStream(); 
+            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8); 
+            
             string resultado = readStream.ReadToEnd();
 
             response.Close();
             readStream.Close();
 
-            // converte para objeto XML para facilitar a extração da informação e ...
+            
             XDocument xmlResposta = XDocument.Parse(resultado);
-            // ...interpretar o resultado de acordo com a lógica da aplicação (exemplificativo)
+            
             if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
             {
                 // apresenta mensagem de erro usando o texto (contexto) da resposta

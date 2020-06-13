@@ -5,6 +5,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,13 +29,11 @@ namespace Minesweeper.View_Controller
             Program.V_PedirNome.AtribuirNome += V_PedirNome_AtribuirNome;
             Program.V_Mapa.RestartOnlineGame += V_Mapa_RestartOnlineGame;
         }
-
         private void V_Mapa_RestartOnlineGame()
         {
             Program.V_Menu.RestartOnlineGame();
         }
-
-        public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        public bool AcceptAllCertifications(object sender, X509Certificate certification, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;
         }
@@ -92,12 +92,6 @@ namespace Minesweeper.View_Controller
             Program.M_jogador.Nome = nome;
             Program.M_jogador.Pontuacao = Program.V_Mapa.segundos;
 
-
-            //verificar condicao if file exist 
-            //if (!File.Exists(Environment.CurrentDirectory + @"\Save\pontuacao.xml"))
-            //{
-            //    Directory.CreateDirectory(Environment.CurrentDirectory + @"\Save");
-            //    File.Create(Environment.CurrentDirectory + @"\Save\pontuacao.xml");
             BuscarPontuacao(Program.M_jogador.Pontuacao, nome);
         }
         private bool CheckRecorde(int pontuacao)
@@ -132,10 +126,7 @@ namespace Minesweeper.View_Controller
             catch
             {
                 return true;
-            }
-            
-
-            
+            } 
         }
         private void BuscarPontuacao(int pontuacao, string nome)
         {
@@ -251,7 +242,6 @@ namespace Minesweeper.View_Controller
                         );
                 }
             }
-            
         }
         private void GanharJogo()
         {
@@ -264,23 +254,18 @@ namespace Minesweeper.View_Controller
             
             
             //verificar online offline
-
-
             Program.V_Mapa.MostraTodasBandeiras();
             Program.V_Mapa.setVariaveisFinais("00", false);
-            Program.V_Mapa.GanharHappy();
+            Program.V_Mapa.ChangeButtonToHappy();
             MessageBox.Show("Ganhou o jogo!");
 
             
-            //Program.V_Mapa.VerificarRecorde();
-
             Program.V_Mapa.Hide();
             Program.V_Mapa.LimparForm();
-            Program.V_Menu.ShowTop10();
-
 
             if (Program.M_menu.online)
             {
+                Program.V_Menu.ShowTop10();
                 EnviarDadosFimJogo(true);
                 Program.V_Menu.Show();
             }
@@ -295,8 +280,6 @@ namespace Minesweeper.View_Controller
                     Program.V_Menu.Show();
                 }
             }
-
-
         }
         private void V_Mapa_MostraBombasTodas(Button[,] b, int numLinhas, int numColunas)
         {  
@@ -330,26 +313,31 @@ namespace Minesweeper.View_Controller
         }
         private void PerderJogo()
         {
+            
+            string[] posErradas = Program.M_mapa.GetBandeirasErradas();
+
             //Som de derrota
             string path = Environment.CurrentDirectory + @"\Music\Explosion.wav";
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(path);
             player.Play();
 
-            Program.V_Mapa.setVariaveisFinais("-1", false);
-            string[] posErradas = Program.M_mapa.GetBandeirasErradas();
+            Program.V_Mapa.setVariaveisFinais("-1", false);          
             Program.V_Mapa.MostraTodasBombas();
             Program.V_Mapa.MostraBandeirasErradas(posErradas);
-            Program.V_Mapa.PerderSad();
+            Program.V_Mapa.ChangeButtonToSad();
+
             MessageBox.Show("Perdeu o jogo!");
+
             Program.V_Mapa.Hide();
             Program.V_Mapa.LimparForm();
-            Program.V_Menu.ShowTop10();
-            Program.V_Menu.Show();
+            
             if(Program.M_menu.online)
             {
+                Program.V_Menu.ShowTop10();
                 EnviarDadosFimJogo(false);
             }
-            
+
+            Program.V_Menu.Show();
             /*Pontuação*/
         }
         private void V_Mapa_MostraConteudoQuadrado(Button b)
@@ -389,7 +377,7 @@ namespace Minesweeper.View_Controller
         }
         public void VerificarQuadradosExpostos(int numLinhas, int numColunas, int numMinas)
         {
-            int quadradoporver = numColunas * numLinhas;
+            int quadradoPorVer = numColunas * numLinhas;
 
             for (int linha = 0; linha < numLinhas; linha++)
             {
@@ -397,21 +385,29 @@ namespace Minesweeper.View_Controller
                 {
                     if (!Program.M_mapa.CheckQuadradoSelecionado(linha, coluna))
                     {
-                        quadradoporver = quadradoporver - 1;
+                        quadradoPorVer = quadradoPorVer - 1;
                         //MessageBox.Show("YAAAAAAAAAAA");
                     }
                 }
             }
 
-            if (quadradoporver == numMinas)
+            if (quadradoPorVer == numMinas)
             {
                 GanharJogo();
             }
+
+
+
+
+
+
+
+            //Função de checkar se as bandeiras estão todas selecionadas
         }
         private void MostrarQuadrado(int linha, int coluna, Quadrado quadrado)
         {
-            string nome = quadrado.Linha.ToString() + '-' + quadrado.Coluna.ToString();
             quadrado.Selecionado = true;
+            string nome = quadrado.Linha.ToString() + '-' + quadrado.Coluna.ToString();
             string path = Environment.CurrentDirectory + Program.M_mapa.getImagePath(quadrado);
             AtualizaImagemConteudo(nome, path);   //Ir pelo nome
         }

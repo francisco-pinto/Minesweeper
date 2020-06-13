@@ -43,9 +43,6 @@ namespace Minesweeper
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Timer
-
-            //Nº minas
             labelMinas.Text = getMinas();
             labelTime.Text = "000";
         }
@@ -76,13 +73,6 @@ namespace Minesweeper
             }
             if (me.Button == MouseButtons.Left)
             {
-
-                //iF ME BUTTON DOWN UMA CARA
-
-
-                //if me button up outra cara
-
-
                 MostraConteudoQuadrado(b);
                 //MessageBox.Show(b.Name);
             }
@@ -112,12 +102,12 @@ namespace Minesweeper
                 }
             }
         }
-        public void PerderSad()
+        public void ChangeButtonToSad()
         {
             string path = Environment.CurrentDirectory + @"/Botoes/sad.png";
             buttonReiniciar.Image = Image.FromFile(path);
         }
-        public void GanharHappy()
+        public void ChangeButtonToHappy()
         {
             string path = Environment.CurrentDirectory + @"/Botoes/smile glasses.png";
             buttonReiniciar.Image = Image.FromFile(path);
@@ -278,7 +268,6 @@ namespace Minesweeper
             
             labelMinas.Text = getMinas();
         }
-
         public void VerificarRecorde()
         {
             //if melhor tempo

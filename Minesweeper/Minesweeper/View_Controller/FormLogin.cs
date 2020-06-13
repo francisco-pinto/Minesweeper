@@ -15,18 +15,13 @@ namespace Minesweeper.View_Controller
 {
    public partial class FormLogin : Form
     {
-        public event fazlogin FazerLogin;
         public event dadosUtilizador EnviarDados;
-        Bitmap image;
-        string base64Text;
-        string imagem;
 
+        string imagem;
         public FormLogin()
         {
             InitializeComponent();
         }
-
-        OpenFileDialog ofd = new OpenFileDialog();
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
             {
                 return true;
@@ -85,13 +80,7 @@ namespace Minesweeper.View_Controller
             
             }
 
-
-            //FazerLogin();
-
-            // Gitlab teste
-
-
-            //Provisório. Acrescentar um evento para dados do login
+            //Erro no Login segue para o offline
             Program.V_Menu.Show();
 
         }
@@ -130,6 +119,9 @@ namespace Minesweeper.View_Controller
         }
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
+
+            OpenFileDialog ofd = new OpenFileDialog();
+
             ofd.Filter = "PNG|*.png; *.jpg; *.jpeg";
             ofd.CheckFileExists = true;
 
@@ -141,7 +133,7 @@ namespace Minesweeper.View_Controller
                 //pictureBoxFoto.Image = new Bitmap(ofd.FileName);
                
                
-                    image = new Bitmap(ofd.FileName);
+                    Bitmap image = new Bitmap(ofd.FileName);
                     pictureBoxFoto.Image = (Image)image;
 
                     byte[] imageArray = System.IO.File.ReadAllBytes(ofd.FileName);
@@ -171,6 +163,7 @@ namespace Minesweeper.View_Controller
             if (textBoxNomeAbreviado.Text == null) 
             {
                 MessageBox.Show("Preencha todos os campos");
+                return;
             }
             else
             {
@@ -180,7 +173,8 @@ namespace Minesweeper.View_Controller
             //Username
             if (textBoxUsername.Text == null)
             {
-                
+                MessageBox.Show("Preencha todos os campos");
+                return;
             }
             else
             {
@@ -191,7 +185,8 @@ namespace Minesweeper.View_Controller
             //Password
             if (textBoxPassword.Text == null)
             {
-                
+                MessageBox.Show("Preencha todos os campos");
+                return;
             }
             else
             {
@@ -201,7 +196,8 @@ namespace Minesweeper.View_Controller
 
             if (textBoxEmail.Text == null)
             {
-                
+                MessageBox.Show("Preencha todos os campos");
+                return;
             }
             else
             {
@@ -211,7 +207,8 @@ namespace Minesweeper.View_Controller
             //Imagem
             if (imagem == null)
             {
-                
+                MessageBox.Show("Preencha todos os campos");
+                return;
             }
             else
             {
@@ -220,7 +217,8 @@ namespace Minesweeper.View_Controller
 
             if (textBoxPais.Text == null)
             {
-                
+                MessageBox.Show("Preencha todos os campos");
+                return;
             }
             else
             {
@@ -264,8 +262,8 @@ namespace Minesweeper.View_Controller
             else
             {
                 
-                MessageBox.Show( "submeteu o seu registo com sucesso"  );
-                Program.V_Login.Size = new System.Drawing.Size(500, 100);
+                MessageBox.Show( "Registo submetido com sucesso");
+                Program.V_Login.Size = new Size(500, 100);
 
 
                 textBoxEmail.Text = null;
@@ -277,11 +275,7 @@ namespace Minesweeper.View_Controller
 
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("ID").Value }
-
-
-                // Colocar Online
             }
         }
-
     }
 }

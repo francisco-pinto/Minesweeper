@@ -16,12 +16,16 @@ namespace Minesweeper.View_Controller
     public partial class FormConsultarPerfil : Form
     {
         public event GetNome getNomeJogador;
+        public FormConsultarPerfil()
+        {
+            InitializeComponent();
+        }
         public void AcessoPerfil()
         {
             string nome = getNomeJogador();
 
             //Prepara o pedido ao servidor com o URL adequado
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/perfil/"+ nome);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/perfil/" + nome);
 
             // Com o acesso usa HTTPS e o servidor usar cerificados autoassinados, tempos de configurar o cliente para aceitar sempre o certificado.
             ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
@@ -71,44 +75,47 @@ namespace Minesweeper.View_Controller
                 textBoxPais.Text = base64Pais;
 
                 //JOGOS GANHOS
-                if((base64jogosganhos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("ganhos").Value) == null)
+                if ((base64jogosganhos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("ganhos").Value) == null)
                 {
                     textBoxJogosGanhos.Text = "0";
                 }
                 else
                     textBoxJogosGanhos.Text = base64jogosganhos;
                 //JOGOS PERDIDOS
-                if((base64jogosperdidos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("perdidos").Value) == null)
+                if ((base64jogosperdidos = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("jogos").Element("perdidos").Value) == null)
                 {
                     textBoxJogosPerdidos.Text = "0";
                 }
                 else
-                     textBoxJogosPerdidos.Text = base64jogosperdidos;
+                    textBoxJogosPerdidos.Text = base64jogosperdidos;
                 //TEMPOS FACIL
 
-                base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("facil").Value;
+                try
+                {
+                    base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("facil").Value;
 
-                try { 
-                    if(base64tempofacil != null)
-                        {
-                            textBoxTempoFacil.Text = base64tempofacil; 
-                        }
+                    if (base64tempofacil != null)
+                    {
+                        textBoxTempoFacil.Text = base64tempofacil;
                     }
-                catch {textBoxTempoFacil.Text = "0" ;}
+                }
+                catch { textBoxTempoFacil.Text = "0"; }
 
                 //TEMPOS MEDIO
 
-                base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("medio").Value;
+                try
+                {
+                    base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("medio").Value;
 
-                try { 
-                        if ( base64tempomedio != null)
-                        {
-                           textBoxTempoMedio.Text = base64tempomedio;
-                        }
+                    if (base64tempomedio != null)
+                    {
+                        textBoxTempoMedio.Text = base64tempomedio;
                     }
-                catch { 
+                }
+                catch
+                {
                     textBoxTempoMedio.Text = "0";
-                      }
+                }
                 //FOTO
                 string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
                 string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
@@ -121,21 +128,13 @@ namespace Minesweeper.View_Controller
             }
         }
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
-            {
-                return true;
-            }
-        public FormConsultarPerfil()
         {
-            InitializeComponent();
+            return true;
         }
-
-        OpenFileDialog ofd = new OpenFileDialog();
-        
         private void buttonVoltarMenu_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
-
         private void FormConsultarPerfil_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
