@@ -470,7 +470,7 @@ namespace Minesweeper_UWP_
             Program.C_mapa.V_Mapa_AtualizarMinas(b);
             AtualizaNumMinasMapa();
             TextBlockMinas.Text = numMinas.ToString();
-            await VerificarBandeirasAsync();
+            //await VerificarBandeirasAsync();
         }
         private async Task VerificarBandeirasAsync()
         {
