@@ -351,6 +351,12 @@ namespace Minesweeper_UWP_
                     {
                         this.Frame.Navigate(typeof(PedirNome));
                     }
+                    else
+                    {
+                        Sleep(3);
+                        ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 700, Width = 1000 });
+                        this.Frame.Navigate(typeof(Menu));
+                    }
 
                 }
                 else if (numColunas == 16)
@@ -361,10 +367,17 @@ namespace Minesweeper_UWP_
                     {
                         this.Frame.Navigate(typeof(PedirNome));
                     }
+                    else
+                    {
+                        Sleep(3);
+                        ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 700, Width = 1000 });
+                        this.Frame.Navigate(typeof(Menu));
+                    }
                 }
                 else
                 {
                     Sleep(3);
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 700, Width = 1000 });
                     this.Frame.Navigate(typeof(Menu));
                 }
             }

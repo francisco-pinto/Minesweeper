@@ -266,7 +266,8 @@ namespace Minesweeper_UWP_
 
             if (Program.M_menu.online)
             {
-                RadioButtonMedio.Margin = new Thickness(RadioButtonMedio.Margin.Left + 100, RadioButtonMedio.Margin.Top, RadioButtonMedio.Margin.Right, RadioButtonMedio.Margin.Bottom);
+                RadioButtonMedio.Margin = new Thickness(RadioButtonMedio.Margin.Left + 134, RadioButtonMedio.Margin.Top, RadioButtonMedio.Margin.Right - 134, RadioButtonMedio.Margin.Bottom);
+                //RadioButtonMedio.Content = "Médio";
                 RadioButtonCustom.Visibility = Visibility.Collapsed;
                 ImageJogador.Visibility = Visibility.Visible;
                 ButtonConsulta.Visibility = Visibility.Visible;
