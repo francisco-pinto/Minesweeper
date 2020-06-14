@@ -30,7 +30,6 @@ namespace Minesweeper.View_Controller
             Program.V_Mapa.RestartOnlineGame += V_Mapa_RestartOnlineGame;
             Program.V_Mapa.VerificarBandeiras += V_Mapa_VerificarBandeiras;
         }
-
         private void V_Mapa_VerificarBandeiras(int numLinhas, int numColunas, int numMinas, string MinasRestantes)
         {
             int count = 0;

@@ -454,7 +454,6 @@ namespace Minesweeper_UWP_
             var messageDialog = new MessageDialog(message);
             await messageDialog.ShowAsync();
         }
-
         private void ListViewFacil_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Program.M_menu.online)
@@ -463,7 +462,6 @@ namespace Minesweeper_UWP_
                 this.Frame.Navigate(typeof(ConsultaPerfil), nome[0]);
             }
         }
-
         private void ListViewMedio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Program.M_menu.online)

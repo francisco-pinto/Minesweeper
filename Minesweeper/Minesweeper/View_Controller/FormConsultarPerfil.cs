@@ -20,7 +20,6 @@ namespace Minesweeper.View_Controller
         {
             InitializeComponent();
         }
-
         public void AcessoPerfilTop10(string Nome)
         {
             string nome = Nome;
