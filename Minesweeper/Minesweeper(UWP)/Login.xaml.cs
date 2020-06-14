@@ -151,7 +151,7 @@ namespace Minesweeper_UWP_
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("id").Value
             }
-            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 1000 });
             this.Frame.Navigate(typeof(Menu), null);
         }
         private async Task MessageBoxAsync(string message)
