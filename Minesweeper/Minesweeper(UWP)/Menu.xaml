@@ -28,7 +28,7 @@
         <TextBlock Name="TextBlockNumBombas" HorizontalAlignment="Left" Margin="620,400,0,0" Text="Num Bombas:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Image Name="ImageOnOff" HorizontalAlignment="Left" Height="46" Margin="30,30,0,0" VerticalAlignment="Top" Width="46" Visibility="Visible" Source="/Assets/Offline.png" Stretch="Fill">
         </Image>
-        <Image x:Name="ImageJogador" Height="100" Margin="840,37,110,0" VerticalAlignment="Top"/>
+        <Image x:Name="ImageJogador" Height="83" Margin="778,54,132,0" VerticalAlignment="Top"/>
         <Button x:Name="ButtonConsulta" Content="Consulta Perfil" Margin="770,165,0,0" VerticalAlignment="Top" Width="109" Click="ButtonConsulta_Click"/>
     </Grid>
 </Page>

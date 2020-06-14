@@ -229,7 +229,7 @@ namespace Minesweeper_UWP_
                 //Erro devido à não existência de elementos 
                 try
                 {
-                    if ((base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Facil").Value) != null)
+                    if ((base64tempofacil = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("facil").Value) != null)
                         TextBoxTempoFacil.Text = base64tempofacil;
                 }
                 catch
@@ -238,12 +238,18 @@ namespace Minesweeper_UWP_
                 }
                 //base64tempofacil;
                 //TEMPOS MEDIO
-                if ((base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("Medio").Value) == null)
+                try
+                {
+                    if ((base64tempomedio = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("tempos").Element("medio").Value) != null)
+                    {
+                        TextBoxTempoMedio.Text = base64tempomedio;
+                    }
+                }
+                catch
                 {
                     TextBoxTempoMedio.Text = "0";
                 }
-                else
-                    TextBoxTempoMedio.Text = base64tempomedio;
+                
                 //FOTO
                 try
                 {
