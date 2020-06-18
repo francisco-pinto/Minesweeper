@@ -92,6 +92,8 @@ namespace Minesweeper_UWP_
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
+                    ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 244, Width = 400 });
+
                     rootFrame.Navigate(typeof(On_Off), e.Arguments);
                 }
 

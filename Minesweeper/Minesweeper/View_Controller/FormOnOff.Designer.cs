@@ -76,9 +76,10 @@
             this.Controls.Add(this.labelOnOff);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "FormOnOff";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormOnOff";
+            this.Text = "Rede vs Standalone";
             this.ResumeLayout(false);
             this.PerformLayout();
 

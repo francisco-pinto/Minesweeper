@@ -349,7 +349,9 @@ namespace Minesweeper_UWP_
 
                     if (pontuacao < recordeAnterior)
                     {
+                        ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 398, Width = 288 });
                         this.Frame.Navigate(typeof(PedirNome));
+                        
                     }
                     else
                     {
@@ -365,6 +367,7 @@ namespace Minesweeper_UWP_
 
                     if (pontuacao < recordeAnterior)
                     {
+                        ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 398, Width = 288 });
                         this.Frame.Navigate(typeof(PedirNome));
                     }
                     else
@@ -383,6 +386,7 @@ namespace Minesweeper_UWP_
             }
             catch
             {
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 398, Width = 288 });
                 this.Frame.Navigate(typeof(PedirNome));
             }
         }

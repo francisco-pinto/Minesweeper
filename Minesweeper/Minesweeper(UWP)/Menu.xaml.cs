@@ -168,20 +168,20 @@ namespace Minesweeper_UWP_
 
                 if (numBombas > numMaxBombas)
                 {
-                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 32 * numLinhas, Width = 32 * numColunas });
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
                     Program.C_menu.V_Menu_play(numLinhas, numColunas, numMaxBombas);
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else if (numBombas < numMinBombas)
                 {
 
-                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 32 * numLinhas, Width = 32 * numColunas });
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
                     Program.C_menu.V_Menu_play(numLinhas, numColunas, numMinBombas);
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else
                 {
-                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 32 * numLinhas, Width = 32 * numColunas });
+                    ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
                     Program.C_menu.V_Menu_play(numLinhas, numColunas, numBombas);
                     this.Frame.Navigate(typeof(MainPage));
                 }

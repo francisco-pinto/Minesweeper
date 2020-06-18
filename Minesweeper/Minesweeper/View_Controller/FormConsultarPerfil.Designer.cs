@@ -230,7 +230,7 @@
             this.MaximizeBox = false;
             this.Name = "FormConsultarPerfil";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Minesweeper";
+            this.Text = "Perfil";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConsultarPerfil_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFoto)).EndInit();
             this.ResumeLayout(false);

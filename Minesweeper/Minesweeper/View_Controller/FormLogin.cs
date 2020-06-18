@@ -70,18 +70,23 @@ namespace Minesweeper.View_Controller
             {
                 // apresenta mensagem de erro usando o texto (contexto) da resposta
                 MessageBox.Show(xmlResposta.Element("resultado").Element("contexto").Value, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxNome.Text = null;
+                textBoxPasse.Text = null;
+                this.Hide();
+                Program.V_OnOff.Show();
+
             } else
             {
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 string ID = xmlResposta.Element("resultado").Element("objeto").Element("ID").Value;
                 MessageBox.Show("Entrou!");
                 EnviarDados(ID, textBoxNome.Text);
-
+                Program.V_Menu.Show();
             
             }
 
             //Erro no Login segue para o offline
-            Program.V_Menu.Show();
+            
 
         }
         private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)

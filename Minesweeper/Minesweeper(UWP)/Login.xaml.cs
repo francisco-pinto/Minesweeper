@@ -137,8 +137,13 @@ namespace Minesweeper_UWP_
             {
                 // apresenta mensagem de erro usando o texto (contexto) da resposta
                 MessageBoxAsync(xmlResposta.Element("resultado").Element("contexto").Value);
-                
+
                 //MessageBox.Show(xmlResposta.Element("resultado").Element("contexto").Value, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TextboxName.Text = "";
+                PasswordBox1.Password = "";
+
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 244, Width = 400 });
+                this.Frame.Navigate(typeof(On_Off), null);
             }
             else
             {
@@ -147,12 +152,12 @@ namespace Minesweeper_UWP_
                 Program.M_jogador.Nome = TextboxName.Text;
                 Program.M_jogador.Id = xmlResposta.Element("resultado").Element("objeto").Element("ID").Value;
 
-
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 1000 });
+                this.Frame.Navigate(typeof(Menu), null);
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("id").Value
             }
-            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 1000 });
-            this.Frame.Navigate(typeof(Menu), null);
+            
         }
         private async Task MessageBoxAsync(string message)
         {

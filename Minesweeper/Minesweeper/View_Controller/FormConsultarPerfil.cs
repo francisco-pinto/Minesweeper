@@ -117,14 +117,20 @@ namespace Minesweeper.View_Controller
                     textBoxTempoMedio.Text = "0";
                 }
                 //FOTO
-                string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
-                string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
-                byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
-                Image image = Image.FromStream(new MemoryStream(bytes));//... e, por fim, para Image
+                try {
+                    string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
+                    string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
+                    byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
+                    Image image = Image.FromStream(new MemoryStream(bytes));//... e, por fim, para Image
 
-                // pode mostrar a imagem num qualquer componente...como por exemplo:
-                pictureBoxFoto.BackgroundImageLayout = ImageLayout.Zoom;
-                pictureBoxFoto.BackgroundImage = image;
+                    // pode mostrar a imagem num qualquer componente...como por exemplo:
+                    pictureBoxFoto.BackgroundImageLayout = ImageLayout.Zoom;
+                    pictureBoxFoto.BackgroundImage = image; 
+                }
+                catch
+                {
+                    // Erro 
+                }
             }
         }
         public void AcessoPerfil()
