@@ -188,7 +188,7 @@ namespace Minesweeper_UWP_
                 //);
 
                 /*await */
-                MessageBoxAsync("Erro na consulta dos dados do jogdor");
+                await MessageBoxAsync("Erro na consulta dos dados do jogdor");
 
             }
             else

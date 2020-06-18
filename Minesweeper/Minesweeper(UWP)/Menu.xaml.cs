@@ -31,9 +31,7 @@ namespace Minesweeper_UWP_
     /// 
     /// 
     public sealed partial class Menu : Page
-    {
-        public event startGame play;
-        public event ShowProfile verPerfilTop10;
+    {      
         private App Program = App.Current as App;
         public Menu()
         {
@@ -70,21 +68,27 @@ namespace Minesweeper_UWP_
                 // converte para objeto XML para facilitar a extração da informação e ...
                 XDocument xmlResposta = XDocument.Parse(resultado);
 
-                string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
-                string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
-                byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
-                BitmapImage image = new BitmapImage();//... e, por fim, para Image
+                try
+                {
+                    string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
+                    string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
+                    byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
+                    BitmapImage image = new BitmapImage();//... e, por fim, para Image
 
-                var stream = new InMemoryRandomAccessStream();
-                await stream.WriteAsync(bytes.AsBuffer());
-                stream.Seek(0);
-                await image.SetSourceAsync(stream);
-                // pode mostrar a imagem num qualquer componente...como por exemplo:
+                    var stream = new InMemoryRandomAccessStream();
+                    await stream.WriteAsync(bytes.AsBuffer());
+                    stream.Seek(0);
+                    await image.SetSourceAsync(stream);
+                    // pode mostrar a imagem num qualquer componente...como por exemplo:
 
-                //BitmapImage offline = new BitmapImage(new Uri("ms-appx:///Assets/Offline.png"));
-                ImageJogador.Source = image;
+                    //BitmapImage offline = new BitmapImage(new Uri("ms-appx:///Assets/Offline.png"));
+                    ImageJogador.Source = image;
+                }
+                catch
+                {
+                    //Erro imagem não existe
+                }
             }
-            
         }
         private void ButtonInstrucoes_Click(object sender, RoutedEventArgs e)
         {
@@ -123,7 +127,7 @@ namespace Minesweeper_UWP_
 
 
                 ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * 9, Width = 32 * 9 });
-                Program.C_menu.V_Menu_play(9, 9, 10);
+                Program.M_mapa.CreateMapa(10, 9, 9);
                 this.Frame.Navigate(typeof(MainPage));
                 
                 /*Adicionar ao eventpo de modo a chamar
@@ -138,7 +142,7 @@ namespace Minesweeper_UWP_
                 TextBoxNumColunas.Visibility = Visibility.Collapsed;
 
                 ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * 16, Width = 32 * 16 });
-                Program.C_menu.V_Menu_play(16, 16, 40);
+                Program.M_mapa.CreateMapa(40, 16, 16);
                 this.Frame.Navigate(typeof(MainPage));
             }else if(RadioButtonCustom.IsChecked == true)
             {
@@ -169,20 +173,20 @@ namespace Minesweeper_UWP_
                 if (numBombas > numMaxBombas)
                 {
                     ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
-                    Program.C_menu.V_Menu_play(numLinhas, numColunas, numMaxBombas);
+                    Program.M_mapa.CreateMapa(numMaxBombas, numLinhas, numColunas);
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else if (numBombas < numMinBombas)
                 {
 
                     ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
-                    Program.C_menu.V_Menu_play(numLinhas, numColunas, numMinBombas);
+                    Program.M_mapa.CreateMapa(numMinBombas, numLinhas, numColunas);
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else
                 {
                     ApplicationView.GetForCurrentView().TryResizeView(new Windows.Foundation.Size { Height = 110 + 32 * numLinhas, Width = 32 * numColunas });
-                    Program.C_menu.V_Menu_play(numLinhas, numColunas, numBombas);
+                    Program.M_mapa.CreateMapa(numBombas, numLinhas, numColunas);
                     this.Frame.Navigate(typeof(MainPage));
                 }
             }
@@ -301,7 +305,7 @@ namespace Minesweeper_UWP_
                     document = XDocument.Load(fileStream);
                 }
 
-                await MessageBoxAsync(document.Element("pontuacoes").Element("Facil").Element("Nome").Value + "  " + document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
+                //await MessageBoxAsync(document.Element("pontuacoes").Element("Facil").Element("Nome").Value + "  " + document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
 
                 //listBoxFacil.Items.Add(document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);
                 ListViewFacil.Items.Add(document.Element("pontuacoes").Element("Facil").Element("Nome").Value + "  " + document.Element("pontuacoes").Element("Facil").Element("Tempo").Value);

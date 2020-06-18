@@ -37,11 +37,7 @@ namespace Minesweeper_UWP_
         public On_Off V_On_Off { get; set; }
         public Login V_Login { get; set; }
         public Menu V_Menu { get; set; }
-        public ControllerJogador C_jogador { get; set; }
-        public ControllerMapa C_mapa { get; set; }
         public ControllerMenu C_menu { get; set; }
-        public ControllerInstrucoes C_Intrucoes { get; set; }
-        public ControllerLogin C_Login { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -118,10 +114,6 @@ namespace Minesweeper_UWP_
             V_PedirNome = new PedirNome();
             V_On_Off = new On_Off();
 
-            C_Intrucoes = new ControllerInstrucoes();
-            C_jogador = new ControllerJogador();
-            C_Login = new ControllerLogin();
-            C_mapa = new ControllerMapa();
             C_menu = new ControllerMenu();
         }
         void WindowProprieties(){

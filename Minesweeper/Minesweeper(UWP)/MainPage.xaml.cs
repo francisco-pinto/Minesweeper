@@ -1,4 +1,5 @@
 ﻿using Minesweeper;
+using Minesweeper.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -61,15 +62,6 @@ namespace Minesweeper_UWP_
 
         //Timer
         private DispatcherTimer timer1;
-
-        public event startGame play;
-        ////public event CreateButton CreateButtonModel;
-        ////public event MostraBandeirasTodas MostraBandeirasTodas;
-        //public event MostraBombasTodas MostraBombasTodas;
-        ////public event GetMinas getMinas;
-        //public event AtualizarMinas AtualizarMinas;
-        //public event MostraConteudoQuadrado MostraConteudoQuadrado;
-        //public event AdicionaFlag AdicionaFlag;
 
         public MainPage()
         {   
@@ -203,7 +195,7 @@ namespace Minesweeper_UWP_
         {
             Button b = (Button)sender;
 
-            int aux = Program.C_mapa.V_Mapa_MostraConteudoQuadrado(b);
+            int aux = MostraConteudoQuadrado(b);
 
             if(aux == 0)            //Mostrar Quadrados Vazios
             {
@@ -221,6 +213,167 @@ namespace Minesweeper_UWP_
                 //ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
                 //this.Frame.Navigate(typeof(Menu));
             }   
+        }
+        public int MostraConteudoQuadrado(Button b)
+        {
+            /*Identifica o quadrado que possui aquele nome*/
+            int numLinhas = Program.M_mapa.NumLinhas;
+            int numColunas = Program.M_mapa.NumColunas;
+            int numMinas = Program.M_mapa.NumMinasPorEncontrar;
+            string[] pos = b.Name.Split('-');
+            int linha = Convert.ToInt32(pos[0]);
+            int coluna = Convert.ToInt32(pos[1]);
+
+            Quadrado quadrado = Program.M_mapa.GetQuadrado(linha, coluna);
+
+            if (Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) && ((quadrado.SimboloQuadrado == SIMBOLO.VAZIO) || (quadrado.SimboloQuadrado == SIMBOLO.QUESTION)))
+            {
+                //Botão vazio fazer abrir todos os vazios
+                if (quadrado.DistanciaBomba == -1)
+                {
+                    MostraQuadradosVaziosTodos(linha, coluna, quadrado, numLinhas, numColunas);
+                }
+
+                //Mostrar quadrado individual
+                MostrarQuadrado(linha, coluna, quadrado);
+            }
+
+            //Verifica se perdeu o jogo
+            if (quadrado.ConteudoQuadrado == CONTEUDO.BOMBA && quadrado.SimboloQuadrado != SIMBOLO.BANDEIRA)
+            {
+                //PerderJogo();
+                return -1;
+            }
+
+            //Verifica se ganha o jogo
+            //Talvez mudar nome da função
+            //Colocar condição de entrada para não percorrer sempre que código é executado
+            return VerificarQuadradosExpostos(numLinhas, numColunas, numMinas);
+        }
+        public int VerificarQuadradosExpostos(int numLinhas, int numColunas, int numMinas)
+        {
+            int quadradoporver = numColunas * numLinhas;
+
+            for (int linha = 0; linha < numLinhas; linha++)
+            {
+                for (int coluna = 0; coluna < numColunas; coluna++)
+                {
+                    if (!Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) || (Program.M_mapa.CheckQuadradoSelecionado(linha, coluna) && Program.M_mapa.GetQuadrado(linha, coluna).SimboloQuadrado == SIMBOLO.BANDEIRA))
+                    {
+                        quadradoporver = quadradoporver - 1;
+                        //MessageBox.Show("YAAAAAAAAAAA");
+                    }
+                }
+            }
+
+            if (quadradoporver == numMinas)
+            {
+                //GanharJogo();
+                return 1;
+            }
+            return 0;
+        }
+        private void MostrarQuadrado(int linha, int coluna, Quadrado quadrado)
+        {
+            string nome = quadrado.Linha.ToString() + '-' + quadrado.Coluna.ToString();
+            quadrado.Selecionado = true;
+            //string path = Program.M_mapa.getImagePath(quadrado);
+            //AtualizaImagemConteudo(nome, path);   //Ir pelo nome
+        }
+        public void MostraQuadradosVaziosTodos(int linha, int coluna, Quadrado quadrado, int numLinhas, int numColunas)
+        {
+
+            if ((!quadrado.Selecionado) && (quadrado.ConteudoQuadrado != CONTEUDO.NUM) && ((quadrado.SimboloQuadrado == SIMBOLO.VAZIO) || (quadrado.SimboloQuadrado == SIMBOLO.QUESTION)))
+            {
+                MostrarQuadrado(linha, coluna, quadrado);
+
+                if (linha + 1 < numLinhas)
+                {
+                    MostraQuadradosVaziosTodos(linha + 1, coluna, Program.M_mapa.GetQuadrado(linha + 1, coluna), numLinhas, numColunas);
+
+                    if (Program.M_mapa.GetQuadrado(linha + 1, coluna).ConteudoQuadrado == CONTEUDO.NUM)
+                        MostrarQuadrado(linha + 1, coluna, Program.M_mapa.GetQuadrado(linha + 1, coluna));
+                }
+
+                if (linha - 1 >= 0)
+                {
+                    MostraQuadradosVaziosTodos(linha - 1, coluna, Program.M_mapa.GetQuadrado(linha - 1, coluna), numLinhas, numColunas);
+
+                    if (Program.M_mapa.GetQuadrado(linha - 1, coluna).ConteudoQuadrado == CONTEUDO.NUM)
+                        MostrarQuadrado(linha - 1, coluna, Program.M_mapa.GetQuadrado(linha - 1, coluna));
+                }
+
+                if ((linha + 1 < numLinhas) && (coluna + 1 < numColunas))
+                {
+                    MostraQuadradosVaziosTodos(linha + 1, coluna + 1, Program.M_mapa.GetQuadrado(linha + 1, coluna + 1), numLinhas, numColunas);
+
+                    if (Program.M_mapa.GetQuadrado(linha + 1, coluna + 1).ConteudoQuadrado == CONTEUDO.NUM)
+                        MostrarQuadrado(linha + 1, coluna + 1, Program.M_mapa.GetQuadrado(linha + 1, coluna + 1));
+                }
+
+                if ((linha - 1 >= 0) && (coluna + 1 < numColunas))
+                {
+                    MostraQuadradosVaziosTodos(linha - 1, coluna + 1, Program.M_mapa.GetQuadrado(linha - 1, coluna + 1), numLinhas, numColunas);
+
+                    if (Program.M_mapa.GetQuadrado(linha - 1, coluna + 1).ConteudoQuadrado == CONTEUDO.NUM)
+                        MostrarQuadrado(linha - 1, coluna + 1, Program.M_mapa.GetQuadrado(linha - 1, coluna + 1));
+                }
+
+                if ((linha + 1 < numLinhas) && (coluna - 1 >= 0))
+                {
+                    MostraQuadradosVaziosTodos(linha + 1, coluna - 1, Program.M_mapa.GetQuadrado(linha + 1, coluna - 1), numLinhas, numColunas);
+
+                    if (Program.M_mapa.GetQuadrado(linha + 1, coluna - 1).ConteudoQuadrado == CONTEUDO.NUM)
+                        MostrarQuadrado(linha + 1, coluna - 1, Program.M_mapa.GetQuadrado(linha + 1, coluna - 1));
+                }
+
+                if ((linha - 1 >= 0) && (coluna - 1 >= 0))
+                {
+                    MostraQuadradosVaziosTodos(linha - 1, coluna - 1, Program.M_mapa.GetQuadrado(linha - 1, coluna - 1), numLinhas, numColunas);
+
+                    if (Program.M_mapa.GetQuadrado(linha - 1, coluna - 1).ConteudoQuadrado == CONTEUDO.NUM)
+                        MostrarQuadrado(linha - 1, coluna - 1, Program.M_mapa.GetQuadrado(linha - 1, coluna - 1));
+                }
+
+                if (coluna + 1 < numColunas)
+                {
+                    MostraQuadradosVaziosTodos(linha, coluna + 1, Program.M_mapa.GetQuadrado(linha, coluna + 1), numLinhas, numColunas);
+
+                    if (Program.M_mapa.GetQuadrado(linha, coluna + 1).ConteudoQuadrado == CONTEUDO.NUM)
+                        MostrarQuadrado(linha, coluna + 1, Program.M_mapa.GetQuadrado(linha, coluna + 1));
+                }
+
+                if (coluna - 1 >= 0)
+                {
+                    MostraQuadradosVaziosTodos(linha, coluna - 1, Program.M_mapa.GetQuadrado(linha, coluna - 1), numLinhas, numColunas);
+
+                    if (Program.M_mapa.GetQuadrado(linha, coluna - 1).ConteudoQuadrado == CONTEUDO.NUM)
+                        MostrarQuadrado(linha, coluna - 1, Program.M_mapa.GetQuadrado(linha, coluna - 1));
+                }
+            }
+        }
+        public string AdicionaFlag(Button b)
+        {
+            string nome = b.Name;
+
+            string[] pos = nome.Split('-');
+            int linha = Convert.ToInt32(pos[0]);
+            int coluna = Convert.ToInt32(pos[1]);
+
+            if (Program.M_mapa.CheckQuadradoSelecionado(linha, coluna))
+            {
+                //Função deveria estar no MAPA?
+                string path = Program.M_mapa.getQuadradoPath(linha, coluna);
+
+                //string path = @"\btnFlag.png";
+
+                /*Passar isso a imagens mais tarde*/
+
+                return path;
+                //AlteraSimboloBotao(linha, coluna, path);
+            }
+
+            return "Vazio";
         }
         private async Task PerderJogoAsync()
         {
@@ -482,9 +635,9 @@ namespace Minesweeper_UWP_
             int linha = Convert.ToInt32(pos[0]);
             int coluna = Convert.ToInt32(pos[1]);
 
-            string path = Program.C_mapa.V_Mapa_AdicionaFlag(b);
+            string path = AdicionaFlag(b);
             AtualizaSimboloBotao(linha, coluna, path);
-            Program.C_mapa.V_Mapa_AtualizarMinas(b);
+            Program.M_mapa.AtualizaMinas(b.Name);
             AtualizaNumMinasMapa();
             TextBlockMinas.Text = numMinas.ToString();
             //await VerificarBandeirasAsync();
@@ -650,10 +803,8 @@ namespace Minesweeper_UWP_
             if (numMinas != 0)
             {
                 LimparForm();
-                Program.C_menu.V_Menu_play(numColunas, numLinhas, Program.M_mapa.NMinasTotais);
+                Program.M_mapa.CreateMapa(Program.M_mapa.NMinasTotais, numColunas, numLinhas);
             }
-
-
 
             if (Program.M_menu.online)
             {
@@ -662,7 +813,7 @@ namespace Minesweeper_UWP_
             }
             else
             { 
-                InicializarValoresMapaView(numMinas, numLinhas, numColunas);
+                InicializarValoresMapaView(numLinhas, numColunas, numMinas);
                 CreateButtonModel(numLinhas, numColunas, numMinas); 
             }
 
