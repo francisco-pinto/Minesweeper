@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Security;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +38,8 @@ namespace Minesweeper_UWP_
             //mainGrid.Width = 1000;
             
             ApplicationView.PreferredLaunchViewSize = new Size { Height = 520, Width = 1020 };
+            var appView = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
+            appView.Title = "Login";
         }
         private void PropriedadesRegistar()
         {
@@ -95,7 +95,7 @@ namespace Minesweeper_UWP_
         {
          return true;
         }
-        private void ButtonLogin_Click(object sender, RoutedEventArgs e)
+        private async void ButtonLogin_ClickAsync(object sender, RoutedEventArgs e)
         {
             //Autenticar
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://prateleira.utad.priv:1234/LPDSW/2019-2020/Autentica");
@@ -136,7 +136,7 @@ namespace Minesweeper_UWP_
             if (xmlResposta.Element("resultado").Element("status").Value == "ERRO")
             {
                 // apresenta mensagem de erro usando o texto (contexto) da resposta
-                MessageBoxAsync(xmlResposta.Element("resultado").Element("contexto").Value);
+                await MessageBoxAsync(xmlResposta.Element("resultado").Element("contexto").Value);
 
                 //MessageBox.Show(xmlResposta.Element("resultado").Element("contexto").Value, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 TextboxName.Text = "";
@@ -147,7 +147,7 @@ namespace Minesweeper_UWP_
             }
             else
             {
-                MessageBoxAsync("Entrou");
+                await MessageBoxAsync("Entrou");
                 Program.M_menu.online = true;
                 Program.M_jogador.Nome = TextboxName.Text;
                 Program.M_jogador.Id = xmlResposta.Element("resultado").Element("objeto").Element("ID").Value;
@@ -213,7 +213,7 @@ namespace Minesweeper_UWP_
                 TBLogin_Fotografia.Text = "Erro";
             }
         }
-        private void ButtonRegistar_Click_1(object sender, RoutedEventArgs e)
+        private async void ButtonRegistar_Click_1Async(object sender, RoutedEventArgs e)
         {
             //EnviarServidor()
             //Voltatr
@@ -232,7 +232,7 @@ namespace Minesweeper_UWP_
             // Nome Abreviado
             if (TBLogin_Name.Text == null)
             {
-                MessageBoxAsync("Preencha todos os campos");
+                await MessageBoxAsync("Preencha todos os campos");
             }
             else
             {
@@ -332,7 +332,7 @@ namespace Minesweeper_UWP_
                 PropriedadesRegistar();
 
 
-                MessageBoxAsync("Submeteu o seu registo com sucesso");
+                await MessageBoxAsync("Submeteu o seu registo com sucesso");
                 // assume a autenticação e obtem o ID do resultado...para ser usado noutros pedidos
                 // xmlResposta.Element("resultado").Element("objeto").Element("ID").Value }
 

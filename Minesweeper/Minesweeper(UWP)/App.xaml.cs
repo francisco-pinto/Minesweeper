@@ -1,6 +1,5 @@
 ﻿using Minesweeper;
 using Minesweeper.Models;
-using Minesweeper.View_Controller;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,7 +36,6 @@ namespace Minesweeper_UWP_
         public On_Off V_On_Off { get; set; }
         public Login V_Login { get; set; }
         public Menu V_Menu { get; set; }
-        public ControllerMenu C_menu { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -114,7 +112,6 @@ namespace Minesweeper_UWP_
             V_PedirNome = new PedirNome();
             V_On_Off = new On_Off();
 
-            C_menu = new ControllerMenu();
         }
         void WindowProprieties(){
             //Altera cores de forma a esconder os botões

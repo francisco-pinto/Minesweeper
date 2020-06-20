@@ -1,6 +1,4 @@
-﻿using Minesweeper;
-using System;
-using System.Drawing;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,8 +7,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Windows.Foundation;
-using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Popups;
@@ -36,7 +32,9 @@ namespace Minesweeper_UWP_
         public Menu()
         {
             this.InitializeComponent();
-            
+            var appView = ApplicationView.GetForCurrentView();
+            appView.Title = "Menu";
+
         }
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
@@ -360,6 +358,7 @@ namespace Minesweeper_UWP_
                 StringBuilder quando = new StringBuilder();
                 foreach (XElement level1Element in xmlResposta.Element("resultado").Element("objeto").Element("top").Elements("nivel"))
                 {
+                    dificuldade.Clear();
                     dificuldade.AppendLine(level1Element.FirstAttribute.Value);
 
                     foreach (XElement level2Element in level1Element.Elements("jogador"))

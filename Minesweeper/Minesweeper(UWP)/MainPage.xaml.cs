@@ -1,38 +1,25 @@
-﻿using Minesweeper;
-using Minesweeper.Models;
+﻿using Minesweeper.Models;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Security;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Windows.Devices.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Storage;
 using Windows.System.Threading;
 using Windows.UI;
 using Windows.UI.Core;
-using Windows.UI.Core.Preview;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using Size = Windows.Foundation.Size;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -74,7 +61,10 @@ namespace Minesweeper_UWP_
 
             //Colocar numa função de load
             //Muda tamanho da janela
-            this.TextBlockMinas.Text = numMinas.ToString();       
+            this.TextBlockMinas.Text = numMinas.ToString();
+
+            var appView = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
+            appView.Title = "Minesweeper";
         }
         private void Timer1_Tick(object sender, object e)
         {

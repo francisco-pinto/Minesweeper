@@ -20,10 +20,8 @@ namespace Minesweeper
         public static Instrucoes V_Instrucoes { get; private set; }
         public static FormOnOff V_OnOff { get; private set; }
         public static PedirNome V_PedirNome { get; private set; }
-        public static ControllerJogador C_jogador { get; private set; }
         public static ControllerMapa C_mapa { get; private set; }
         public static ControllerMenu C_menu { get; private set; }
-        public static ControllerInstrucoes C_Intrucoes { get; private set; }
         public static ControllerLogin C_Login { get; private set; }
 
         /// <summary>
@@ -52,10 +50,8 @@ namespace Minesweeper
             V_ConsultarPerfil = new FormConsultarPerfil();
 
             //Controllers
-            C_jogador = new ControllerJogador();
             C_menu = new ControllerMenu();
             C_mapa = new ControllerMapa();
-            C_Intrucoes = new ControllerInstrucoes();
             C_Login = new ControllerLogin();
 
             Application.Run(V_OnOff);

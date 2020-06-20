@@ -95,7 +95,8 @@ namespace Minesweeper.View_Controller
         }
         private void buttonRegistar_Click(object sender, EventArgs e)
         {
-            Program.V_Login.Size = new System.Drawing.Size(500, 400);
+            Program.V_Login.Text = "Registo";
+            Program.V_Login.Size = new Size(500, 400);
             labelemail.Visible = true;
             labelfoto.Visible = true;
             labelNomeAbreviado.Visible = true;
@@ -111,7 +112,7 @@ namespace Minesweeper.View_Controller
         }
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            Program.V_Login.Size = new System.Drawing.Size(500, 100);
+            Program.V_Login.Size = new Size(500, 100);
 
             // Set to no text.
             //textBoxPasse.Text = "";

@@ -279,13 +279,23 @@ namespace Minesweeper.View_Controller
 
             XDocument xmlResposta = XDocument.Parse(resultado);
 
-            string base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
-            string base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
-            byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
-            Image image = Image.FromStream(new MemoryStream(bytes));//... e, por fim, para Image
+            string base64Imagem;
+            string base64;
+            try
+            {
+                base64Imagem = xmlResposta.Element("resultado").Element("objeto").Element("perfil").Element("fotografia").Value;
+                base64 = base64Imagem.Split(',')[1]; // retira a parte da string correspondente aos bytes da imagem..
+                byte[] bytes = Convert.FromBase64String(base64); //...converte para array de bytes...
+                Image image = Image.FromStream(new MemoryStream(bytes));//... e, por fim, para Image
 
-            pictureBoxFotoMenu.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBoxFotoMenu.BackgroundImage = image;
+                pictureBoxFotoMenu.BackgroundImageLayout = ImageLayout.Zoom;
+                pictureBoxFotoMenu.BackgroundImage = image;
+            }
+            catch
+            {
+                //Erro imagem não existe
+            }
+            
         }
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
@@ -406,6 +416,7 @@ namespace Minesweeper.View_Controller
                 StringBuilder quando = new StringBuilder();
                 foreach (XElement level1Element in xmlResposta.Element("resultado").Element("objeto").Element("top").Elements("nivel"))
                     {
+                    dificuldade.Clear();
                     dificuldade.AppendLine(level1Element.FirstAttribute.Value);
                     
                     foreach (XElement level2Element in level1Element.Elements("jogador"))
