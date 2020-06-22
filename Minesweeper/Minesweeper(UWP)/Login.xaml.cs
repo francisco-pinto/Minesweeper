@@ -66,30 +66,12 @@ namespace Minesweeper_UWP_
             Login_Password.Visibility = Visibility.Collapsed;
             Login_Username.Visibility = Visibility.Collapsed;
 
-            ButtonRegistar.Visibility = Visibility.Collapsed;
+            ButtonInserir.Visibility = Visibility.Collapsed;
             ButtonInserirfoto.Visibility = Visibility.Collapsed;
         }
         private void ButtonRegistar_Click(object sender, RoutedEventArgs e)
         {
-            //ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 790, Width = 1020 });
-            //mainGrid.Height = 684;
-            //mainGrid.Width = 1000;
-            TBLogin_Email.Visibility = Visibility.Visible;
-            TBLogin_Fotografia.Visibility = Visibility.Visible;
-            TBLogin_Name.Visibility = Visibility.Visible;
-            TBLogin_Pais.Visibility = Visibility.Visible;
-            TBLogin_Password.Visibility = Visibility.Visible;
-            TBLogin_Username.Visibility = Visibility.Visible;
-
-            Login_Email.Visibility = Visibility.Visible;
-            Login_Fotografia.Visibility = Visibility.Visible;
-            Login_Name.Visibility = Visibility.Visible;
-            Login_Pais.Visibility = Visibility.Visible;
-            Login_Password.Visibility = Visibility.Visible;
-            Login_Username.Visibility = Visibility.Visible;
-
-            ButtonRegistar.Visibility = Visibility.Visible;
-            ButtonInserirfoto.Visibility = Visibility.Visible;
+            
         }
         public bool AcceptAllCertifications(object sender, X509Certificate certification, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
@@ -213,7 +195,7 @@ namespace Minesweeper_UWP_
                 TBLogin_Fotografia.Text = "Erro";
             }
         }
-        private async void ButtonRegistar_Click_1Async(object sender, RoutedEventArgs e)
+        private async void ButtonInserir_ClickAsync(object sender, RoutedEventArgs e)
         {
             //EnviarServidor()
             //Voltatr
@@ -339,6 +321,29 @@ namespace Minesweeper_UWP_
 
                 // Colocar Online
             }
+        }
+
+        private void ButtonRegistar(object sender, RoutedEventArgs e)
+        {
+            //ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 790, Width = 1020 });
+            //mainGrid.Height = 684;
+            //mainGrid.Width = 1000;
+            TBLogin_Email.Visibility = Visibility.Visible;
+            TBLogin_Fotografia.Visibility = Visibility.Visible;
+            TBLogin_Name.Visibility = Visibility.Visible;
+            TBLogin_Pais.Visibility = Visibility.Visible;
+            TBLogin_Password.Visibility = Visibility.Visible;
+            TBLogin_Username.Visibility = Visibility.Visible;
+
+            Login_Email.Visibility = Visibility.Visible;
+            Login_Fotografia.Visibility = Visibility.Visible;
+            Login_Name.Visibility = Visibility.Visible;
+            Login_Pais.Visibility = Visibility.Visible;
+            Login_Password.Visibility = Visibility.Visible;
+            Login_Username.Visibility = Visibility.Visible;
+
+            ButtonInserir.Visibility = Visibility.Visible;
+            ButtonInserirfoto.Visibility = Visibility.Visible;
         }
     }
 }
