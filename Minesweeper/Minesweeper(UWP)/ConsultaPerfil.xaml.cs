@@ -144,7 +144,7 @@ namespace Minesweeper_UWP_
                 }
                 catch
                 {
-
+                    ImageJogador.Source = null;
                 }
             }
         }
@@ -263,7 +263,7 @@ namespace Minesweeper_UWP_
                 }
                 catch
                 {
-                    //Não tem foto
+                    ImageJogador.Source = null;
                 }
             }
         }
