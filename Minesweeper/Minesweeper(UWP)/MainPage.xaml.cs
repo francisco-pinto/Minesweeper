@@ -381,7 +381,7 @@ namespace Minesweeper_UWP_
             //LimparForm();
             Sleep(3);
             await MessageBoxAsync("Perdeu o Jogo!");
-            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+            ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 1000 });
             this.Frame.Navigate(typeof(Menu));
             //Task.Run(async () => await Task.Delay(TimeSpan.FromMilliseconds(10000)));
         }
@@ -406,7 +406,7 @@ namespace Minesweeper_UWP_
                 //Enviar os dados para o server
                 await EnviarDadosFimJogoAsync(true);
 
-                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 900 });
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 1000 });
                 this.Frame.Navigate(typeof(Menu), null);
             }
             else
