@@ -20,11 +20,11 @@ namespace Minesweeper_UWP_
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (this.Frame.CanGoBack)
-            {
-                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 800, Width = 1000 });
+            
+            
+                ApplicationView.GetForCurrentView().TryResizeView(new Size { Height = 700, Width = 1000 });
                 this.Frame.Navigate(typeof(Menu), null);
-            }
+            
         }
     }
 }
