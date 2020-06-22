@@ -156,10 +156,10 @@ namespace Minesweeper
             button[linha, coluna].MouseUp += B_MouseUp;
 
             //Só para testar
-            if (conteudoQuadrado == CONTEUDO.BOMBA)
-            {
-                button[linha, coluna].BackColor = Color.Red;
-            }
+            //if (conteudoQuadrado == CONTEUDO.BOMBA)
+            //{
+            //    button[linha, coluna].BackColor = Color.Red;
+            //}
         }
         private void B_MouseUp(object sender, MouseEventArgs e)
         {

@@ -171,10 +171,10 @@ namespace Minesweeper_UWP_
             //    button[linha, coluna].Location = new Point(ButtonX, ButtonY);
 
             //    //Só para testar
-            if (conteudoQuadrado == CONTEUDO.BOMBA)
-            {
-                button[linha, coluna].Background = new SolidColorBrush(Colors.Red);
-            }
+            //if (conteudoQuadrado == CONTEUDO.BOMBA)
+            //{
+            //    button[linha, coluna].Background = new SolidColorBrush(Colors.Red);
+            //}
 
             MapaGrid.Children.Add(button[linha, coluna]);
             Grid.SetColumn(button[linha, coluna], coluna);
