@@ -1,5 +1,8 @@
 # Minesweeper
-In this project me and 2 other friends remade Minesweeper using C#.
+In this project me and 2 other friends remade Minesweeper using C#.  
 
-This project is divided into two, both in C#. One using Windows Forms and the other using UWP.
-This was made for an University project. 
+This project is divided in two, both in C# but with different interfaces:
+  * One using Windows Forms;
+  * One using UWP.  
+
+This was made for an University project.
