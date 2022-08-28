@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="Minesweeper_UWP_.Instrucoes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Minesweeper_UWP_"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Button Content="Voltar ao Menu" Margin="0,350,0,0" VerticalAlignment="Top" Click="Button_Click" Width="115" HorizontalAlignment="Center" Height="32"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,100,10,0" TextWrapping="Wrap" Text="O jogo Minesweeper (ou campo minado) consiste em descobrir a posição de todas as minas escondidas de um campo de quadrados. Para isso o jogador terá de clicar com o botão esquerdo do rato nas posições em que acha que não existe nenhuma mina, e poderá assinalar, com o botão direito do rato, as possíveis minas e incertezas. Ao clicar com o botão esquerdo se não existir nenhuma mina por perto, o mapa revela-se automaticamente até ao ponto de existir minas perto. Se o jogador clicar na posição em que existe uma mina, perde o jogo. A dificuldade Fácil irá apresentar um mapa 9x9 com 10 minas. A dificuldade Média irá apresentar um mapa 16x16 com 40 minas. Se o jogador conseguir descobrir todas as minas ganha e o jogo e o tempo que demorou transforma-se na sua pontuação."/>
+    </Grid>
+</Page>

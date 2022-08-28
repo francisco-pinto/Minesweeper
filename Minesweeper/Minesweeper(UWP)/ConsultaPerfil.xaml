@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="Minesweeper_UWP_.ConsultaPerfil"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Minesweeper_UWP_"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid Margin="229,0,0,0" Height="640" VerticalAlignment="Center" HorizontalAlignment="Left" Width="1071">
+            <TextBlock Margin="0,0,853,568" Text="Perfil" TextWrapping="Wrap" FontSize="24" FontWeight="Bold" HorizontalAlignment="Right" Height="32" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,927,470" Text="Nome abreviado" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,997,420" Text="Email" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,1006,370" Text="País" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,944,320" Text="Jogos Ganhos" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,937,270" Text="Jogos Perdidos" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,958,220" Text="Tempo Fácil" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,945,170" Text="Tempo Médio" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,967,100" Text="Fotografia" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="TextBoxNome" HorizontalAlignment="Right" Margin="0,0,576,463" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxEmail" Margin="0,0,576,413" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Right" Width="303" Height="32" VerticalAlignment="Bottom" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxPais" HorizontalAlignment="Right" Margin="0,0,576,363" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxJogosGanhos" HorizontalAlignment="Right" Margin="0,0,576,313" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxJogosPerdidos" HorizontalAlignment="Right" Margin="0,0,576,263" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxTempoFacil" HorizontalAlignment="Right" Margin="0,0,576,213" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <TextBox x:Name="TextBoxTempoMedio" HorizontalAlignment="Right" Margin="0,0,576,163" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="303" IsReadOnly="True"/>
+            <Image Name="ImageJogador" HorizontalAlignment="Right" Height="100" Margin="0,0,689,40" VerticalAlignment="Bottom" Width="100"/>
+            <Button x:Name="ButtonVoltar" Content="Voltar" Margin="529,524,0,0" VerticalAlignment="Top" Width="77" Click="ButtonVoltar_Click"/>
+
+        </Grid>
+    </Grid>
+</Page>

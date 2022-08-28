@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="Minesweeper_UWP_.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Minesweeper_UWP_"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="mainGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Width="997" Height="412" >
+
+        <TextBlock HorizontalAlignment="Right" Margin="0,64,878,0" Text="Nome:" TextWrapping="Wrap" FontSize="20" Height="32" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextboxName" HorizontalAlignment="Left" Margin="184,59,0,0" Text="" TextWrapping="Wrap" Width="330" FontSize="20" Height="45" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,156,850,0" Text="Password:" TextWrapping="Wrap" FontSize="20" Height="32" VerticalAlignment="Top"/>
+        <Button Content="Login" Margin="0,246,837,0" VerticalAlignment="Top" Width="100" HorizontalAlignment="Right" Height="32" Click="ButtonLogin_ClickAsync"/>
+        <Button Content="Registar" Margin="0,300,837,0" VerticalAlignment="Top" Width="100" Height="32" HorizontalAlignment="Right" Click="ButtonRegistar"/>
+        <TextBlock x:Name="Login_Name" HorizontalAlignment="Left" Margin="638,40,0,0" Text="Nome:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="Visible"/>
+        <TextBlock x:Name="Login_Username" HorizontalAlignment="Left" Margin="636,99,0,0" Text="Username:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="Visible"/>
+        <TextBlock x:Name="Login_Password" HorizontalAlignment="Left" Margin="636,160,0,0" Text="Password:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="Visible"/>
+        <TextBlock x:Name="Login_Email" HorizontalAlignment="Left" Margin="638,228,0,0" Text="Email:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="Visible"/>
+        <TextBlock x:Name="Login_Fotografia" HorizontalAlignment="Left" Margin="638,289,0,0" Text="Fotografia:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="Visible"/>
+        <TextBlock x:Name="Login_Pais" HorizontalAlignment="Left" Margin="638,350,0,0" Text="País:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="Visible"/>
+        <TextBox x:Name="TBLogin_Name" HorizontalAlignment="Left" Margin="741,32,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
+        <TextBox x:Name="TBLogin_Username" HorizontalAlignment="Left" Margin="741,93,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
+        <TextBox x:Name="TBLogin_Password" HorizontalAlignment="Left" Margin="741,163,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
+        <TextBox x:Name="TBLogin_Email" HorizontalAlignment="Left" Margin="743,222,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
+        <TextBox x:Name="TBLogin_Fotografia" HorizontalAlignment="Left" Margin="743,283,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
+        <TextBox x:Name="TBLogin_Pais" HorizontalAlignment="Left" Margin="743,344,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Visibility="Visible"/>
+        <Button x:Name="ButtonInserir" Content="Inserir" Margin="511,341,0,0" VerticalAlignment="Top" Width="80" Visibility="Visible" Click="ButtonInserir_ClickAsync"/>
+        <Button x:Name="ButtonInserirfoto" Content="Escolher" Margin="906,279,0,0" VerticalAlignment="Top" Width="80" Visibility="Visible" Click="ButtonInserirfoto_ClickAsync"/>
+        <PasswordBox x:Name="PasswordBox1" HorizontalAlignment="Left" Margin="184,151,0,0" VerticalAlignment="Top" Width="330" FontSize="20" Height="45"/>
+        <Image Name="ImageBox" HorizontalAlignment="Left" Height="70" Margin="911,181,0,0" VerticalAlignment="Top" Width="71"/>
+
+    </Grid>
+</Page>

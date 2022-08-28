@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="Minesweeper_UWP_.Menu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Minesweeper_UWP_"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Height="800" Width="1000">
+
+        <Image Height="175" VerticalAlignment="Top" Source="/Assets/MinesweeperLogo.png" Margin="321,25,320,0"/>
+        <Button Content="Jogar" Margin="451,320,451,0" VerticalAlignment="Top" Click="ButtonJogar_Click" Height="32" HorizontalAlignment="Stretch"/>
+        <Button Content="Instruções" Margin="0,390,440,0" VerticalAlignment="Top" Click="ButtonInstrucoes_Click" Width="120" HorizontalAlignment="Right"/>
+        <TextBlock Margin="300,0,548,320" Text="Melhores Tempos Fácil" TextWrapping="Wrap" Height="19" VerticalAlignment="Bottom"/>
+        <ListView  Name="ListViewFacil" Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="161,0,549,114" Height="193" VerticalAlignment="Bottom" SelectionChanged="ListViewFacil_SelectionChanged"/>
+        <TextBlock Margin="547,0,300,320"  Text="Melhores Tempos Médio" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+        <ListView  Name="ListViewMedio" Background="{ThemeResource SystemControlForegroundChromeGrayBrush}" Margin="550,0,160,113"  Height="191" VerticalAlignment="Bottom" SelectionChanged="ListViewMedio_SelectionChanged"/>
+        <RadioButton x:Name="RadioButtonFacil"  Content="Fácil"  Margin="329,0,551,520"  VerticalAlignment="Bottom" Height="32" Checked="RadioButtonFacil_Checked" HorizontalAlignment="Stretch"/>
+        <RadioButton x:Name="RadioButtonMedio" Content="Médio"  Margin="474,0,406,518"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="32" Checked="RadioButtonMedio_Checked"/>
+        <RadioButton x:Name="RadioButtonCustom" Content="Custom"  Margin="608,0,272,518"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="32" Checked="RadioButtonCustom_Checked"/>
+        <TextBox Name="TextBoxNumLinhas" Margin="720,300,150,0" Text="Num Linhas" TextWrapping="Wrap" VerticalAlignment="Top" GotFocus="TextBoxNumLinhas_GotFocus" BeforeTextChanging="TextBoxNumLinhas_OnBeforeTextChanging"/>
+        <TextBox Name="TextBoxNumColunas" Margin="720,345,150,0" Text="Num Colunas" TextWrapping="Wrap" VerticalAlignment="Top" GotFocus="TextBoxNumColunas_GotFocus" BeforeTextChanging="TextBoxNumColunas_OnBeforeTextChanging"/>
+        <TextBox Name="TextBoxNumBombas" Margin="720,390,150,0" Text="Num Bombas" TextWrapping="Wrap" VerticalAlignment="Top" GotFocus="TextBoxNumBombas_GotFocus" BeforeTextChanging="TextBoxNumBombas_OnBeforeTextChanging"/>
+        <TextBlock Name="TextBlockNumLinhas" HorizontalAlignment="Left" Margin="620,310,0,0" Text="Num Linhas:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Name="TextBlockNumColunas" HorizontalAlignment="Left" Margin="620,355,0,0" Text="Num Colunas:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Name="TextBlockNumBombas" HorizontalAlignment="Left" Margin="620,400,0,0" Text="Num Bombas:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Image Name="ImageOnOff" HorizontalAlignment="Left" Height="46" Margin="30,30,0,0" VerticalAlignment="Top" Width="46" Visibility="Visible" Source="/Assets/Offline.png" Stretch="Fill">
+        </Image>
+        <Image x:Name="ImageJogador" Height="83" Margin="778,54,132,0" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonConsulta" Content="Consulta Perfil" Margin="770,165,0,0" VerticalAlignment="Top" Width="109" Click="ButtonConsulta_Click"/>
+    </Grid>
+</Page>
